@@ -21,6 +21,8 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^5.6.0",
+    "@stripe/stripe-js": "^8.8.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
