@@ -1,8 +1,15 @@
+import React from "react";
+// import { getServerSession } from "next-auth";
 import { prisma } from "@/server/db";
+// import { authOptions } from "@/server/auth/session";
 
 export default async function RestaurantDashboardPage() {
   // TODO: Get restaurant from session
+  // const session = await getServerSession(authOptions);
+  // const restaurantId = session?.user?.restaurantId;
+
   const orders = await prisma.order.findMany({
+    // where: { restaurantId },
     include: { items: true, restaurant: true },
     orderBy: { createdAt: "desc" },
     take: 50,
@@ -28,7 +35,7 @@ export default async function RestaurantDashboardPage() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.map((order: typeof orders[number]) => (
               <tr key={order.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
                 <td style={{ padding: "0.5rem", fontFamily: "monospace", fontSize: "0.85rem" }}>{order.id.slice(0, 8)}</td>
                 <td style={{ padding: "0.5rem" }}>{order.customerName}</td>
