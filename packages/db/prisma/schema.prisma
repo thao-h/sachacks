@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY_FOR_PICKUP
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELED
+}
+
+enum DispatchStatus {
+  UNASSIGNED
+  ASSIGNED
+  PICKED_UP
+  DROPPED_OFF
+}
+
+model Restaurant {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  address   String
+  phone     String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  menuItems MenuItem[]
+  orders    Order[]
+}
+
+model MenuItem {
+  id             String   @id @default(cuid())
+  restaurantId   String
+  name           String
+  description    String   @default("")
+  priceCents     Int
+  category       String   @default("General")
+  isAvailable    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  orderItems OrderItem[]
+
+  @@index([restaurantId])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  restaurantId    String
+  status          OrderStatus @default(PENDING)
+  customerName    String
+  customerPhone   String
+  deliveryAddress String
+  subtotalCents   Int
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  restaurant Restaurant          @relation(fields: [restaurantId], references: [id])
+  items      OrderItem[]
+  dispatch   DispatchAssignment?
+
+  @@index([restaurantId])
+  @@index([status])
+}
+
+model OrderItem {
+  id             String @id @default(cuid())
+  orderId        String
+  menuItemId     String
+  name           String
+  unitPriceCents Int
+  quantity       Int
+  lineTotalCents Int
+
+  order    Order    @relation(fields: [orderId], references: [id])
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
+
+  @@index([orderId])
+}
+
+model Driver {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assignments DispatchAssignment[]
+}
+
+model DispatchAssignment {
+  id        String         @id @default(cuid())
+  orderId   String         @unique
+  driverId  String
+  status    DispatchStatus @default(UNASSIGNED)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  order  Order  @relation(fields: [orderId], references: [id])
+  driver Driver @relation(fields: [driverId], references: [id])
+
+  @@index([driverId])
+  @@index([status])
+}
