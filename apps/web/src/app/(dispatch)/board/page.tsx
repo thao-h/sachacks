@@ -27,7 +27,7 @@ export default async function DispatchBoardPage() {
             <p style={{ color: "#999", marginTop: "1rem" }}>No orders ready for pickup.</p>
           ) : (
             <ul style={{ listStyle: "none", padding: 0, marginTop: "1rem" }}>
-              {readyOrders.map((order) => (
+              {readyOrders.map((order: typeof readyOrders[number]) => (
                 <li key={order.id} style={{ padding: "1rem", border: "1px solid #eee", borderRadius: 4, marginBottom: "0.5rem" }}>
                   <strong>{order.restaurant.name}</strong>
                   <p style={{ fontSize: "0.85rem", color: "#666" }}>
@@ -46,7 +46,7 @@ export default async function DispatchBoardPage() {
             <p style={{ color: "#999", marginTop: "1rem" }}>No active deliveries.</p>
           ) : (
             <ul style={{ listStyle: "none", padding: 0, marginTop: "1rem" }}>
-              {activeAssignments.map((a) => (
+              {activeAssignments.map((a: typeof activeAssignments[number]) => (
                 <li key={a.id} style={{ padding: "1rem", border: "1px solid #eee", borderRadius: 4, marginBottom: "0.5rem" }}>
                   <strong>{a.driver.name}</strong> &rarr; {a.order.restaurant.name}
                   <p style={{ fontSize: "0.85rem", color: "#666" }}>
@@ -62,7 +62,7 @@ export default async function DispatchBoardPage() {
       <section style={{ marginTop: "2rem" }}>
         <h2>Available Drivers ({drivers.length})</h2>
         <ul style={{ listStyle: "none", padding: 0, marginTop: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-          {drivers.map((driver) => (
+          {drivers.map((driver: typeof drivers[number]) => (
             <li key={driver.id} style={{ padding: "0.5rem 1rem", border: "1px solid #eee", borderRadius: 4 }}>
               {driver.name}
             </li>
