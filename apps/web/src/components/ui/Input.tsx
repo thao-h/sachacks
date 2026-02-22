@@ -15,21 +15,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-stone-700 mb-1.5"
+            className="block text-sm font-medium text-primary-900 mb-1.5"
           >
             {label}
             {hint && (
-              <span className="text-stone-400 font-normal ml-1">({hint})</span>
+              <span className="text-stone-500 font-normal ml-1">({hint})</span>
             )}
           </label>
         )}
         <input
           ref={ref}
           id={inputId}
-          className={`w-full px-4 py-3 bg-stone-50 border rounded-xl text-base transition-all duration-200 ${
+          className={`w-full px-4 py-3 bg-[#fffef9] border rounded-xl text-base transition-all duration-200 ${
             error
               ? "border-red-300 focus:ring-red-500/30 focus:border-red-500"
-              : "border-stone-200 focus:ring-primary-500/30 focus:border-primary-500"
+              : "border-stone-300 focus:ring-primary-500/25 focus:border-primary-500"
           } focus:outline-none focus:ring-2 ${className}`}
           {...props}
         />

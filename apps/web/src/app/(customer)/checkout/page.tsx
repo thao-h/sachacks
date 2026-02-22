@@ -1,12 +1,17 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import {
   DeliveryOptions,
   type DeliveryOptionType,
 } from "@/components/ui/DeliveryOptions";
+import { api } from "@/lib/api-client";
+import {
+  getCheckoutOfferDiscount,
+  subscribeLiveOfferUpdates,
+} from "@/lib/domain/live-offers";
 
 interface CartItem {
   id: string;
@@ -15,10 +20,36 @@ interface CartItem {
   quantity: number;
 }
 
+interface PricingEstimate {
+  distanceMiles: number;
+  distanceSource: "google-directions" | "fallback";
+  deliveryFee: number;
+  tax: number;
+  taxRate: number;
+  grandTotal: number;
+}
+
+function fallbackDeliveryFee(option: DeliveryOptionType): number {
+  switch (option) {
+    case "route-match":
+      return 1.5;
+    case "community-batch":
+      return 2.0;
+    case "direct-courier":
+      return 5.99;
+    case "pickup":
+      return 0;
+    default:
+      return 0;
+  }
+}
+
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [total, setTotal] = useState(0);
+  const [restaurantName, setRestaurantName] = useState<string>("");
+  const [restaurantSlug, setRestaurantSlug] = useState<string>("");
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,6 +58,8 @@ export default function CheckoutPage() {
       const data = JSON.parse(raw);
       setCart(data.cart || []);
       setTotal(data.total || 0);
+      setRestaurantName(data.restaurantName || "");
+      setRestaurantSlug(data.restaurantSlug || "");
     }
     setLoaded(true);
   }, []);
@@ -40,23 +73,113 @@ export default function CheckoutPage() {
   const [deliveryOption, setDeliveryOption] =
     useState<DeliveryOptionType>("route-match");
 
-  const deliveryFee = useMemo(() => {
-    switch (deliveryOption) {
-      case "route-match":
-        return 1.5;
-      case "community-batch":
-        return 2.0;
-      case "direct-courier":
-        return 5.99;
-      case "pickup":
-        return 0;
-      default:
-        return 0;
-    }
-  }, [deliveryOption]);
+  const [pricing, setPricing] = useState<PricingEstimate>({
+    distanceMiles: 0,
+    distanceSource: "fallback",
+    deliveryFee: fallbackDeliveryFee("route-match"),
+    tax: 0,
+    taxRate: Number(process.env.NEXT_PUBLIC_TAX_RATE ?? "0.08") || 0.08,
+    grandTotal: 0,
+  });
+  const [pricingLoading, setPricingLoading] = useState(false);
+  const [, setDiscountTick] = useState(0);
 
-  const tax = total * 0.08;
-  const grandTotal = total + deliveryFee + tax;
+  useEffect(() => {
+    const unsub = subscribeLiveOfferUpdates(() => {
+      setDiscountTick((n) => n + 1);
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    const fallbackRateRaw = Number(process.env.NEXT_PUBLIC_TAX_RATE ?? "0.08");
+    const fallbackTaxRate = Number.isFinite(fallbackRateRaw)
+      ? fallbackRateRaw
+      : 0.08;
+    const fee = fallbackDeliveryFee(deliveryOption);
+    const fallbackTax = Math.round(total * fallbackTaxRate * 100) / 100;
+    const fallbackGrandTotal =
+      Math.round((total + fee + fallbackTax) * 100) / 100;
+
+    if (deliveryOption === "pickup") {
+      setPricing({
+        distanceMiles: 0,
+        distanceSource: "fallback",
+        deliveryFee: 0,
+        tax: fallbackTax,
+        taxRate: fallbackTaxRate,
+        grandTotal: Math.round((total + fallbackTax) * 100) / 100,
+      });
+      setPricingLoading(false);
+      return;
+    }
+
+    if (!restaurantSlug || !formData.address.trim()) {
+      setPricing({
+        distanceMiles: 0,
+        distanceSource: "fallback",
+        deliveryFee: fee,
+        tax: fallbackTax,
+        taxRate: fallbackTaxRate,
+        grandTotal: fallbackGrandTotal,
+      });
+      setPricingLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    setPricingLoading(true);
+    const timer = window.setTimeout(() => {
+      api
+        .getPricingEstimate({
+          restaurantSlug,
+          deliveryAddress: formData.address,
+          deliveryOption,
+          subtotal: total,
+        })
+        .then((estimate) => {
+          if (cancelled) return;
+          setPricing(estimate as PricingEstimate);
+        })
+        .catch(() => {
+          if (cancelled) return;
+          setPricing({
+            distanceMiles: 0,
+            distanceSource: "fallback",
+            deliveryFee: fee,
+            tax: fallbackTax,
+            taxRate: fallbackTaxRate,
+            grandTotal: fallbackGrandTotal,
+          });
+        })
+        .finally(() => {
+          if (!cancelled) setPricingLoading(false);
+        });
+    }, 350);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [deliveryOption, formData.address, loaded, restaurantSlug, total]);
+
+  const deliveryFee = pricing.deliveryFee;
+  const tax = pricing.tax;
+  const activeDiscount = getCheckoutOfferDiscount({
+    restaurantName,
+    deliveryOption,
+  });
+  const discountAmount = activeDiscount
+    ? Math.round(total * (activeDiscount.percent / 100) * 100) / 100
+    : 0;
+  const grandTotal = Math.max(
+    0,
+    Math.round((pricing.grandTotal - discountAmount) * 100) / 100
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,6 +193,12 @@ export default function CheckoutPage() {
         orderId,
         deliveryOption,
         deliveryFee,
+        tax,
+        offerDiscountAmount: discountAmount,
+        offerDiscountPercent: activeDiscount?.percent ?? 0,
+        offerDiscountTitle: activeDiscount?.title ?? null,
+        distanceMiles: pricing.distanceMiles,
+        distanceSource: pricing.distanceSource,
         grandTotal,
       })
     );
@@ -181,6 +310,7 @@ export default function CheckoutPage() {
                 selectedOption={deliveryOption}
                 onSelect={setDeliveryOption}
                 communityActive={true}
+                distanceMiles={pricing.distanceMiles}
               />
             </div>
 
@@ -217,13 +347,37 @@ export default function CheckoutPage() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-stone-600">Delivery Fee</span>
-              <span className="text-stone-900">${deliveryFee.toFixed(2)}</span>
+              <span className="text-stone-900">
+                {pricingLoading ? "Calculating..." : `$${deliveryFee.toFixed(2)}`}
+              </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-stone-600">Tax</span>
+              <span className="text-stone-600">Estimated Tax</span>
               <span className="text-stone-900">${tax.toFixed(2)}</span>
             </div>
+            {activeDiscount && (
+              <div className="flex justify-between text-sm">
+                <span className="text-green-700">
+                  Offer Discount ({activeDiscount.percent}%)
+                </span>
+                <span className="text-green-700">-${discountAmount.toFixed(2)}</span>
+              </div>
+            )}
           </div>
+
+          {deliveryOption !== "pickup" && (
+            <p className="text-xs text-stone-500 mb-4">
+              {formData.address.trim()
+                ? `Distance estimate: ${pricing.distanceMiles.toFixed(1)} mi (${pricing.distanceSource === "google-directions" ? "Google Directions" : "fallback"}).`
+                : "Enter delivery address to get distance-based fee estimate."}
+            </p>
+          )}
+
+          {activeDiscount && (
+            <p className="text-xs text-green-700 mb-4">
+              Active offer applied from {restaurantName || "restaurant"}: {activeDiscount.title}
+            </p>
+          )}
 
           <div className="border-t border-stone-200 pt-4">
             <div className="flex justify-between items-center">

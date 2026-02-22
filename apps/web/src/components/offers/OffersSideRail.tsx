@@ -59,6 +59,11 @@ export default function OffersSideRail() {
                 <p className="text-xs text-stone-500 mb-1">{offer.restaurantName}</p>
                 <p className="text-sm font-semibold text-stone-900">{offer.title}</p>
                 <p className="text-xs text-stone-600 mt-1">{offer.details}</p>
+                {offer.checkoutDiscountPercent && offer.checkoutDiscountPercent > 0 && (
+                  <p className="text-[11px] font-semibold text-green-700 mt-1">
+                    {offer.checkoutDiscountPercent}% off at checkout
+                  </p>
+                )}
                 {timeLeft !== null && (
                   <p className="text-xs text-amber-700 mt-1.5 flex items-center gap-1">
                     <Clock className="w-3 h-3" />

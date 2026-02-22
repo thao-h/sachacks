@@ -7,9 +7,19 @@ import {
   Navigation,
   Loader2,
   RefreshCw,
+  Users,
+  Clock3,
+  Star,
 } from "lucide-react";
 import { apiGet } from "@/lib/api-client";
 import { attachLocations, findNearRouteRestaurants } from "@/lib/routes/routeMath";
+import {
+  fetchRoutes,
+  requestDeliveryOnRoute,
+  type DriverRoute,
+} from "@/lib/domain/routes";
+import { subscribeLiveRoutesUpdates } from "@/lib/domain/live-routes";
+import { useAuth } from "@/components/ui/LayoutShell";
 import type {
   RestaurantFromApi,
   RestaurantWithLocation,
@@ -50,6 +60,8 @@ function normalizeLocationInput(value: string): string {
 }
 
 export default function RoutesPage() {
+  const { user, openAuth } = useAuth();
+
   const [originInput, setOriginInput] = useState("");
   const [destInput, setDestInput] = useState("");
   const [origin, setOrigin] = useState("");
@@ -66,6 +78,10 @@ export default function RoutesPage() {
   const [routeResult, setRouteResult] = useState<RouteResult | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
   const [searching, setSearching] = useState(false);
+  const [postedRoutes, setPostedRoutes] = useState<DriverRoute[]>([]);
+  const [loadingPostedRoutes, setLoadingPostedRoutes] = useState(true);
+  const [joiningRouteId, setJoiningRouteId] = useState<string | null>(null);
+  const [routesNotice, setRoutesNotice] = useState<string | null>(null);
 
   const restaurantsLoaded = useRef(false);
 
@@ -77,6 +93,31 @@ export default function RoutesPage() {
       .then((data) => setRestaurants(attachLocations(data)))
       .catch(() => {});
   }, []);
+
+  const loadPostedRoutes = useCallback(async () => {
+    setLoadingPostedRoutes(true);
+    try {
+      const data = await fetchRoutes();
+      setPostedRoutes(data);
+    } catch {
+      setPostedRoutes([]);
+    } finally {
+      setLoadingPostedRoutes(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadPostedRoutes();
+  }, [loadPostedRoutes]);
+
+  useEffect(() => {
+    const unsub = subscribeLiveRoutesUpdates(() => {
+      loadPostedRoutes();
+    });
+    return () => {
+      unsub();
+    };
+  }, [loadPostedRoutes]);
 
   const handleRouteCalculated = useCallback(
     (result: RouteResult) => {
@@ -136,6 +177,24 @@ export default function RoutesPage() {
     }
   };
 
+  const handleRequestOnRoute = async (routeId: string) => {
+    if (!user) {
+      setRoutesNotice("Sign in to request delivery on a live route.");
+      openAuth();
+      return;
+    }
+    setJoiningRouteId(routeId);
+    try {
+      const result = await requestDeliveryOnRoute(routeId);
+      setRoutesNotice(result.message);
+      await loadPostedRoutes();
+    } catch {
+      setRoutesNotice("Could not request this route right now.");
+    } finally {
+      setJoiningRouteId(null);
+    }
+  };
+
   const combinedSuggestions = [
     ...DAVIS_LOCATION_PRESETS,
     ...restaurants.map((r) => (r.address ? `${r.name}, ${r.address}` : r.name)),
@@ -152,10 +211,17 @@ export default function RoutesPage() {
             <div>
               <h1 className="text-xl font-bold text-stone-900">Route Planner</h1>
               <p className="text-xs text-stone-500">
-                Plan a route and see which restaurants you can pick up from along the way
+                Explore routes in Davis and find restaurants or live driver trips
               </p>
             </div>
           </div>
+
+          {user?.mode !== "drive" && (
+            <div className="mb-4 rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-xs text-primary-800">
+              You are in Order mode. You can explore routes and request delivery.
+              Switch to Drive mode from your profile menu to post routes.
+            </div>
+          )}
 
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
@@ -299,6 +365,93 @@ export default function RoutesPage() {
             )}
           </div>
         </div>
+
+        <section className="mt-8 bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+          <div className="px-4 py-3 border-b border-stone-200 bg-stone-50/80 flex items-center justify-between">
+            <h2 className="font-semibold text-stone-900 flex items-center gap-2">
+              <Users className="w-4 h-4 text-primary-600" />
+              Live Driver Routes
+            </h2>
+            <button
+              type="button"
+              onClick={loadPostedRoutes}
+              className="text-xs px-2.5 py-1 rounded-md border border-stone-200 bg-white hover:bg-stone-50 text-stone-700"
+            >
+              Refresh
+            </button>
+          </div>
+
+          {routesNotice && (
+            <div className="px-4 pt-3">
+              <div className="rounded-lg border border-primary-200 bg-primary-50 text-primary-800 text-sm px-3 py-2">
+                {routesNotice}
+              </div>
+            </div>
+          )}
+
+          <div className="p-4">
+            {loadingPostedRoutes ? (
+              <p className="text-sm text-stone-500">Loading live routes…</p>
+            ) : postedRoutes.length === 0 ? (
+              <p className="text-sm text-stone-500">
+                No routes posted yet. Drivers can post from the Drive tab.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {postedRoutes.map((route) => {
+                  const spotsLeft = Math.max(0, route.capacity - route.filled);
+                  const full = spotsLeft === 0;
+                  return (
+                    <article
+                      key={route.id}
+                      className="rounded-xl border border-stone-200 bg-white p-4"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-semibold text-stone-900">{route.from} to {route.to}</p>
+                          <p className="text-xs text-stone-500 mt-0.5">{route.id}</p>
+                        </div>
+                        <span
+                          className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                            full
+                              ? "bg-red-100 text-red-700"
+                              : "bg-sage-100 text-sage-800"
+                          }`}
+                        >
+                          {full ? "Full" : `${spotsLeft} spots left`}
+                        </span>
+                      </div>
+
+                      <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-stone-600">
+                        <p className="flex items-center gap-1.5">
+                          <Clock3 className="w-3.5 h-3.5" />
+                          {route.departureTime}
+                        </p>
+                        <p className="flex items-center gap-1.5">
+                          <Star className="w-3.5 h-3.5 text-accent-600" />
+                          {route.rating.toFixed(1)} by {route.driverName}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleRequestOnRoute(route.id)}
+                        disabled={full || joiningRouteId === route.id}
+                        className="mt-3 w-full px-3 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {joiningRouteId === route.id
+                          ? "Requesting…"
+                          : full
+                            ? "Route Full"
+                            : "Request Delivery on This Route"}
+                      </button>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
       </main>
     </div>
   );

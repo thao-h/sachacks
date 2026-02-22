@@ -6,13 +6,13 @@ import type { LucideIcon } from "lucide-react";
 
 const variants = {
   primary:
-    "bg-primary-600 hover:bg-primary-700 text-white shadow-sm shadow-primary-600/20 hover:shadow-md hover:shadow-primary-600/30",
+    "bg-pop-500 hover:bg-pop-600 text-white shadow-sm shadow-pop-500/20 hover:shadow-md hover:shadow-pop-500/30",
   secondary:
-    "bg-white border border-stone-200 text-stone-900 hover:bg-primary-50 hover:border-primary-300",
-  ghost: "text-stone-600 hover:text-stone-900 hover:bg-stone-100",
+    "bg-primary-50 border border-primary-200 text-primary-900 hover:bg-primary-100 hover:border-primary-300",
+  ghost: "text-primary-700 hover:text-primary-900 hover:bg-primary-100",
   danger: "bg-red-600 hover:bg-red-700 text-white shadow-sm shadow-red-600/20",
   accent:
-    "bg-accent-500 hover:bg-accent-600 text-white shadow-sm shadow-accent-500/20 hover:shadow-md hover:shadow-accent-500/30",
+    "bg-accent-400 hover:bg-accent-500 text-primary-900 shadow-sm shadow-accent-400/25 hover:shadow-md hover:shadow-accent-500/30",
 };
 
 const sizes = {

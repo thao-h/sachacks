@@ -78,7 +78,7 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
         onLogin={setUser}
       />
       <div id="main-content" className="pb-16 md:pb-0">{children}</div>
-      <BottomNav />
+      <BottomNav user={user} />
     </AuthContext.Provider>
   );
 }

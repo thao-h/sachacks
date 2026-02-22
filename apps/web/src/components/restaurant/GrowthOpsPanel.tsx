@@ -82,6 +82,16 @@ export default function GrowthOpsPanel({
   const [flashIngredient, setFlashIngredient] = useState("");
   const [flashOfferText, setFlashOfferText] = useState("");
   const [creatingFlash, setCreatingFlash] = useState(false);
+  const [customOfferTitle, setCustomOfferTitle] = useState("");
+  const [customOfferDetails, setCustomOfferDetails] = useState("");
+  const [customOfferDiscountPercent, setCustomOfferDiscountPercent] =
+    useState(12);
+  const [customOfferDurationMinutes, setCustomOfferDurationMinutes] =
+    useState(45);
+  const [customOfferScope, setCustomOfferScope] = useState<
+    "all" | "delivery" | "pickup"
+  >("all");
+  const [creatingCustomOffer, setCreatingCustomOffer] = useState(false);
 
   const [surplusItemName, setSurplusItemName] = useState("");
   const [surplusQuantity, setSurplusQuantity] = useState(5);
@@ -204,6 +214,33 @@ export default function GrowthOpsPanel({
     setFlashIngredient("");
     setFlashOfferText("");
     setCreatingFlash(false);
+  };
+
+  const submitCustomOffer = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!customOfferTitle.trim() || !customOfferDetails.trim()) return;
+    const percent = Math.max(1, Math.min(40, customOfferDiscountPercent));
+    const duration = Math.max(5, Math.min(180, customOfferDurationMinutes));
+
+    setCreatingCustomOffer(true);
+    publishLiveOffer({
+      restaurantName,
+      title: customOfferTitle.trim(),
+      details: customOfferDetails.trim(),
+      type: "CUSTOM_DEAL",
+      expiresInMinutes: duration,
+      checkoutDiscountPercent: percent,
+      checkoutScope: customOfferScope,
+    });
+    incrementImpactStats({ totalSavingsCents: Math.round(450 + percent * 70) });
+    setNotice(`Custom deal launched: ${percent}% off at checkout`);
+    setCustomOfferTitle("");
+    setCustomOfferDetails("");
+    setCustomOfferDiscountPercent(12);
+    setCustomOfferDurationMinutes(45);
+    setCustomOfferScope("all");
+    setCreatingCustomOffer(false);
   };
 
   const createNightLoopBundle = (e: React.FormEvent) => {
@@ -434,6 +471,78 @@ export default function GrowthOpsPanel({
                 {creatingFlash ? "Launching..." : "Launch Flash Sale"}
               </button>
             </form>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-stone-900 mb-2">
+              Custom Deal Builder
+            </h3>
+            <form
+              onSubmit={submitCustomOffer}
+              className="grid grid-cols-1 md:grid-cols-6 gap-2"
+            >
+              <input
+                value={customOfferTitle}
+                onChange={(e) => setCustomOfferTitle(e.target.value)}
+                placeholder="Deal title (e.g. Late Night Drop)"
+                className="md:col-span-2 px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
+              />
+              <input
+                value={customOfferDetails}
+                onChange={(e) => setCustomOfferDetails(e.target.value)}
+                placeholder="Deal details"
+                className="md:col-span-2 px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
+              />
+              <input
+                type="number"
+                min={1}
+                max={40}
+                value={customOfferDiscountPercent}
+                onChange={(e) =>
+                  setCustomOfferDiscountPercent(
+                    Math.max(1, Math.min(40, Number(e.target.value))),
+                  )
+                }
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
+                title="Discount percent"
+              />
+              <input
+                type="number"
+                min={5}
+                max={180}
+                value={customOfferDurationMinutes}
+                onChange={(e) =>
+                  setCustomOfferDurationMinutes(
+                    Math.max(5, Math.min(180, Number(e.target.value))),
+                  )
+                }
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
+                title="Duration minutes"
+              />
+              <select
+                value={customOfferScope}
+                onChange={(e) =>
+                  setCustomOfferScope(
+                    e.target.value as "all" | "delivery" | "pickup",
+                  )
+                }
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
+              >
+                <option value="all">All orders</option>
+                <option value="delivery">Delivery only</option>
+                <option value="pickup">Pickup only</option>
+              </select>
+              <button
+                type="submit"
+                disabled={creatingCustomOffer}
+                className="rounded-lg bg-pop-500 text-white text-sm font-medium px-4 py-2 hover:bg-pop-600 disabled:opacity-60"
+              >
+                {creatingCustomOffer ? "Launching..." : "Launch Custom Deal"}
+              </button>
+            </form>
+            <p className="mt-2 text-xs text-stone-500">
+              Format: title + details + % off + duration(min) + scope. Applies automatically at checkout when active.
+            </p>
           </div>
 
           <div>

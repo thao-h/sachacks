@@ -3,6 +3,11 @@
 // ---------------------------------------------------------------------------
 
 import { api } from "@/lib/api-client";
+import {
+  removeLiveRoute,
+  upsertLiveRoute,
+  type LivePostedRoute,
+} from "./live-routes";
 
 export interface RouteOffer {
   id: string;
@@ -150,11 +155,42 @@ export async function updateDeliveryStatus(
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export async function postRoute(data: {
+  driverId: string;
+  driverName: string;
   from: string;
   to: string;
   departureTime: string;
   capacity: number;
-}): Promise<{ id: string; from: string; to: string }> {
+}): Promise<{
+  id: string;
+  from: string;
+  to: string;
+  departureTime: string;
+  capacity: number;
+}> {
   await delay(400);
-  return { id: `RT-${Date.now().toString().slice(-4)}`, ...data };
+  const route: LivePostedRoute = {
+    id: `RT-${Date.now().toString().slice(-6)}`,
+    driverId: data.driverId,
+    driverName: data.driverName,
+    from: data.from,
+    to: data.to,
+    departureTime: data.departureTime,
+    capacity: data.capacity,
+    filled: 0,
+    createdAt: new Date().toISOString(),
+  };
+  upsertLiveRoute(route);
+  return {
+    id: route.id,
+    from: route.from,
+    to: route.to,
+    departureTime: route.departureTime,
+    capacity: route.capacity,
+  };
+}
+
+export async function cancelPostedRoute(routeId: string): Promise<void> {
+  await delay(150);
+  removeLiveRoute(routeId);
 }

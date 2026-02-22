@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Store, ChevronRight, MapPin, UtensilsCrossed } from "lucide-react";
 import { motion } from "motion/react";
 import { api } from "@/lib/api-client";
@@ -10,6 +11,18 @@ import { ErrorState } from "@/components/ui/ErrorState";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { SkeletonGrid } from "@/components/ui/Skeleton";
 import OffersSideRail from "@/components/offers/OffersSideRail";
+
+const RestaurantDiscoveryMap = dynamic(
+  () => import("./components/RestaurantDiscoveryMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="rounded-2xl border border-stone-200 bg-stone-100/80 px-6 py-10 text-center animate-pulse">
+        <p className="text-stone-600 text-sm">Loading Davis restaurant map…</p>
+      </div>
+    ),
+  }
+);
 
 interface Restaurant {
   id: string;
@@ -24,6 +37,13 @@ export default function CustomerPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const showDiscoveryMap =
+    process.env.NEXT_PUBLIC_ENABLE_CUSTOMER_MAP !== "false";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const loadRestaurants = useCallback(async () => {
     setLoading(true);
@@ -101,6 +121,17 @@ export default function CustomerPage() {
               Choose a restaurant to browse their menu
             </p>
           </motion.div>
+
+          {showDiscoveryMap && mounted && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="mb-6"
+            >
+              <RestaurantDiscoveryMap restaurants={restaurants} />
+            </motion.div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {restaurants.map((restaurant, i) => (

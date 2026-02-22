@@ -17,26 +17,26 @@ const statusConfig: Record<
   { bg: string; text: string; dot: string }
 > = {
   Pending: {
-    bg: "bg-yellow-50",
-    text: "text-yellow-600",
-    dot: "bg-yellow-500",
+    bg: "bg-accent-100",
+    text: "text-accent-900",
+    dot: "bg-accent-500",
   },
-  Confirmed: { bg: "bg-sky-50", text: "text-sky-600", dot: "bg-sky-600" },
+  Confirmed: { bg: "bg-teal-100", text: "text-teal-800", dot: "bg-teal-600" },
   Preparing: {
-    bg: "bg-purple-50",
-    text: "text-purple-600",
-    dot: "bg-purple-500",
+    bg: "bg-primary-100",
+    text: "text-primary-800",
+    dot: "bg-primary-600",
   },
-  Ready: { bg: "bg-green-50", text: "text-green-600", dot: "bg-green-500" },
+  Ready: { bg: "bg-sage-100", text: "text-sage-800", dot: "bg-sage-600" },
   "Out for Delivery": {
-    bg: "bg-orange-50",
-    text: "text-orange-600",
-    dot: "bg-orange-500",
+    bg: "bg-pop-100",
+    text: "text-pop-800",
+    dot: "bg-pop-600",
   },
   Delivered: {
-    bg: "bg-green-50",
-    text: "text-green-700",
-    dot: "bg-green-600",
+    bg: "bg-sage-100",
+    text: "text-sage-900",
+    dot: "bg-sage-700",
   },
   Canceled: { bg: "bg-red-50", text: "text-red-600", dot: "bg-red-500" },
 };

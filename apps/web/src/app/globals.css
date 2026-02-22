@@ -3,29 +3,77 @@
 @theme {
   --font-sans: "DM Sans", system-ui, sans-serif;
 
-  /* Primary: Sage Green — community, local, organic */
-  --color-primary-50: #f0fdf4;
-  --color-primary-100: #dcfce7;
-  --color-primary-200: #bbf7d0;
-  --color-primary-300: #86efac;
-  --color-primary-400: #4ade80;
-  --color-primary-500: #22c55e;
-  --color-primary-600: #16a34a;
-  --color-primary-700: #15803d;
-  --color-primary-800: #166534;
-  --color-primary-900: #14532d;
+  /* Warm neutral palette used heavily across existing "stone-*" classes */
+  --color-stone-50: #fdf9ef;
+  --color-stone-100: #f8f1dd;
+  --color-stone-200: #efe3c4;
+  --color-stone-300: #e2d3ad;
+  --color-stone-400: #cbbd96;
+  --color-stone-500: #ad9f7d;
+  --color-stone-600: #8f8265;
+  --color-stone-700: #746950;
+  --color-stone-800: #5a5140;
+  --color-stone-900: #3f392f;
 
-  /* Accent: Amber/Gold — energy, warmth, CTAs */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-200: #fde68a;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
-  --color-accent-700: #b45309;
-  --color-accent-800: #92400e;
-  --color-accent-900: #78350f;
+  /* Indigo from reference art */
+  --color-primary-50: #eff1ff;
+  --color-primary-100: #e0e4ff;
+  --color-primary-200: #c7ceff;
+  --color-primary-300: #abb6fb;
+  --color-primary-400: #8996f0;
+  --color-primary-500: #6f7ce5;
+  --color-primary-600: #5e67d8;
+  --color-primary-700: #4f56ba;
+  --color-primary-800: #404693;
+  --color-primary-900: #32366f;
+
+  /* Sunflower yellow */
+  --color-accent-50: #fff9dd;
+  --color-accent-100: #fff2b6;
+  --color-accent-200: #ffe88c;
+  --color-accent-300: #f8dd67;
+  --color-accent-400: #f2cf4a;
+  --color-accent-500: #dfbb2f;
+  --color-accent-600: #b99223;
+  --color-accent-700: #8f6d1b;
+  --color-accent-800: #665013;
+  --color-accent-900: #4b3a0d;
+
+  /* Playful pink */
+  --color-pop-50: #fdf0f8;
+  --color-pop-100: #f8dced;
+  --color-pop-200: #f2bfdc;
+  --color-pop-300: #ea9cc8;
+  --color-pop-400: #e07db8;
+  --color-pop-500: #d866a9;
+  --color-pop-600: #be4f91;
+  --color-pop-700: #a03f79;
+  --color-pop-800: #7f305f;
+  --color-pop-900: #5b2143;
+
+  /* Sky teal accents */
+  --color-teal-50: #eef8fd;
+  --color-teal-100: #d6edf8;
+  --color-teal-200: #b8dff0;
+  --color-teal-300: #99d0e9;
+  --color-teal-400: #7cc4e0;
+  --color-teal-500: #60b9d8;
+  --color-teal-600: #419cbc;
+  --color-teal-700: #317a95;
+  --color-teal-800: #245c70;
+  --color-teal-900: #1a4250;
+
+  /* Soft leafy green */
+  --color-sage-50: #f3f9e9;
+  --color-sage-100: #e6f2d3;
+  --color-sage-200: #d3e7b1;
+  --color-sage-300: #c0db95;
+  --color-sage-400: #b1d184;
+  --color-sage-500: #a2c66f;
+  --color-sage-600: #84ab55;
+  --color-sage-700: #67853f;
+  --color-sage-800: #4d6530;
+  --color-sage-900: #374822;
 }
 
 @layer base {
@@ -38,9 +86,16 @@
   }
 
   body {
-    @apply bg-stone-50 text-stone-900 antialiased;
+    @apply text-stone-900 antialiased;
     font-family: var(--font-sans);
     line-height: 1.6;
+    background-color: #faf4e2;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(162, 198, 111, 0.24) 0, rgba(162, 198, 111, 0.24) 22%, transparent 23%),
+      radial-gradient(circle at 85% 18%, rgba(94, 103, 216, 0.18) 0, rgba(94, 103, 216, 0.18) 17%, transparent 18%),
+      radial-gradient(circle at 84% 70%, rgba(96, 185, 216, 0.2) 0, rgba(96, 185, 216, 0.2) 15%, transparent 16%),
+      linear-gradient(180deg, #fcf7ea 0%, #f8f0dd 100%);
+    background-attachment: fixed;
   }
 
   a {
@@ -49,7 +104,7 @@
   }
 
   ::selection {
-    @apply bg-primary-200 text-primary-900;
+    @apply bg-accent-200 text-primary-900;
   }
 
   :focus-visible {
@@ -88,7 +143,7 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-stone-100;
+  background: #f5f0e4;
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-stone-300 rounded-full;
@@ -110,9 +165,9 @@
 .animate-shimmer {
   background: linear-gradient(
     90deg,
-    theme(--color-stone-200) 25%,
-    theme(--color-stone-100) 50%,
-    theme(--color-stone-200) 75%
+    #ece7d9 25%,
+    #f5f0e4 50%,
+    #ece7d9 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
@@ -153,7 +208,12 @@
 .gradient-border {
   border: 1px solid transparent;
   background:
-    linear-gradient(white, white) padding-box,
-    linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400))
+    linear-gradient(#fffef7, #fffef7) padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-primary-400),
+        var(--color-pop-400),
+        var(--color-accent-400)
+      )
       border-box;
 }

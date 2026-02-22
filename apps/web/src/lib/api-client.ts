@@ -136,4 +136,12 @@ export const api = {
 
   lockBulkOrder: (bulkOrderId: string) =>
     apiPost(`/api/v1/bulk-orders/${bulkOrderId}/lock`, {}),
+
+  // Pricing estimates
+  getPricingEstimate: (data: {
+    restaurantSlug: string;
+    deliveryAddress?: string;
+    deliveryOption: "route-match" | "community-batch" | "direct-courier" | "pickup";
+    subtotal: number;
+  }) => apiPost("/api/v1/pricing/estimate", data),
 };

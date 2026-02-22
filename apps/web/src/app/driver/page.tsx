@@ -23,6 +23,7 @@ import {
   acceptOffer,
   updateDeliveryStatus,
   postRoute,
+  cancelPostedRoute,
   type RouteOffer,
   type ActiveDelivery,
   type DriverStats,
@@ -30,6 +31,7 @@ import {
 import { LoadingState } from "@/components/ui/LoadingState";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { DriveModeGate } from "@/components/ui/DriveModeGate";
 import { useAuth } from "@/components/ui/LayoutShell";
 import {
   getDonationBounties,
@@ -40,7 +42,7 @@ import {
 } from "@/lib/domain/live-offers";
 
 export default function DriverDashboardPage() {
-  const { user } = useAuth();
+  const { user, setUser, openAuth } = useAuth();
   const driverId = user?.id ?? null;
 
   const [isOnline, setIsOnline] = useState(true);
@@ -74,7 +76,14 @@ export default function DriverDashboardPage() {
   };
 
   const loadData = useCallback(async () => {
-    if (!driverId) return;
+    if (!driverId) {
+      setOffers([]);
+      setActiveDeliveries([]);
+      setStats(null);
+      setDonationBounties(getDonationBounties());
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -156,7 +165,14 @@ export default function DriverDashboardPage() {
 
     setPostingRoute(true);
     try {
-      const route = await postRoute({ from, to, departureTime, capacity });
+      const route = await postRoute({
+        driverId: user?.id ?? "driver-anon",
+        driverName: user?.name ?? "Driver",
+        from,
+        to,
+        departureTime,
+        capacity,
+      });
       setActiveRoute(route);
     } catch (err) {
       // silently fail
@@ -165,7 +181,10 @@ export default function DriverDashboardPage() {
     }
   };
 
-  const handleCancelRoute = () => {
+  const handleCancelRoute = async () => {
+    if (activeRoute?.id) {
+      await cancelPostedRoute(activeRoute.id);
+    }
     setActiveRoute(null);
   };
 
@@ -195,6 +214,18 @@ export default function DriverDashboardPage() {
         title="Something went wrong"
         message={error}
         onRetry={loadData}
+      />
+    );
+  }
+
+  if (!user || user.mode !== "drive") {
+    return (
+      <DriveModeGate
+        user={user}
+        setUser={setUser}
+        openAuth={openAuth}
+        title="Drive Mode Required"
+        description="This dashboard is for active delivery partners. Switch to Drive mode to post routes and accept offers."
       />
     );
   }

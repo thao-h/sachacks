@@ -14,6 +14,12 @@ export interface DriverRoute {
   stops: { location: string; time: string }[];
 }
 
+import {
+  getLiveRoutes,
+  reserveLiveRouteSpot,
+  type LivePostedRoute,
+} from "./live-routes";
+
 // -- Mock data ---------------------------------------------------------------
 
 const MOCK_ROUTES: DriverRoute[] = [
@@ -71,7 +77,24 @@ export async function fetchRoutes(filters?: {
   to?: string;
 }): Promise<DriverRoute[]> {
   await delay(400);
-  let routes = MOCK_ROUTES;
+  const liveRoutes: DriverRoute[] = getLiveRoutes().map(
+    (route: LivePostedRoute) => ({
+      id: route.id,
+      driverName: route.driverName,
+      rating: 4.9,
+      from: route.from,
+      to: route.to,
+      departureTime: route.departureTime,
+      capacity: route.capacity,
+      filled: route.filled,
+      stops: [
+        { location: route.from, time: route.departureTime },
+        { location: route.to, time: route.departureTime },
+      ],
+    }),
+  );
+
+  let routes = [...liveRoutes, ...MOCK_ROUTES];
   if (filters?.from) {
     routes = routes.filter((r) =>
       r.from.toLowerCase().includes(filters.from!.toLowerCase()),
@@ -89,6 +112,15 @@ export async function requestDeliveryOnRoute(
   routeId: string,
 ): Promise<{ success: boolean; message: string }> {
   await delay(500);
+
+  const reserved = reserveLiveRouteSpot(routeId);
+  if (!reserved && routeId.startsWith("RT-")) {
+    return {
+      success: false,
+      message: `Route ${routeId} is already full.`,
+    };
+  }
+
   return {
     success: true,
     message: `Delivery requested on route ${routeId}. The driver will be notified.`,

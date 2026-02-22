@@ -15,10 +15,18 @@ const MODE_CONFIG: Record<
   UserMode,
   { label: string; color: string; icon: typeof ShoppingBag }
 > = {
-  order: { label: "Ordering", color: "bg-primary-100 text-primary-700", icon: ShoppingBag },
-  drive: { label: "Driving", color: "bg-green-100 text-green-700", icon: Car },
-  restaurant: { label: "Restaurant", color: "bg-orange-100 text-orange-700", icon: Store },
-  admin: { label: "Admin", color: "bg-purple-100 text-purple-700", icon: Shield },
+  order: {
+    label: "Ordering",
+    color: "bg-primary-100 text-primary-800",
+    icon: ShoppingBag,
+  },
+  drive: { label: "Driving", color: "bg-sage-100 text-sage-800", icon: Car },
+  restaurant: {
+    label: "Restaurant",
+    color: "bg-accent-100 text-accent-900",
+    icon: Store,
+  },
+  admin: { label: "Admin", color: "bg-pop-100 text-pop-800", icon: Shield },
 };
 
 function canUseMode(user: SessionUser, mode: UserMode): boolean {
@@ -72,7 +80,7 @@ export function UserMenu({ user, onModeChange, onLogout }: UserMenuProps) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 p-1.5 hover:bg-stone-100 rounded-lg transition-colors border border-transparent hover:border-stone-200"
+        className="flex items-center gap-2 p-1.5 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-200"
       >
         {/* Mode chip */}
         <div
@@ -83,25 +91,25 @@ export function UserMenu({ user, onModeChange, onLogout }: UserMenuProps) {
         </div>
 
         {/* Avatar */}
-        <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm font-bold">
+        <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm font-bold shadow-sm shadow-primary-600/20">
           {initial}
         </div>
-        <ChevronDown className="w-4 h-4 text-stone-500 hidden sm:block" />
+        <ChevronDown className="w-4 h-4 text-stone-600 hidden sm:block" />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-xl border border-stone-200 py-2 z-[60]">
+        <div className="absolute right-0 top-full mt-2 w-64 bg-[#fffef9] rounded-xl shadow-xl shadow-stone-900/10 border border-stone-200 py-2 z-[60]">
           {/* User info */}
-          <div className="px-4 py-3 border-b border-stone-100">
-            <p className="font-semibold text-stone-900 text-sm">{user.name}</p>
-            <p className="text-xs text-stone-500">
+          <div className="px-4 py-3 border-b border-primary-100">
+            <p className="font-semibold text-primary-900 text-sm">{user.name}</p>
+            <p className="text-xs text-stone-600">
               {user.phone || user.email}
             </p>
           </div>
 
           {/* Mode switcher */}
-          <div className="px-2 py-2 border-b border-stone-100">
-            <p className="px-2 text-xs font-semibold text-stone-400 uppercase tracking-wider mb-1">
+          <div className="px-2 py-2 border-b border-primary-100">
+            <p className="px-2 text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1">
               Switch Mode
             </p>
             {availableModes.map((mode) => {
@@ -114,14 +122,14 @@ export function UserMenu({ user, onModeChange, onLogout }: UserMenuProps) {
                   onClick={() => handleModeSwitch(mode)}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                     isActive
-                      ? "bg-stone-100 font-semibold text-stone-900"
-                      : "text-stone-600 hover:bg-stone-50"
+                      ? "bg-gradient-to-r from-primary-100 to-accent-100 font-semibold text-primary-900"
+                      : "text-stone-700 hover:bg-primary-50"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   {config.label}
                   {isActive && (
-                    <span className="ml-auto text-xs text-primary-600">Active</span>
+                    <span className="ml-auto text-xs text-pop-600">Active</span>
                   )}
                 </button>
               );

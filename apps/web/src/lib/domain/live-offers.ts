@@ -8,9 +8,12 @@ export type LiveOfferType =
   | "BATCH_BOOST"
   | "ECO_ONLY"
   | "DEAD_ZONE_PICKUP"
+  | "CUSTOM_DEAL"
   | "FLASH_SALE"
   | "SURPLUS_BUNDLE"
   | "DONATION_ALERT";
+
+export type CheckoutScope = "all" | "delivery" | "pickup";
 
 export interface LiveOffer {
   id: string;
@@ -20,6 +23,8 @@ export interface LiveOffer {
   type: LiveOfferType;
   createdAt: string;
   expiresAt: string | null;
+  checkoutDiscountPercent?: number | null;
+  checkoutScope?: CheckoutScope;
 }
 
 export interface SurplusBundle {
@@ -52,6 +57,12 @@ export interface ImpactStats {
   wasteDivertedCents: number;
   donationsNotified: number;
   donationsCompleted: number;
+}
+
+export interface CheckoutOfferDiscount {
+  percent: number;
+  title: string;
+  type: LiveOfferType;
 }
 
 function canUseStorage() {
@@ -123,12 +134,81 @@ export function getLiveOffers(): LiveOffer[] {
   return cleaned;
 }
 
+function normalizeRestaurantName(name: string): string {
+  return name.trim().toLowerCase();
+}
+
+export function getCheckoutOfferDiscount(input: {
+  restaurantName?: string;
+  deliveryOption?: string;
+}): CheckoutOfferDiscount | null {
+  const restaurantName = input.restaurantName?.trim();
+  if (!restaurantName) return null;
+
+  const matchingOffers = getLiveOffers().filter(
+    (offer) =>
+      normalizeRestaurantName(offer.restaurantName) ===
+      normalizeRestaurantName(restaurantName),
+  );
+
+  if (matchingOffers.length === 0) return null;
+
+  const isPickup = input.deliveryOption === "pickup";
+  const customDeal = matchingOffers.find((offer) => {
+    if (offer.type !== "CUSTOM_DEAL") return false;
+    if (!offer.checkoutDiscountPercent || offer.checkoutDiscountPercent <= 0) {
+      return false;
+    }
+    const scope = offer.checkoutScope ?? "all";
+    if (scope === "pickup" && !isPickup) return false;
+    if (scope === "delivery" && isPickup) return false;
+    return true;
+  });
+
+  if (customDeal?.checkoutDiscountPercent) {
+    return {
+      percent: customDeal.checkoutDiscountPercent,
+      title: customDeal.title,
+      type: customDeal.type,
+    };
+  }
+
+  // Priority by strongest checkout impact for MVP.
+  const priority: LiveOfferType[] = [
+    "BATCH_BOOST",
+    "ECO_ONLY",
+    "DEAD_ZONE_PICKUP",
+    "FLASH_SALE",
+    "SURPLUS_BUNDLE",
+    "DONATION_ALERT",
+  ];
+
+  for (const type of priority) {
+    const found = matchingOffers.find((offer) => offer.type === type);
+    if (!found) continue;
+
+    if (type === "BATCH_BOOST") {
+      return { percent: 15, title: found.title, type };
+    }
+    if (type === "ECO_ONLY" && input.deliveryOption !== "pickup") {
+      return { percent: 10, title: found.title, type };
+    }
+    if (type === "DEAD_ZONE_PICKUP" && input.deliveryOption === "pickup") {
+      return { percent: 10, title: found.title, type };
+    }
+  }
+
+  return null;
+}
+
 export function publishLiveOffer(input: {
   restaurantName: string;
   title: string;
   details: string;
   type: LiveOfferType;
   expiresInMinutes?: number;
+  checkoutDiscountPercent?: number;
+  checkoutScope?: CheckoutScope;
 }) {
   const offers = getLiveOffers();
   const expiresAt =
@@ -144,6 +224,8 @@ export function publishLiveOffer(input: {
     type: input.type,
     createdAt: nowIso(),
     expiresAt,
+    checkoutDiscountPercent: input.checkoutDiscountPercent ?? null,
+    checkoutScope: input.checkoutScope ?? "all",
   };
   writeJson(LIVE_OFFERS_KEY, [next, ...offers].slice(0, 40));
   return next;

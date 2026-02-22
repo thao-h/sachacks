@@ -16,20 +16,40 @@ interface DeliveryOption {
   icon: React.ElementType;
   available: boolean;
   unavailableReason?: string;
-  eta: string;
 }
 
 interface DeliveryOptionsProps {
   selectedOption: DeliveryOptionType;
   onSelect: (option: DeliveryOptionType) => void;
   communityActive?: boolean;
+  distanceMiles?: number;
 }
 
 export function DeliveryOptions({
   selectedOption,
   onSelect,
   communityActive = false,
+  distanceMiles = 0,
 }: DeliveryOptionsProps) {
+  const roundedMiles = Number.isFinite(distanceMiles)
+    ? Math.max(0, distanceMiles)
+    : 0;
+
+  const getEta = (optionId: DeliveryOptionType): string => {
+    switch (optionId) {
+      case "route-match":
+        return `${Math.round(35 + 4 * roundedMiles)} min`;
+      case "community-batch":
+        return `${Math.round(30 + 3.5 * roundedMiles)} min`;
+      case "direct-courier":
+        return `${Math.round(20 + 3 * roundedMiles)} min`;
+      case "pickup":
+        return "15-20 min";
+      default:
+        return "N/A";
+    }
+  };
+
   const options: DeliveryOption[] = [
     {
       id: "route-match",
@@ -38,7 +58,6 @@ export function DeliveryOptions({
       subtitle: "Someone's heading your way",
       icon: Car,
       available: true,
-      eta: "45-60 min",
     },
     {
       id: "community-batch",
@@ -48,7 +67,6 @@ export function DeliveryOptions({
       icon: Users,
       available: communityActive,
       unavailableReason: "No active batches nearby",
-      eta: "30-45 min",
     },
     {
       id: "direct-courier",
@@ -57,7 +75,6 @@ export function DeliveryOptions({
       subtitle: "Guaranteed 30 min",
       icon: Bike,
       available: true,
-      eta: "25-30 min",
     },
     {
       id: "pickup",
@@ -66,7 +83,6 @@ export function DeliveryOptions({
       subtitle: "Ready in 15-20 min",
       icon: Store,
       available: true,
-      eta: "15-20 min",
     },
   ];
 
@@ -126,7 +142,7 @@ export function DeliveryOptions({
         <div className="flex items-center gap-2 text-sm text-primary-700 bg-primary-50 px-3 py-2 rounded-lg border border-primary-100">
           <Info className="w-4 h-4" />
           <span className="font-medium">
-            Estimated arrival: {selected.eta}
+            Estimated arrival: {getEta(selected.id)}
           </span>
         </div>
       )}
