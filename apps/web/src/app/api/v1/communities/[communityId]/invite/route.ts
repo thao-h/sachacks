@@ -13,8 +13,32 @@ const inviteSchema = z.object({
   expiresAt: z.string().datetime().optional(),
 });
 
+type InviteRecord = {
+  code: string;
+  expiresAt: Date | null;
+  createdAt: Date;
+};
+
+type CommunityInviteTx = {
+  communityInvite: {
+    updateMany: (args: {
+      where: { communityId: string; isActive: boolean };
+      data: { isActive: boolean };
+    }) => Promise<unknown>;
+    create: (args: {
+      data: {
+        communityId: string;
+        createdByUserId: string;
+        code: string;
+        isActive: boolean;
+        expiresAt: Date | null;
+      };
+    }) => Promise<InviteRecord>;
+  };
+};
+
 async function createInviteWithRetry(
-  tx: any,
+  tx: CommunityInviteTx,
   communityId: string,
   createdByUserId: string,
   expiresAt: Date | null,
@@ -62,7 +86,7 @@ export const POST = handleRoute(async (request, { params }) => {
     throw new ValidationError("Invalid invite expiration timestamp");
   }
 
-  const invite = await prisma.$transaction(async (tx) => {
+  const invite = await prisma.$transaction(async (tx: CommunityInviteTx) => {
     await tx.communityInvite.updateMany({
       where: { communityId, isActive: true },
       data: { isActive: false },
