@@ -1,82 +1,386 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Users, MapPin, ShoppingBag, RefreshCw } from "lucide-react";
+import { api } from "@/lib/api-client";
 import {
-  Search,
-  Users,
-  MapPin,
-  ShoppingBag,
-  ChevronRight,
-  UserPlus,
-  Check,
-} from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import {
+  createBulkOrder,
+  createCommunity,
+  fetchBulkOrders,
   fetchCommunities,
+  issueCommunityInvite,
+  joinBulkOrder,
   joinCommunity,
-  leaveCommunity,
+  lockBulkOrder,
+  setCommunityAreaPreference,
+  type BulkOrder,
+  type Community,
 } from "@/lib/domain/communities";
-import type { Community } from "@/lib/domain/communities";
 import { LoadingState } from "@/components/ui/LoadingState";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { DAVIS_AREAS } from "@/lib/davis-areas";
+import OffersSideRail from "@/components/offers/OffersSideRail";
+
+type RestaurantOption = {
+  id: string;
+  name: string;
+};
+
+type BulkOrderFormState = {
+  restaurantId: string;
+  title: string;
+  orderDeadline: string;
+  deliveryNotes: string;
+};
+
+function defaultDeadlineLocal() {
+  return new Date(Date.now() + 30 * 60 * 1000).toISOString().slice(0, 16);
+}
+
+function formatDate(value?: string) {
+  if (!value) return "N/A";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleString();
+}
 
 export default function CommunityHubPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCommunity, setSelectedCommunity] = useState<Community | null>(
-    null
+  const [selectedArea, setSelectedArea] = useState("");
+  const [userAreaPreference, setUserAreaPreference] = useState<string | null>(
+    null,
   );
   const [communities, setCommunities] = useState<Community[]>([]);
+  const [availableAreas, setAvailableAreas] = useState<string[]>([
+    ...DAVIS_AREAS,
+  ]);
+  const [restaurants, setRestaurants] = useState<RestaurantOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
+  const [actionNotice, setActionNotice] = useState<string | null>(null);
+  const [savingArea, setSavingArea] = useState(false);
+  const [creatingCommunity, setCreatingCommunity] = useState(false);
+  const [busyAction, setBusyAction] = useState<string | null>(null);
+
+  const [createForm, setCreateForm] = useState({
+    name: "",
+    area: DAVIS_AREAS[0] as (typeof DAVIS_AREAS)[number],
+    description: "",
+    visibility: "PUBLIC" as "PUBLIC" | "PRIVATE",
+  });
+
+  const [inviteInputs, setInviteInputs] = useState<Record<string, string>>({});
+  const [generatedInviteCodes, setGeneratedInviteCodes] = useState<
+    Record<string, string>
+  >({});
+  const [bulkOrdersByCommunity, setBulkOrdersByCommunity] = useState<
+    Record<string, BulkOrder[]>
+  >({});
+  const [loadingBulkOrders, setLoadingBulkOrders] = useState<
+    Record<string, boolean>
+  >({});
+  const [bulkOrderForms, setBulkOrderForms] = useState<
+    Record<string, BulkOrderFormState>
+  >({});
 
   const loadCommunities = useCallback(async () => {
     setLoading(true);
     setError(null);
+
     try {
-      const data = await fetchCommunities();
-      setCommunities(data);
+      const data = await fetchCommunities({
+        search: searchTerm || undefined,
+        area: selectedArea || undefined,
+      });
+
+      setCommunities(data.communities);
+      setAvailableAreas(
+        data.availableAreas.length > 0 ? data.availableAreas : [...DAVIS_AREAS],
+      );
+      setUserAreaPreference(data.userAreaPreference);
+      if (!selectedArea && data.userAreaPreference) {
+        setSelectedArea(data.userAreaPreference);
+      }
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Failed to load communities"
+        err instanceof Error ? err.message : "Failed to load communities",
       );
     } finally {
       setLoading(false);
     }
+  }, [searchTerm, selectedArea]);
+
+  const loadRestaurants = useCallback(async () => {
+    try {
+      const data = (await api.getRestaurants()) as RestaurantOption[];
+      setRestaurants(data);
+    } catch {
+      setRestaurants([]);
+    }
   }, []);
+
+  useEffect(() => {
+    loadRestaurants();
+  }, [loadRestaurants]);
 
   useEffect(() => {
     loadCommunities();
   }, [loadCommunities]);
 
-  const filteredCommunities = communities.filter(
-    (c) =>
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.area.includes(searchTerm)
+  const ensureBulkOrderForm = useCallback(
+    (communityId: string) => {
+      setBulkOrderForms((prev) => {
+        if (prev[communityId]) return prev;
+
+        return {
+          ...prev,
+          [communityId]: {
+            restaurantId: restaurants[0]?.id ?? "",
+            title: "",
+            orderDeadline: defaultDeadlineLocal(),
+            deliveryNotes: "",
+          },
+        };
+      });
+    },
+    [restaurants],
   );
 
-  const handleJoin = async (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    const community = communities.find((c) => c.id === id);
-    if (!community) return;
+  const loadCommunityBulkOrders = useCallback(
+    async (communityId: string) => {
+      setLoadingBulkOrders((prev) => ({ ...prev, [communityId]: true }));
+      setActionError(null);
 
-    // Optimistic update
+      try {
+        const data = await fetchBulkOrders({ communityId });
+        setBulkOrdersByCommunity((prev) => ({
+          ...prev,
+          [communityId]: data.bulkOrders,
+        }));
+        ensureBulkOrderForm(communityId);
+      } catch (err) {
+        setActionError(
+          err instanceof Error ? err.message : "Failed to load bulk orders",
+        );
+      } finally {
+        setLoadingBulkOrders((prev) => ({ ...prev, [communityId]: false }));
+      }
+    },
+    [ensureBulkOrderForm],
+  );
+
+  const updateCommunity = useCallback((updated: Community) => {
     setCommunities((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, joined: !c.joined } : c))
+      prev.map((community) =>
+        community.id === updated.id ? updated : community,
+      ),
     );
+  }, []);
+
+  const areaSelectOptions = useMemo(
+    () => (availableAreas.length > 0 ? availableAreas : [...DAVIS_AREAS]),
+    [availableAreas],
+  );
+
+  const handleSaveAreaPreference = async () => {
+    setSavingArea(true);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      const area = selectedArea || null;
+      await setCommunityAreaPreference(area);
+      setUserAreaPreference(area);
+      setActionNotice(
+        area
+          ? `Area preference set to ${area}`
+          : "Area preference cleared",
+      );
+      await loadCommunities();
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to update area preference",
+      );
+    } finally {
+      setSavingArea(false);
+    }
+  };
+
+  const handleCreateCommunity = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setActionError(null);
+    setActionNotice(null);
+
+    if (!createForm.name.trim()) {
+      setActionError("Community name is required");
+      return;
+    }
+
+    setCreatingCommunity(true);
+    try {
+      const created = await createCommunity({
+        name: createForm.name.trim(),
+        area: createForm.area,
+        description: createForm.description.trim() || undefined,
+        visibility: createForm.visibility,
+      });
+
+      setCommunities((prev) => [created.community, ...prev]);
+      if (created.inviteCode) {
+        setGeneratedInviteCodes((prev) => ({
+          ...prev,
+          [created.community.id]: created.inviteCode!,
+        }));
+      }
+
+      setCreateForm({
+        name: "",
+        area: createForm.area,
+        description: "",
+        visibility: "PUBLIC",
+      });
+
+      setActionNotice("Community created successfully");
+      await loadCommunities();
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to create community",
+      );
+    } finally {
+      setCreatingCommunity(false);
+    }
+  };
+
+  const handleJoinCommunity = async (community: Community) => {
+    setBusyAction(`join-${community.id}`);
+    setActionError(null);
+    setActionNotice(null);
 
     try {
-      const updated = community.joined
-        ? await leaveCommunity(id)
-        : await joinCommunity(id);
-      setCommunities((prev) =>
-        prev.map((c) => (c.id === id ? updated : c))
+      const result = await joinCommunity(
+        community.id,
+        inviteInputs[community.id]?.trim() || undefined,
       );
-    } catch {
-      // Revert optimistic update on failure
-      setCommunities((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, joined: community.joined } : c))
+      updateCommunity(result.community);
+      setActionNotice(`Joined ${community.name}`);
+      await loadCommunityBulkOrders(community.id);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to join community",
       );
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
+  const handleGenerateInviteCode = async (community: Community) => {
+    setBusyAction(`invite-${community.id}`);
+    setActionError(null);
+    setActionNotice(null);
+
+    try {
+      const data = await issueCommunityInvite(community.id);
+      setGeneratedInviteCodes((prev) => ({
+        ...prev,
+        [community.id]: data.inviteCode,
+      }));
+      setActionNotice(`Invite code refreshed for ${community.name}`);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to generate invite code",
+      );
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
+  const handleCreateBulkOrder = async (
+    e: React.FormEvent,
+    community: Community,
+  ) => {
+    e.preventDefault();
+    const form = bulkOrderForms[community.id];
+    if (!form) return;
+
+    setBusyAction(`bulk-create-${community.id}`);
+    setActionError(null);
+    setActionNotice(null);
+
+    try {
+      if (!form.restaurantId) {
+        throw new Error("Select a restaurant for the bulk order");
+      }
+      if (!form.title.trim()) {
+        throw new Error("Bulk order title is required");
+      }
+      if (!form.orderDeadline) {
+        throw new Error("Order deadline is required");
+      }
+
+      await createBulkOrder({
+        communityId: community.id,
+        restaurantId: form.restaurantId,
+        title: form.title.trim(),
+        orderDeadline: new Date(form.orderDeadline).toISOString(),
+        deliveryNotes: form.deliveryNotes.trim() || undefined,
+      });
+
+      setBulkOrderForms((prev) => ({
+        ...prev,
+        [community.id]: {
+          ...form,
+          title: "",
+          deliveryNotes: "",
+          orderDeadline: defaultDeadlineLocal(),
+        },
+      }));
+
+      setActionNotice(`Bulk order started in ${community.name}`);
+      await Promise.all([
+        loadCommunityBulkOrders(community.id),
+        loadCommunities(),
+      ]);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to start bulk order",
+      );
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
+  const handleJoinBulkOrder = async (communityId: string, bulkOrderId: string) => {
+    setBusyAction(`bulk-join-${bulkOrderId}`);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      await joinBulkOrder(bulkOrderId);
+      setActionNotice("Joined bulk order");
+      await loadCommunityBulkOrders(communityId);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to join bulk order",
+      );
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
+  const handleLockBulkOrder = async (communityId: string, bulkOrderId: string) => {
+    setBusyAction(`bulk-lock-${bulkOrderId}`);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      await lockBulkOrder(bulkOrderId);
+      setActionNotice("Bulk order locked");
+      await Promise.all([loadCommunityBulkOrders(communityId), loadCommunities()]);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Failed to lock bulk order",
+      );
+    } finally {
+      setBusyAction(null);
     }
   };
 
@@ -97,208 +401,434 @@ export default function CommunityHubPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       <header className="bg-white border-b border-gray-200 sticky top-16 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Community Hub
-          </h1>
-          <div className="relative">
-            <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+        <div className="max-w-4xl mx-auto px-4 py-4 space-y-3">
+          <h1 className="text-2xl font-bold text-gray-900">Community Hub</h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <input
               type="text"
-              placeholder="Find communities by name or zip..."
+              placeholder="Search communities..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="md:col-span-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
             />
+            <select
+              value={selectedArea}
+              onChange={(event) => setSelectedArea(event.target.value)}
+              className="px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            >
+              <option value="">All areas</option>
+              {areaSelectOptions.map((area) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </select>
           </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={handleSaveAreaPreference}
+              disabled={savingArea}
+              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
+            >
+              {savingArea ? "Saving..." : "Save Area Preference"}
+            </button>
+            <button
+              onClick={loadCommunities}
+              className="bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium px-3 py-2 rounded-lg"
+            >
+              Refresh List
+            </button>
+            {userAreaPreference && (
+              <span className="text-sm text-gray-600">
+                Preferred area: <span className="font-semibold">{userAreaPreference}</span>
+              </span>
+            )}
+          </div>
+          {actionNotice && (
+            <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+              {actionNotice}
+            </div>
+          )}
+          {actionError && (
+            <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              {actionError}
+            </div>
+          )}
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6">
-        {filteredCommunities.length === 0 ? (
+      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+        <section className="bg-white border border-gray-200 rounded-xl p-4">
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            Start a Community
+          </h2>
+          <form onSubmit={handleCreateCommunity} className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input
+                value={createForm.name}
+                onChange={(event) =>
+                  setCreateForm((prev) => ({ ...prev, name: event.target.value }))
+                }
+                placeholder="Community name"
+                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <select
+                value={createForm.area}
+                onChange={(event) =>
+                  setCreateForm((prev) => ({
+                    ...prev,
+                    area: event.target.value as (typeof DAVIS_AREAS)[number],
+                  }))
+                }
+                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+              >
+                {areaSelectOptions.map((area) => (
+                  <option key={area} value={area}>
+                    {area}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <select
+                value={createForm.visibility}
+                onChange={(event) =>
+                  setCreateForm((prev) => ({
+                    ...prev,
+                    visibility: event.target.value as "PUBLIC" | "PRIVATE",
+                  }))
+                }
+                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+              >
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+              </select>
+              <input
+                value={createForm.description}
+                onChange={(event) =>
+                  setCreateForm((prev) => ({
+                    ...prev,
+                    description: event.target.value,
+                  }))
+                }
+                placeholder="Description (optional)"
+                className="md:col-span-2 px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={creatingCommunity}
+              className="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
+            >
+              {creatingCommunity ? "Creating..." : "Create Community"}
+            </button>
+          </form>
+        </section>
+
+        {communities.length === 0 ? (
           <EmptyState
             icon={Users}
             title="No communities found"
-            message={
-              searchTerm
-                ? `No communities match "${searchTerm}"`
-                : "There are no communities available yet"
-            }
-            action={
-              searchTerm
-                ? { label: "Clear search", onClick: () => setSearchTerm("") }
-                : undefined
-            }
+            message="Try changing your search, area filter, or create a new community."
           />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredCommunities.map((community) => (
-              <motion.div
-                key={community.id}
-                layoutId={`card-${community.id}`}
-                onClick={() => setSelectedCommunity(community)}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 cursor-pointer hover:shadow-md hover:border-blue-200 transition-all group"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center ${community.imageColor}`}
-                  >
-                    <Users className="w-6 h-6" />
-                  </div>
-                  <button
-                    onClick={(e) => handleJoin(e, community.id)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                      community.joined
-                        ? "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        : "bg-blue-600 text-white hover:bg-blue-700"
-                    }`}
-                  >
-                    {community.joined ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" /> Joined
-                      </>
-                    ) : (
-                      <>
-                        <UserPlus className="w-3.5 h-3.5" /> Join
-                      </>
-                    )}
-                  </button>
-                </div>
+          <section className="space-y-4">
+            {communities.map((community) => {
+              const bulkOrders = bulkOrdersByCommunity[community.id] ?? [];
+              const bulkForm = bulkOrderForms[community.id];
+              const canManageInvites =
+                community.memberRole === "OWNER" ||
+                community.memberRole === "ADMIN";
 
-                <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
-                  {community.name}
-                </h3>
-
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                  <MapPin className="w-3.5 h-3.5" />
-                  {community.area}
-                </div>
-
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="text-sm text-gray-600">
-                    <span className="font-semibold text-gray-900">
-                      {community.memberCount}
-                    </span>{" "}
-                    members
-                  </div>
-                  {community.activeNow > 0 && (
-                    <div className="flex items-center gap-1.5 text-green-600 text-xs font-medium bg-green-50 px-2 py-1 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      {community.activeNow} ordering now
+              return (
+                <article
+                  key={community.id}
+                  className="bg-white border border-gray-200 rounded-xl p-4 space-y-4"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {community.name}
+                      </h3>
+                      <div className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                        <MapPin className="w-4 h-4" />
+                        {community.area}
+                      </div>
+                      {community.description && (
+                        <p className="text-sm text-gray-600 mt-2 max-w-2xl">
+                          {community.description}
+                        </p>
+                      )}
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </main>
-
-      <AnimatePresence>
-        {selectedCommunity && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedCommunity(null)}
-              className="fixed inset-0 bg-black/40 z-40 backdrop-blur-sm"
-            />
-            <motion.div
-              layoutId={`card-${selectedCommunity.id}`}
-              className="fixed inset-x-0 bottom-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[500px] bg-white rounded-t-2xl md:rounded-2xl z-50 overflow-hidden shadow-2xl max-h-[85vh] flex flex-col"
-            >
-              <div className="p-6 overflow-y-auto">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    {selectedCommunity.name}
-                  </h2>
-                  <button
-                    onClick={() => setSelectedCommunity(null)}
-                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  >
-                    <ChevronRight className="w-6 h-6 rotate-90 md:rotate-0 text-gray-400" />
-                  </button>
-                </div>
-
-                <div className="mb-8">
-                  <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-                    Active Group Orders
-                  </h3>
-
-                  {selectedCommunity.activeNow > 0 ? (
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="bg-white p-2 rounded-lg shadow-sm">
-                          <ShoppingBag className="w-6 h-6 text-blue-600" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-gray-900">
-                            Dos Coyotes Border Cafe
-                          </div>
-                          <div className="text-sm text-blue-600 font-medium">
-                            Ordering closes in 15m
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="flex -space-x-2">
-                          {[1, 2, 3].map((i) => (
-                            <div
-                              key={i}
-                              className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white"
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm text-gray-600 ml-2">
-                          +2 others from your community
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs font-medium bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                        {community.visibility}
+                      </span>
+                      <span className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                        {community.memberCount} members
+                      </span>
+                      <span className="text-xs font-medium bg-indigo-50 text-indigo-700 px-2 py-1 rounded-full">
+                        {community.openBulkOrderCount} open bulk orders
+                      </span>
+                      {community.isAreaMatch && (
+                        <span className="text-xs font-medium bg-green-50 text-green-700 px-2 py-1 rounded-full">
+                          Near you
                         </span>
-                      </div>
+                      )}
+                    </div>
+                  </div>
 
-                      <div className="flex items-center justify-between bg-white/60 rounded-lg p-3 mb-4">
-                        <span className="text-sm text-gray-700">
-                          Estimated savings
-                        </span>
-                        <span className="font-bold text-green-600">
-                          ~$2.50 each
-                        </span>
-                      </div>
-
-                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors shadow-sm">
-                        Join Group Order
+                  {!community.joined ? (
+                    <div className="flex flex-wrap gap-2 items-center">
+                      {community.visibility === "PRIVATE" && (
+                        <input
+                          value={inviteInputs[community.id] ?? ""}
+                          onChange={(event) =>
+                            setInviteInputs((prev) => ({
+                              ...prev,
+                              [community.id]: event.target.value,
+                            }))
+                          }
+                          placeholder="Invite code"
+                          className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                        />
+                      )}
+                      <button
+                        onClick={() => handleJoinCommunity(community)}
+                        disabled={busyAction === `join-${community.id}`}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
+                      >
+                        {busyAction === `join-${community.id}`
+                          ? "Joining..."
+                          : "Join Community"}
                       </button>
                     </div>
                   ) : (
-                    <div className="text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-300">
-                      <p className="text-gray-500 mb-2">
-                        No active group orders
-                      </p>
-                      <button className="text-blue-600 font-medium hover:underline">
-                        Start one now
-                      </button>
+                    <div className="space-y-3">
+                      <div className="text-sm text-gray-600">
+                        Joined as{" "}
+                        <span className="font-semibold text-gray-900">
+                          {community.memberRole ?? "MEMBER"}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          onClick={() => loadCommunityBulkOrders(community.id)}
+                          className="inline-flex items-center gap-1.5 bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium px-3 py-2 rounded-lg"
+                        >
+                          <RefreshCw className="w-4 h-4" />
+                          {loadingBulkOrders[community.id]
+                            ? "Loading..."
+                            : "Refresh Bulk Orders"}
+                        </button>
+
+                        {canManageInvites && (
+                          <button
+                            onClick={() => handleGenerateInviteCode(community)}
+                            disabled={busyAction === `invite-${community.id}`}
+                            className="bg-gray-900 hover:bg-black text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
+                          >
+                            {busyAction === `invite-${community.id}`
+                              ? "Generating..."
+                              : "Generate Invite Code"}
+                          </button>
+                        )}
+
+                        {generatedInviteCodes[community.id] && (
+                          <span className="text-sm bg-yellow-50 border border-yellow-200 text-yellow-800 px-3 py-2 rounded-lg">
+                            Invite code:{" "}
+                            <span className="font-semibold tracking-wide">
+                              {generatedInviteCodes[community.id]}
+                            </span>
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="border border-gray-200 rounded-lg p-3">
+                        <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                          <ShoppingBag className="w-4 h-4" />
+                          Start Bulk Order
+                        </h4>
+                        <form
+                          onSubmit={(event) =>
+                            handleCreateBulkOrder(event, community)
+                          }
+                          className="grid grid-cols-1 md:grid-cols-2 gap-2"
+                        >
+                          <input
+                            value={bulkForm?.title ?? ""}
+                            onFocus={() => ensureBulkOrderForm(community.id)}
+                            onChange={(event) =>
+                              setBulkOrderForms((prev) => ({
+                                ...prev,
+                                [community.id]: {
+                                  ...(prev[community.id] ?? {
+                                    restaurantId: restaurants[0]?.id ?? "",
+                                    title: "",
+                                    orderDeadline: defaultDeadlineLocal(),
+                                    deliveryNotes: "",
+                                  }),
+                                  title: event.target.value,
+                                },
+                              }))
+                            }
+                            placeholder="Order title (e.g. Friday sushi run)"
+                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                          />
+                          <select
+                            value={bulkForm?.restaurantId ?? ""}
+                            onFocus={() => ensureBulkOrderForm(community.id)}
+                            onChange={(event) =>
+                              setBulkOrderForms((prev) => ({
+                                ...prev,
+                                [community.id]: {
+                                  ...(prev[community.id] ?? {
+                                    restaurantId: "",
+                                    title: "",
+                                    orderDeadline: defaultDeadlineLocal(),
+                                    deliveryNotes: "",
+                                  }),
+                                  restaurantId: event.target.value,
+                                },
+                              }))
+                            }
+                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                          >
+                            <option value="">Select restaurant</option>
+                            {restaurants.map((restaurant) => (
+                              <option key={restaurant.id} value={restaurant.id}>
+                                {restaurant.name}
+                              </option>
+                            ))}
+                          </select>
+                          <input
+                            type="datetime-local"
+                            value={bulkForm?.orderDeadline ?? defaultDeadlineLocal()}
+                            onFocus={() => ensureBulkOrderForm(community.id)}
+                            onChange={(event) =>
+                              setBulkOrderForms((prev) => ({
+                                ...prev,
+                                [community.id]: {
+                                  ...(prev[community.id] ?? {
+                                    restaurantId: restaurants[0]?.id ?? "",
+                                    title: "",
+                                    orderDeadline: defaultDeadlineLocal(),
+                                    deliveryNotes: "",
+                                  }),
+                                  orderDeadline: event.target.value,
+                                },
+                              }))
+                            }
+                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                          />
+                          <input
+                            value={bulkForm?.deliveryNotes ?? ""}
+                            onFocus={() => ensureBulkOrderForm(community.id)}
+                            onChange={(event) =>
+                              setBulkOrderForms((prev) => ({
+                                ...prev,
+                                [community.id]: {
+                                  ...(prev[community.id] ?? {
+                                    restaurantId: restaurants[0]?.id ?? "",
+                                    title: "",
+                                    orderDeadline: defaultDeadlineLocal(),
+                                    deliveryNotes: "",
+                                  }),
+                                  deliveryNotes: event.target.value,
+                                },
+                              }))
+                            }
+                            placeholder="Delivery notes (optional)"
+                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                          />
+                          <button
+                            type="submit"
+                            disabled={busyAction === `bulk-create-${community.id}`}
+                            className="md:col-span-2 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
+                          >
+                            {busyAction === `bulk-create-${community.id}`
+                              ? "Starting..."
+                              : "Start Bulk Order"}
+                          </button>
+                        </form>
+                      </div>
+
+                      <div className="space-y-2">
+                        {bulkOrders.length === 0 ? (
+                          <div className="text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-3">
+                            No bulk orders loaded yet. Use "Refresh Bulk Orders" to
+                            view active orders.
+                          </div>
+                        ) : (
+                          bulkOrders.map((order) => (
+                            <div
+                              key={order.id}
+                              className="border border-gray-200 rounded-lg p-3 flex flex-col gap-2"
+                            >
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div>
+                                  <div className="font-semibold text-gray-900">
+                                    {order.title}
+                                  </div>
+                                  <div className="text-sm text-gray-600">
+                                    {order.restaurantName} • closes{" "}
+                                    {formatDate(order.orderDeadline)}
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-medium bg-gray-100 px-2 py-1 rounded-full">
+                                    {order.status}
+                                  </span>
+                                  <span className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                                    {order.participantsCount} joined
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {!order.joined && order.status === "OPEN" && (
+                                  <button
+                                    onClick={() =>
+                                      handleJoinBulkOrder(community.id, order.id)
+                                    }
+                                    disabled={busyAction === `bulk-join-${order.id}`}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
+                                  >
+                                    {busyAction === `bulk-join-${order.id}`
+                                      ? "Joining..."
+                                      : "Join"}
+                                  </button>
+                                )}
+                                {order.canLock && order.status === "OPEN" && (
+                                  <button
+                                    onClick={() =>
+                                      handleLockBulkOrder(community.id, order.id)
+                                    }
+                                    disabled={busyAction === `bulk-lock-${order.id}`}
+                                    className="bg-gray-900 hover:bg-black text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
+                                  >
+                                    {busyAction === `bulk-lock-${order.id}`
+                                      ? "Locking..."
+                                      : "Lock Order"}
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
                     </div>
                   )}
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-                    Members ({selectedCommunity.memberCount})
-                  </h3>
-                  <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
-                    {[...Array(10)].map((_, i) => (
-                      <div key={i} className="text-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-100 mx-auto mb-2" />
-                        <div className="h-2 w-16 bg-gray-100 rounded mx-auto" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
+                </article>
+              );
+            })}
+          </section>
         )}
-      </AnimatePresence>
+      </main>
+
+      <div className="hidden xl:block fixed right-6 top-24 w-80 z-20">
+        <OffersSideRail />
+      </div>
     </div>
   );
 }

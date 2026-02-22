@@ -16,6 +16,7 @@ export type SessionUser = {
   restaurantIds: string[];
   isAdmin?: boolean;
   mode: UserMode;
+  areaPreference?: string | null;
 };
 
 // ---------------------------------------------------------------------------

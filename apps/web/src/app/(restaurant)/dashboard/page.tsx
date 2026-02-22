@@ -12,6 +12,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import GrowthOpsPanel from "@/components/restaurant/GrowthOpsPanel";
 
 type OrderStatus =
   | "Pending"
@@ -210,6 +211,8 @@ export default function RestaurantDashboardPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Restaurant Dashboard</h1>
         <p className="text-gray-600">Manage incoming orders and update their status</p>
       </div>
+
+      <GrowthOpsPanel restaurantName="The Local Kitchen" />
 
       <div className="mb-6 overflow-x-auto pb-2">
         <div className="flex gap-2">

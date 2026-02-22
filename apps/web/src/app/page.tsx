@@ -126,16 +126,14 @@ export default function HomePage() {
                 <button
                   onClick={() =>
                     requireAuth(() => {
-                      if (user?.restaurantIds.length) {
+                      if (user?.isAdmin) {
+                        router.push("/board");
+                      } else {
                         router.push("/dashboard");
                       }
                     })
                   }
-                  className={`text-sm font-medium transition-colors ${
-                    user && user.restaurantIds.length > 0
-                      ? "text-gray-500 hover:text-blue-600"
-                      : "text-gray-400 hover:text-gray-600"
-                  }`}
+                  className="text-sm font-medium transition-colors text-gray-500 hover:text-blue-600"
                 >
                   For Restaurants & Dispatchers &rarr;
                 </button>

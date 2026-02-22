@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import { MapPin, ArrowRight, Navigation, Loader2 } from "lucide-react";
+import {
+  MapPin,
+  ArrowRight,
+  Navigation,
+  Loader2,
+  RefreshCw,
+} from "lucide-react";
 import { apiGet } from "@/lib/api-client";
 import { attachLocations, findNearRouteRestaurants } from "@/lib/routes/routeMath";
 import type {
@@ -13,11 +19,47 @@ import type {
 import DeliveryRouteMap from "./components/DeliveryRouteMap";
 import NearRouteRestaurantsPanel from "./components/NearRouteRestaurants";
 
+const DAVIS_LOCATION_PRESETS = [
+  "UC Davis Memorial Union",
+  "UC Davis Silo",
+  "West Village, Davis",
+  "Downtown Davis",
+  "Davis Amtrak Station",
+  "The Green at West Village",
+  "North Davis",
+  "South Davis",
+] as const;
+
+function normalizeLocationInput(value: string): string {
+  const trimmed = value.trim();
+  if (!trimmed) return trimmed;
+
+  const lowered = trimmed.toLowerCase();
+  const alreadySpecific =
+    lowered.includes("davis") ||
+    lowered.includes("california") ||
+    /\bca\b/.test(lowered) ||
+    /\b\d{5}\b/.test(trimmed) ||
+    trimmed.includes(",");
+
+  if (alreadySpecific) {
+    return trimmed;
+  }
+
+  return `${trimmed}, Davis, CA`;
+}
+
 export default function RoutesPage() {
   const [originInput, setOriginInput] = useState("");
   const [destInput, setDestInput] = useState("");
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
+  const [focusedField, setFocusedField] = useState<"origin" | "destination">(
+    "origin",
+  );
+  const [normalizationHint, setNormalizationHint] = useState<string | null>(
+    null,
+  );
 
   const [restaurants, setRestaurants] = useState<RestaurantWithLocation[]>([]);
   const [nearRoute, setNearRoute] = useState<NearRouteRestaurant[]>([]);
@@ -53,19 +95,51 @@ export default function RoutesPage() {
     setSearching(false);
   }, []);
 
+  const applyPreset = (preset: string) => {
+    if (focusedField === "destination") {
+      setDestInput(preset);
+      return;
+    }
+    setOriginInput(preset);
+  };
+
+  const handleSwap = () => {
+    setOriginInput(destInput);
+    setDestInput(originInput);
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const o = originInput.trim();
     const d = destInput.trim();
     if (!o || !d) return;
 
+    const normalizedOrigin = normalizeLocationInput(o);
+    const normalizedDestination = normalizeLocationInput(d);
+    const changedOrigin = normalizedOrigin !== o;
+    const changedDestination = normalizedDestination !== d;
+
     setSearching(true);
     setMapError(null);
     setRouteResult(null);
     setNearRoute([]);
-    setOrigin(o);
-    setDestination(d);
+    setOrigin(normalizedOrigin);
+    setDestination(normalizedDestination);
+
+    if (changedOrigin || changedDestination) {
+      const parts: string[] = [];
+      if (changedOrigin) parts.push(`Origin: ${normalizedOrigin}`);
+      if (changedDestination) parts.push(`Destination: ${normalizedDestination}`);
+      setNormalizationHint(`Using Davis fallback. ${parts.join(" • ")}`);
+    } else {
+      setNormalizationHint(null);
+    }
   };
+
+  const combinedSuggestions = [
+    ...DAVIS_LOCATION_PRESETS,
+    ...restaurants.map((r) => (r.address ? `${r.name}, ${r.address}` : r.name)),
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
@@ -91,11 +165,20 @@ export default function RoutesPage() {
                 placeholder="Origin (e.g. UC Davis Memorial Union)"
                 value={originInput}
                 onChange={(e) => setOriginInput(e.target.value)}
+                onFocus={() => setFocusedField("origin")}
+                list="route-location-suggestions"
                 className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm"
               />
             </div>
-            <div className="hidden sm:flex items-center justify-center text-gray-300">
+            <div className="hidden sm:flex items-center justify-center gap-2 text-gray-300">
               <ArrowRight className="w-5 h-5" />
+              <button
+                type="button"
+                onClick={handleSwap}
+                className="text-xs border border-gray-200 bg-white hover:bg-gray-50 text-gray-600 px-2 py-1 rounded-md"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+              </button>
             </div>
             <div className="relative flex-1">
               <MapPin className="absolute left-3 top-3 w-5 h-5 text-red-500" />
@@ -104,6 +187,8 @@ export default function RoutesPage() {
                 placeholder="Destination (e.g. West Village, Davis)"
                 value={destInput}
                 onChange={(e) => setDestInput(e.target.value)}
+                onFocus={() => setFocusedField("destination")}
+                list="route-location-suggestions"
                 className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm"
               />
             </div>
@@ -122,6 +207,32 @@ export default function RoutesPage() {
               )}
             </button>
           </form>
+
+          <datalist id="route-location-suggestions">
+            {combinedSuggestions.map((value) => (
+              <option key={value} value={value} />
+            ))}
+          </datalist>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-xs text-gray-500">Quick picks:</span>
+            {DAVIS_LOCATION_PRESETS.map((preset) => (
+              <button
+                key={preset}
+                type="button"
+                onClick={() => applyPreset(preset)}
+                className="text-xs px-2.5 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200"
+              >
+                {preset}
+              </button>
+            ))}
+          </div>
+
+          {normalizationHint && (
+            <p className="mt-2 text-xs text-blue-700 bg-blue-50 border border-blue-100 rounded-md px-2.5 py-1.5">
+              {normalizationHint}
+            </p>
+          )}
         </div>
       </header>
 

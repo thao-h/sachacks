@@ -84,4 +84,56 @@ export const api = {
     apiPost("/api/v1/dispatch/assignments", { orderId, driverId }),
 
   getDrivers: () => apiGet("/api/v1/drivers"),
+
+  getDriverOffers: (driverId: string) =>
+    apiGet(`/api/v1/drivers/${driverId}/offers`),
+
+  getDriverAssignments: (driverId: string) =>
+    apiGet(`/api/v1/drivers/${driverId}/assignments`),
+
+  getDriverStats: (driverId: string) =>
+    apiGet(`/api/v1/drivers/${driverId}/stats`),
+
+  acceptOffer: (offerId: string) =>
+    apiPost(`/api/v1/drivers/offers/${offerId}/accept`, {}),
+
+  updateAssignmentStatus: (assignmentId: string, status: string) =>
+    apiPost(`/api/v1/dispatch/assignments/${assignmentId}/status`, { status }),
+
+  // Communities
+  getCommunities: (query?: { search?: string; area?: string }) => {
+    const params = new URLSearchParams();
+    if (query?.search) params.set("search", query.search);
+    if (query?.area) params.set("area", query.area);
+    const suffix = params.toString();
+    return apiGet(`/api/v1/communities${suffix ? `?${suffix}` : ""}`);
+  },
+
+  createCommunity: (data: unknown) => apiPost("/api/v1/communities", data),
+
+  joinCommunity: (communityId: string, inviteCode?: string) =>
+    apiPost(`/api/v1/communities/${communityId}/join`, { inviteCode }),
+
+  issueCommunityInvite: (communityId: string, expiresAt?: string) =>
+    apiPost(`/api/v1/communities/${communityId}/invite`, { expiresAt }),
+
+  setCommunityAreaPreference: (area: string | null) =>
+    apiPost("/api/v1/communities/preferences/area", { area }),
+
+  // Bulk orders
+  getBulkOrders: (query?: { communityId?: string; status?: string }) => {
+    const params = new URLSearchParams();
+    if (query?.communityId) params.set("communityId", query.communityId);
+    if (query?.status) params.set("status", query.status);
+    const suffix = params.toString();
+    return apiGet(`/api/v1/bulk-orders${suffix ? `?${suffix}` : ""}`);
+  },
+
+  createBulkOrder: (data: unknown) => apiPost("/api/v1/bulk-orders", data),
+
+  joinBulkOrder: (bulkOrderId: string) =>
+    apiPost(`/api/v1/bulk-orders/${bulkOrderId}/join`, {}),
+
+  lockBulkOrder: (bulkOrderId: string) =>
+    apiPost(`/api/v1/bulk-orders/${bulkOrderId}/lock`, {}),
 };

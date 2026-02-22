@@ -1,6 +1,8 @@
 // ---------------------------------------------------------------------------
-// Drivers domain – mock data + simulated async operations
+// Drivers domain – real API calls + shape transforms
 // ---------------------------------------------------------------------------
+
+import { api } from "@/lib/api-client";
 
 export interface RouteOffer {
   id: string;
@@ -26,80 +28,126 @@ export interface DriverStats {
   completedDeliveries: number;
 }
 
-// -- Mock data ---------------------------------------------------------------
+// -- Raw API types -----------------------------------------------------------
 
-const MOCK_OFFERS: RouteOffer[] = [
-  {
-    id: "OFF-1",
-    restaurantName: "Burger King",
-    restaurantAddress: "500 1st St",
-    deliveryAddress: "123 Oak Ave",
-    detourDistance: "0.2 mi detour",
-    earnings: 3.5,
-    readyTime: "5:45 PM",
-    expiresInSeconds: 272,
-  },
-  {
-    id: "OFF-2",
-    restaurantName: "Thai Canteen",
-    restaurantAddress: "2nd & E St",
-    deliveryAddress: "456 Pine Ln",
-    detourDistance: "0.5 mi detour",
-    earnings: 5.25,
-    readyTime: "5:50 PM",
-    expiresInSeconds: 120,
-  },
-];
-
-const MOCK_ACTIVE: ActiveDelivery[] = [
-  {
-    id: "DEL-101",
-    restaurantName: "Dos Coyotes",
-    deliveryAddress: "789 Elm St",
-    items: ["2x Border Burrito", "1x Chips & Salsa"],
-    status: "pending",
-  },
-];
-
-// -- Async fetchers ----------------------------------------------------------
-
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-export async function fetchOffers(): Promise<RouteOffer[]> {
-  await delay(500);
-  return MOCK_OFFERS;
+interface RawOffer {
+  id: string;
+  orderId: string;
+  driverId: string;
+  status: string;
+  expiresAt: string;
+  createdAt: string;
+  order: {
+    id: string;
+    deliveryAddress: string;
+    subtotalCents: number;
+    restaurant: { name: string; address: string };
+  };
 }
 
-export async function fetchActiveDeliveries(): Promise<ActiveDelivery[]> {
-  await delay(300);
-  return MOCK_ACTIVE;
+interface RawAssignment {
+  id: string;
+  orderId: string;
+  driverId: string;
+  status: string;
+  order: {
+    deliveryAddress: string;
+    restaurant: { name: string };
+    items?: { name: string; quantity: number }[];
+  };
 }
 
-export async function fetchDriverStats(): Promise<DriverStats> {
-  await delay(200);
-  return { todayEarnings: 24.5, completedDeliveries: 4 };
+// -- Transforms --------------------------------------------------------------
+
+function toRouteOffer(raw: RawOffer): RouteOffer {
+  const expiresInSeconds = Math.max(
+    0,
+    Math.floor((new Date(raw.expiresAt).getTime() - Date.now()) / 1000),
+  );
+  const readyTime = new Date(raw.createdAt).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  return {
+    id: raw.id,
+    restaurantName: raw.order.restaurant.name,
+    restaurantAddress: raw.order.restaurant.address ?? "",
+    deliveryAddress: raw.order.deliveryAddress,
+    detourDistance: "On route",
+    earnings: (raw.order.subtotalCents / 100) * 0.15,
+    readyTime,
+    expiresInSeconds,
+  };
+}
+
+const STATUS_FROM_API: Record<string, ActiveDelivery["status"]> = {
+  ASSIGNED: "pending",
+  PICKED_UP: "picked_up",
+  DROPPED_OFF: "dropped_off",
+};
+
+const STATUS_TO_API: Record<string, string> = {
+  pending: "ASSIGNED",
+  picked_up: "PICKED_UP",
+  dropped_off: "DROPPED_OFF",
+};
+
+function toActiveDelivery(raw: RawAssignment): ActiveDelivery {
+  return {
+    id: raw.id,
+    restaurantName: raw.order.restaurant.name,
+    deliveryAddress: raw.order.deliveryAddress,
+    items:
+      raw.order.items?.map((i) => `${i.quantity}x ${i.name}`) ?? [
+        "Order items",
+      ],
+    status: STATUS_FROM_API[raw.status] ?? "pending",
+  };
+}
+
+// -- API calls ---------------------------------------------------------------
+
+export async function fetchOffers(driverId: string): Promise<RouteOffer[]> {
+  const raw = (await api.getDriverOffers(driverId)) as RawOffer[];
+  return raw.map(toRouteOffer);
+}
+
+export async function fetchActiveDeliveries(
+  driverId: string,
+): Promise<ActiveDelivery[]> {
+  const raw = (await api.getDriverAssignments(driverId)) as RawAssignment[];
+  return raw.map(toActiveDelivery);
+}
+
+export async function fetchDriverStats(
+  driverId: string,
+): Promise<DriverStats> {
+  return (await api.getDriverStats(driverId)) as DriverStats;
 }
 
 export async function acceptOffer(offerId: string): Promise<ActiveDelivery> {
-  await delay(400);
-  const offer = MOCK_OFFERS.find((o) => o.id === offerId);
-  return {
-    id: `DEL-${Date.now().toString().slice(-4)}`,
-    restaurantName: offer?.restaurantName ?? "Restaurant",
-    deliveryAddress: offer?.deliveryAddress ?? "Unknown",
-    items: ["Order items"],
-    status: "pending",
+  const result = (await api.acceptOffer(offerId)) as {
+    assignment: RawAssignment;
   };
+  return toActiveDelivery(result.assignment);
 }
 
 export async function updateDeliveryStatus(
   deliveryId: string,
   status: ActiveDelivery["status"],
 ): Promise<ActiveDelivery> {
-  await delay(300);
-  const d = MOCK_ACTIVE.find((d) => d.id === deliveryId);
-  return { ...(d ?? MOCK_ACTIVE[0]), status };
+  const apiStatus = STATUS_TO_API[status] ?? status.toUpperCase();
+  const raw = (await api.updateAssignmentStatus(
+    deliveryId,
+    apiStatus,
+  )) as RawAssignment;
+  return toActiveDelivery(raw);
 }
+
+// -- Post route (mock — no DB model yet) -------------------------------------
+
+const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export async function postRoute(data: {
   from: string;

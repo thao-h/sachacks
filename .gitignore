@@ -22,9 +22,6 @@ dist/
 *.swo
 .DS_Store
 
-# prisma
-packages/db/prisma/migrations/
-
 # turbo
 .turbo/
 

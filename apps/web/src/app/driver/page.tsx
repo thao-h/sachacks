@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   MapPin,
   Clock,
@@ -9,6 +9,7 @@ import {
   Navigation,
   Package,
   CheckCircle,
+  HandHeart,
   X,
   Minus,
   Plus,
@@ -29,13 +30,25 @@ import {
 import { LoadingState } from "@/components/ui/LoadingState";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { useAuth } from "@/components/ui/LayoutShell";
+import {
+  getDonationBounties,
+  incrementImpactStats,
+  subscribeLiveOfferUpdates,
+  updateDonationBountyStatus,
+  type DonationBounty,
+} from "@/lib/domain/live-offers";
 
 export default function DriverDashboardPage() {
+  const { user } = useAuth();
+  const driverId = user?.id ?? null;
+
   const [isOnline, setIsOnline] = useState(true);
   const [capacity, setCapacity] = useState(3);
   const [offers, setOffers] = useState<RouteOffer[]>([]);
   const [activeDeliveries, setActiveDeliveries] = useState<ActiveDelivery[]>([]);
   const [stats, setStats] = useState<DriverStats | null>(null);
+  const [donationBounties, setDonationBounties] = useState<DonationBounty[]>([]);
   const [activeRoute, setActiveRoute] = useState<{
     id: string;
     from: string;
@@ -47,6 +60,7 @@ export default function DriverDashboardPage() {
   const [acceptingId, setAcceptingId] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [postingRoute, setPostingRoute] = useState(false);
+  const [bountyActionId, setBountyActionId] = useState<string | null>(null);
 
   const fromRef = useRef<HTMLInputElement>(null);
   const toRef = useRef<HTMLInputElement>(null);
@@ -59,27 +73,37 @@ export default function DriverDashboardPage() {
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
+    if (!driverId) return;
     setLoading(true);
     setError(null);
     try {
       const [offersData, deliveriesData, statsData] = await Promise.all([
-        fetchOffers(),
-        fetchActiveDeliveries(),
-        fetchDriverStats(),
+        fetchOffers(driverId),
+        fetchActiveDeliveries(driverId),
+        fetchDriverStats(driverId),
       ]);
       setOffers(offersData);
       setActiveDeliveries(deliveriesData);
       setStats(statsData);
+      setDonationBounties(getDonationBounties());
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load data");
     } finally {
       setLoading(false);
     }
-  };
+  }, [driverId]);
 
   useEffect(() => {
     loadData();
+  }, [loadData]);
+
+  useEffect(() => {
+    const sync = () => setDonationBounties(getDonationBounties());
+    const unsub = subscribeLiveOfferUpdates(sync);
+    return () => {
+      unsub();
+    };
   }, []);
 
   const handleAcceptOffer = async (offerId: string) => {
@@ -145,6 +169,22 @@ export default function DriverDashboardPage() {
     setActiveRoute(null);
   };
 
+  const handleClaimBounty = (bountyId: string) => {
+    if (!activeRoute) return;
+    setBountyActionId(bountyId);
+    updateDonationBountyStatus(bountyId, "CLAIMED");
+    setDonationBounties(getDonationBounties());
+    setBountyActionId(null);
+  };
+
+  const handleCompleteBounty = (bountyId: string) => {
+    setBountyActionId(bountyId);
+    updateDonationBountyStatus(bountyId, "COMPLETED");
+    incrementImpactStats({ donationsCompleted: 1 });
+    setDonationBounties(getDonationBounties());
+    setBountyActionId(null);
+  };
+
   if (loading) {
     return <LoadingState message="Loading your dashboard..." />;
   }
@@ -165,7 +205,7 @@ export default function DriverDashboardPage() {
       <header className="bg-white px-4 py-4 border-b border-gray-200 sticky top-16 z-10">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Hey Alex</h1>
+            <h1 className="text-xl font-bold text-gray-900">Hey {user?.name?.split(" ")[0] ?? "Driver"}</h1>
             <p className="text-sm text-gray-500">Ready to drive?</p>
           </div>
           <button
@@ -297,6 +337,81 @@ export default function DriverDashboardPage() {
               </div>
             </div>
           )}
+        </section>
+
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="p-4 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
+            <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+              <HandHeart className="w-5 h-5 text-purple-600" />
+              Donation Bounties
+            </h2>
+            <span className="text-xs font-semibold bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+              {donationBounties.filter((b) => b.status !== "COMPLETED").length}
+            </span>
+          </div>
+
+          <div className="p-4 space-y-3">
+            {donationBounties.length === 0 ? (
+              <p className="text-sm text-gray-500">
+                No pantry bounties yet. Restaurants can trigger these from Night Loop surplus.
+              </p>
+            ) : (
+              donationBounties.slice(0, 6).map((bounty) => (
+                <article
+                  key={bounty.id}
+                  className="border border-gray-200 rounded-lg p-3 bg-gray-50"
+                >
+                  <p className="font-semibold text-gray-900">{bounty.restaurantName}</p>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Pickup: {bounty.pickupArea} • Drop-off: {bounty.dropoffLocation}
+                  </p>
+                  <p className="text-xs text-purple-700 mt-1">
+                    Reward: +{bounty.rewardKarma} Karma
+                  </p>
+
+                  <div className="mt-2 flex items-center justify-between gap-2">
+                    <span
+                      className={`text-xs font-medium px-2 py-1 rounded-full ${
+                        bounty.status === "OPEN"
+                          ? "bg-amber-100 text-amber-700"
+                          : bounty.status === "CLAIMED"
+                            ? "bg-blue-100 text-blue-700"
+                            : "bg-green-100 text-green-700"
+                      }`}
+                    >
+                      {bounty.status}
+                    </span>
+
+                    {bounty.status === "OPEN" && (
+                      <button
+                        onClick={() => handleClaimBounty(bounty.id)}
+                        disabled={bountyActionId === bounty.id || !activeRoute}
+                        className="text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-60"
+                      >
+                        {!activeRoute
+                          ? "Post Route First"
+                          : bountyActionId === bounty.id
+                            ? "Adding..."
+                            : "Add Donation Drop-off"}
+                      </button>
+                    )}
+
+                    {bounty.status === "CLAIMED" && (
+                      <button
+                        onClick={() => handleCompleteBounty(bounty.id)}
+                        disabled={bountyActionId === bounty.id}
+                        className="text-xs font-medium px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 disabled:opacity-60"
+                      >
+                        {bountyActionId === bounty.id
+                          ? "Saving..."
+                          : "Mark Donation Delivered"}
+                      </button>
+                    )}
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
         </section>
 
         {/* Your Offers */}

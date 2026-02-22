@@ -31,6 +31,25 @@ enum OfferStatus {
   REJECTED
 }
 
+enum CommunityVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum CommunityRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum BulkOrderStatus {
+  OPEN
+  LOCKED
+  PLACED
+  DELIVERED
+  CANCELLED
+}
+
 model Restaurant {
   id        String   @id @default(cuid())
   name      String
@@ -41,23 +60,24 @@ model Restaurant {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  menuItems MenuItem[]
-  orders    Order[]
+  menuItems  MenuItem[]
+  orders     Order[]
+  bulkOrders BulkOrder[]
 }
 
 model MenuItem {
-  id             String   @id @default(cuid())
-  restaurantId   String
-  name           String
-  description    String   @default("")
-  priceCents     Int
-  imageUrl       String?
-  category       String   @default("General")
-  isAvailable    Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id           String   @id @default(cuid())
+  restaurantId String
+  name         String
+  description  String   @default("")
+  priceCents   Int
+  imageUrl     String?
+  category     String   @default("General")
+  isAvailable  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant Restaurant  @relation(fields: [restaurantId], references: [id])
   orderItems OrderItem[]
 
   @@index([restaurantId])
@@ -140,4 +160,85 @@ model DispatchOffer {
   @@unique([orderId, driverId])
   @@index([orderId, status])
   @@index([driverId, status])
+}
+
+model Community {
+  id              String              @id @default(cuid())
+  name            String
+  area            String
+  description     String?
+  visibility      CommunityVisibility @default(PUBLIC)
+  createdByUserId String
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  members    CommunityMember[]
+  invites    CommunityInvite[]
+  bulkOrders BulkOrder[]
+
+  @@index([area])
+  @@index([visibility, area])
+  @@index([createdByUserId])
+}
+
+model CommunityMember {
+  id          String        @id @default(cuid())
+  communityId String
+  userId      String
+  role        CommunityRole @default(MEMBER)
+  createdAt   DateTime      @default(now())
+
+  community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  @@unique([communityId, userId])
+  @@index([userId])
+  @@index([communityId, role])
+}
+
+model CommunityInvite {
+  id              String    @id @default(cuid())
+  communityId     String
+  code            String    @unique
+  createdByUserId String
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  expiresAt       DateTime?
+
+  community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  @@index([communityId, isActive])
+}
+
+model BulkOrder {
+  id            String          @id @default(cuid())
+  communityId   String
+  restaurantId  String
+  hostUserId    String
+  title         String
+  orderDeadline DateTime
+  deliveryNotes String?
+  status        BulkOrderStatus @default(OPEN)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  community    Community              @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant             @relation(fields: [restaurantId], references: [id])
+  participants BulkOrderParticipant[]
+
+  @@index([communityId, status])
+  @@index([restaurantId, status])
+  @@index([hostUserId, status])
+  @@index([orderDeadline])
+}
+
+model BulkOrderParticipant {
+  id          String   @id @default(cuid())
+  bulkOrderId String
+  userId      String
+  createdAt   DateTime @default(now())
+
+  bulkOrder BulkOrder @relation(fields: [bulkOrderId], references: [id], onDelete: Cascade)
+
+  @@unique([bulkOrderId, userId])
+  @@index([userId])
 }

@@ -11,10 +11,14 @@ export const POST = handleRoute(async (request) => {
   const body = await request.json();
   const { identifier, name } = loginSchema.parse(body);
 
+  const normalizedIdentifier = identifier.trim().toLowerCase();
+  const stableId = Buffer.from(normalizedIdentifier)
+    .toString("base64url")
+    .slice(0, 24);
   const isEmail = identifier.includes("@");
 
   const user: SessionUser = {
-    id: `usr_${Date.now().toString(36)}`,
+    id: `usr_${stableId}`,
     name: name || identifier.split("@")[0],
     ...(isEmail ? { email: identifier } : { phone: identifier }),
     canOrder: true,
@@ -22,6 +26,7 @@ export const POST = handleRoute(async (request) => {
     restaurantIds: [],
     isAdmin: false,
     mode: "order",
+    areaPreference: null,
   };
 
   await setSessionUser(user);

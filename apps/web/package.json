@@ -12,17 +12,17 @@
   "dependencies": {
     "@ddba/db": "workspace:*",
     "@ddba/shared": "workspace:*",
+    "@react-google-maps/api": "^2.20.8",
     "lucide-react": "^0.575.0",
     "motion": "^12.34.3",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@react-google-maps/api": "^2.20.6",
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.58.1",
     "@tailwindcss/postcss": "^4.2.0",
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

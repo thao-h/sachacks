@@ -1,88 +1,122 @@
-// ---------------------------------------------------------------------------
-// Communities domain – mock data + simulated async operations
-// ---------------------------------------------------------------------------
+import { api } from "@/lib/api-client";
+
+export type CommunityVisibility = "PUBLIC" | "PRIVATE";
+export type CommunityRole = "OWNER" | "ADMIN" | "MEMBER";
+export type BulkOrderStatus =
+  | "OPEN"
+  | "LOCKED"
+  | "PLACED"
+  | "DELIVERED"
+  | "CANCELLED";
 
 export interface Community {
   id: string;
   name: string;
-  memberCount: number;
-  activeNow: number;
   area: string;
+  description?: string | null;
+  visibility: CommunityVisibility;
+  memberCount: number;
+  openBulkOrderCount: number;
   joined: boolean;
-  imageColor: string;
+  memberRole: CommunityRole | null;
+  isAreaMatch: boolean;
+  createdAt: string;
 }
 
-// -- Mock data ---------------------------------------------------------------
+export interface CommunityListPayload {
+  communities: Community[];
+  userAreaPreference: string | null;
+  availableAreas: string[];
+}
 
-const MOCK_COMMUNITIES: Community[] = [
-  {
-    id: "c1",
-    name: "The Colleges Apartments",
-    memberCount: 342,
-    activeNow: 3,
-    area: "95616",
-    joined: false,
-    imageColor: "bg-blue-100 text-blue-600",
-  },
-  {
-    id: "c2",
-    name: "West Davis Neighbors",
-    memberCount: 128,
-    activeNow: 5,
-    area: "95616",
-    joined: true,
-    imageColor: "bg-green-100 text-green-600",
-  },
-  {
-    id: "c3",
-    name: "El Macero Country Club",
-    memberCount: 89,
-    activeNow: 0,
-    area: "95618",
-    joined: false,
-    imageColor: "bg-orange-100 text-orange-600",
-  },
-  {
-    id: "c4",
-    name: "Downtown Davis",
-    memberCount: 567,
-    activeNow: 12,
-    area: "95616",
-    joined: false,
-    imageColor: "bg-purple-100 text-purple-600",
-  },
-];
+export interface BulkOrder {
+  id: string;
+  communityId: string;
+  communityName?: string;
+  communityArea?: string;
+  restaurantId?: string;
+  restaurantName?: string;
+  restaurantSlug?: string;
+  title?: string;
+  orderDeadline?: string;
+  deliveryNotes?: string | null;
+  status: BulkOrderStatus;
+  participantsCount: number;
+  joined: boolean;
+  isHost: boolean;
+  canLock: boolean;
+  createdAt?: string;
+}
 
-// -- Async fetchers ----------------------------------------------------------
+export async function fetchCommunities(query?: {
+  search?: string;
+  area?: string;
+}): Promise<CommunityListPayload> {
+  return api.getCommunities(query) as Promise<CommunityListPayload>;
+}
 
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-export async function fetchCommunities(
-  search?: string,
-): Promise<Community[]> {
-  await delay(400);
-  if (!search) return MOCK_COMMUNITIES;
-  return MOCK_COMMUNITIES.filter(
-    (c) =>
-      c.name.toLowerCase().includes(search.toLowerCase()) ||
-      c.area.includes(search),
-  );
+export async function createCommunity(input: {
+  name: string;
+  area: string;
+  description?: string;
+  visibility: CommunityVisibility;
+}): Promise<{ community: Community; inviteCode: string | null }> {
+  return api.createCommunity(input) as Promise<{
+    community: Community;
+    inviteCode: string | null;
+  }>;
 }
 
 export async function joinCommunity(
   communityId: string,
-): Promise<Community> {
-  await delay(300);
-  const c = MOCK_COMMUNITIES.find((c) => c.id === communityId);
-  if (!c) throw new Error("Community not found");
-  return { ...c, joined: true, memberCount: c.memberCount + 1 };
+  inviteCode?: string,
+): Promise<{ community: Community }> {
+  return api.joinCommunity(communityId, inviteCode) as Promise<{
+    community: Community;
+  }>;
 }
 
-export async function leaveCommunity(
+export async function issueCommunityInvite(
   communityId: string,
-): Promise<Community> {
-  await delay(300);
-  const c = MOCK_COMMUNITIES.find((c) => c.id === communityId);
-  if (!c) throw new Error("Community not found");
-  return { ...c, joined: false, memberCount: c.memberCount - 1 };
+): Promise<{ inviteCode: string; expiresAt?: string | null; createdAt: string }> {
+  return api.issueCommunityInvite(communityId) as Promise<{
+    inviteCode: string;
+    expiresAt?: string | null;
+    createdAt: string;
+  }>;
+}
+
+export async function setCommunityAreaPreference(
+  area: string | null,
+): Promise<void> {
+  await api.setCommunityAreaPreference(area);
+}
+
+export async function fetchBulkOrders(query?: {
+  communityId?: string;
+  status?: BulkOrderStatus;
+}): Promise<{ bulkOrders: BulkOrder[] }> {
+  return api.getBulkOrders(query) as Promise<{ bulkOrders: BulkOrder[] }>;
+}
+
+export async function createBulkOrder(input: {
+  communityId: string;
+  restaurantId: string;
+  title: string;
+  orderDeadline: string;
+  deliveryNotes?: string;
+}): Promise<{ bulkOrder: BulkOrder }> {
+  return api.createBulkOrder(input) as Promise<{ bulkOrder: BulkOrder }>;
+}
+
+export async function joinBulkOrder(
+  bulkOrderId: string,
+): Promise<{ bulkOrder: BulkOrder }> {
+  return api.joinBulkOrder(bulkOrderId) as Promise<{ bulkOrder: BulkOrder }>;
+}
+
+export async function lockBulkOrder(
+  bulkOrderId: string,
+): Promise<{ bulkOrder: BulkOrder }> {
+  return api.lockBulkOrder(bulkOrderId) as Promise<{ bulkOrder: BulkOrder }>;
 }

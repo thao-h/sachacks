@@ -26,7 +26,7 @@ export const dispatchRepo = {
   async findByDriver(driverId: string) {
     return prisma.dispatchAssignment.findMany({
       where: { driverId },
-      include: { order: { include: { restaurant: true } } },
+      include: { order: { include: { restaurant: true, items: true } } },
       orderBy: { createdAt: "desc" },
     });
   },
