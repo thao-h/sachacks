@@ -24,6 +24,31 @@ const statusFilterSchema = z.enum([
   "CANCELLED",
 ]);
 
+type BulkOrderListRow = {
+  id: string;
+  communityId: string;
+  restaurantId: string;
+  hostUserId: string;
+  title: string;
+  orderDeadline: Date;
+  deliveryNotes: string | null;
+  status: "OPEN" | "LOCKED" | "PLACED" | "DELIVERED" | "CANCELLED";
+  createdAt: Date;
+  community: {
+    name: string;
+    area: string;
+    members: { role: "OWNER" | "ADMIN" | "MEMBER" }[];
+  };
+  restaurant: {
+    name: string;
+    slug: string;
+  };
+  participants: { id: string }[];
+  _count: {
+    participants: number;
+  };
+};
+
 export const GET = handleRoute(async (request) => {
   const user = await requireSessionUser();
   const { searchParams } = new URL(request.url);
@@ -84,7 +109,7 @@ export const GET = handleRoute(async (request) => {
     orderBy: [{ orderDeadline: "asc" }, { createdAt: "desc" }],
   });
 
-  const data = bulkOrders.map((bulkOrder) => {
+  const data = bulkOrders.map((bulkOrder: BulkOrderListRow) => {
     const memberRole = bulkOrder.community.members[0]?.role ?? null;
     const isHost = bulkOrder.hostUserId === user.id;
 
