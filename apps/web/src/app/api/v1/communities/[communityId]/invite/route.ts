@@ -86,7 +86,7 @@ export const POST = handleRoute(async (request, { params }) => {
     throw new ValidationError("Invalid invite expiration timestamp");
   }
 
-const invite = await prisma.$transaction(async (tx: any) => {
+  const invite = await prisma.$transaction(async (tx: CommunityInviteTx) => {
     await tx.communityInvite.updateMany({
       where: { communityId, isActive: true },
       data: { isActive: false },
