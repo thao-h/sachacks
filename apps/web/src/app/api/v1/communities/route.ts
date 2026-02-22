@@ -13,6 +13,85 @@ const createCommunitySchema = z.object({
   visibility: z.enum(["PUBLIC", "PRIVATE"]).default("PUBLIC"),
 });
 
+type CommunityListRow = {
+  id: string;
+  name: string;
+  area: string;
+  description: string | null;
+  visibility: "PUBLIC" | "PRIVATE";
+  createdAt: Date;
+  members: { role: "OWNER" | "ADMIN" | "MEMBER" }[];
+  _count: {
+    members: number;
+    bulkOrders: number;
+  };
+};
+
+type CommunityListItem = {
+  id: string;
+  name: string;
+  area: string;
+  description: string | null;
+  visibility: "PUBLIC" | "PRIVATE";
+  memberCount: number;
+  openBulkOrderCount: number;
+  joined: boolean;
+  memberRole: "OWNER" | "ADMIN" | "MEMBER" | null;
+  isAreaMatch: boolean;
+  createdAt: Date;
+};
+
+type CommunityCreateResult = {
+  id: string;
+  name: string;
+  area: string;
+  description: string | null;
+  visibility: "PUBLIC" | "PRIVATE";
+  createdAt: Date;
+  _count: {
+    members: number;
+    bulkOrders: number;
+  };
+};
+
+type CommunityCreateTx = {
+  community: {
+    create: (args: {
+      data: {
+        name: string;
+        area: string;
+        description?: string;
+        visibility: "PUBLIC" | "PRIVATE";
+        createdByUserId: string;
+        members: {
+          create: {
+            userId: string;
+            role: "OWNER";
+          };
+        };
+      };
+      include: {
+        _count: {
+          select: {
+            members: true;
+            bulkOrders: { where: { status: "OPEN" } };
+          };
+        };
+      };
+    }) => Promise<CommunityCreateResult>;
+  };
+  communityInvite: {
+    create: (args: {
+      data: {
+        communityId: string;
+        code: string;
+        createdByUserId: string;
+        isActive: boolean;
+      };
+    }) => Promise<unknown>;
+  };
+};
+
 export const GET = handleRoute(async (request) => {
   const user = await requireSessionUser();
 
@@ -54,7 +133,7 @@ export const GET = handleRoute(async (request) => {
     },
   });
 
-const data = communities.map((community: any) => {
+  const data: CommunityListItem[] = communities.map((community: CommunityListRow) => {
     const memberRole = community.members[0]?.role ?? null;
     const joined = memberRole !== null;
 
@@ -73,7 +152,7 @@ const data = communities.map((community: any) => {
     };
   });
 
-  data.sort((a, b) => {
+  data.sort((a: CommunityListItem, b: CommunityListItem) => {
     if (preferredArea) {
       const aMatch = a.area === preferredArea;
       const bMatch = b.area === preferredArea;
@@ -104,7 +183,7 @@ export const POST = handleRoute(async (request) => {
 
   const inviteCode = input.visibility === "PRIVATE" ? generateInviteCode() : null;
 
-const community = await prisma.$transaction(async (tx: any) => {
+  const community = await prisma.$transaction(async (tx: CommunityCreateTx) => {
     const created = await tx.community.create({
       data: {
         name: input.name,
