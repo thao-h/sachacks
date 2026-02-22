@@ -1,12 +1,7 @@
-import { NextResponse } from "next/server";
 import { driverService } from "@/server/modules/drivers/service";
-import { errorResponse } from "@/server/lib/errors";
+import { ok, handleRoute } from "@/server/contracts/api";
 
-export async function GET() {
-  try {
-    const drivers = await driverService.listActive();
-    return NextResponse.json({ data: drivers });
-  } catch (error) {
-    return errorResponse(error);
-  }
-}
+export const GET = handleRoute(async () => {
+  const drivers = await driverService.listActive();
+  return ok(drivers);
+});

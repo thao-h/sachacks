@@ -36,3 +36,11 @@
 - Multi-restaurant support per order
 - Analytics and reporting
 - Mobile-responsive design
+
+## Backend-First Scaffold TODOs
+
+- [ ] Wire apps/api routes to backend-core services
+- [ ] Add CommunityGroup and RoutePost models to Prisma schema
+- [ ] Implement delivery strategy selector logic
+- [ ] Add integration tests for backend-core services
+- [ ] Wire Prisma repos to backend-core via dependency injection

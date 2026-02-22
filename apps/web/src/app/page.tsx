@@ -14,6 +14,18 @@ export default function HomePage() {
           Dispatch Board
         </a>
       </nav>
+
+      <section style={{ marginTop: "2rem" }}>
+        <h2>Demo Pages</h2>
+        <ul>
+          <li>
+            <a href="/demo/orders">Orders API demo</a>
+          </li>
+          <li>
+            <a href="/demo/dispatch">Deliveries API demo</a>
+          </li>
+        </ul>
+      </section>
     </main>
   );
 }

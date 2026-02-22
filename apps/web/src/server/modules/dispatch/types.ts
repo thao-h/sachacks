@@ -1,10 +1,18 @@
-import type { DispatchStatus } from "@ddba/shared";
+import type { DispatchStatus, OfferStatus } from "@ddba/shared";
 
-// TODO: Add dispatch DTOs
 export type AssignmentSummary = {
   id: string;
   orderId: string;
   driverId: string;
   status: DispatchStatus;
+  createdAt: Date;
+};
+
+export type OfferSummary = {
+  id: string;
+  orderId: string;
+  driverId: string;
+  status: OfferStatus;
+  expiresAt: Date;
   createdAt: Date;
 };

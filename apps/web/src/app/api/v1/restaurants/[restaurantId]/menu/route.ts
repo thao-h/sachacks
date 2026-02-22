@@ -1,16 +1,8 @@
-import { NextResponse } from "next/server";
 import { menuService } from "@/server/modules/menu/service";
-import { errorResponse } from "@/server/lib/errors";
+import { ok, handleRoute } from "@/server/contracts/api";
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ restaurantId: string }> },
-) {
-  try {
-    const { restaurantId } = await params;
-    const items = await menuService.getMenuForRestaurant(restaurantId);
-    return NextResponse.json({ data: items });
-  } catch (error) {
-    return errorResponse(error);
-  }
-}
+export const GET = handleRoute(async (_request, { params }) => {
+  const { restaurantId } = await params;
+  const items = await menuService.getMenuForRestaurant(restaurantId);
+  return ok(items);
+});

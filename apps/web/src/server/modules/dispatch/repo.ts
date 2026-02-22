@@ -9,6 +9,13 @@ export const dispatchRepo = {
     });
   },
 
+  async findById(id: string) {
+    return prisma.dispatchAssignment.findUnique({
+      where: { id },
+      include: { order: true, driver: true },
+    });
+  },
+
   async findByOrder(orderId: string) {
     return prisma.dispatchAssignment.findUnique({
       where: { orderId },

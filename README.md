@@ -2,54 +2,56 @@
 
 A local delivery operations platform for restaurants — built as a modular monolith with Next.js, Prisma, and PostgreSQL.
 
+## Backend-First Extension
+
+Alongside the original `apps/web` monolith, the repo now includes incremental backend-first scaffolding:
+
+- `apps/api` - standalone HTTP adapter (Next.js on port 4000)
+- `packages/backend-core` - framework-agnostic service/repo interfaces
+- `packages/contracts` - shared enums, schemas, and API envelope types
+- `packages/db/src/repositories` - placeholder Prisma repository adapters
+
+This was added without deleting existing working code so migration can happen step by step.
+
 ## Architecture
 
 **Modular monolith** in a single Next.js app (`apps/web`), with domain logic organized into server-side modules. Shared types, enums, and schemas live in `packages/shared`. Database access is isolated in `packages/db`.
 
-This structure enables fast MVP development while keeping a clean extraction path to microservices later.
+```
+apps/web/src/
+├── app/                    # Pages + API routes (Next.js App Router)
+│   ├── (customer)/         # Customer-facing pages
+│   ├── (restaurant)/       # Restaurant dashboard
+│   ├── (dispatch)/         # Dispatch board
+│   └── api/v1/             # Versioned REST API
+├── server/
+│   ├── modules/            # Domain modules (restaurants, menu, orders, dispatch, drivers)
+│   │   └── <module>/       # Each: types.ts, schemas.ts, repo.ts, service.ts
+│   ├── lib/                # errors, money (cents-safe), ids, logger
+│   └── contracts/api.ts    # handleRoute(), ok(), fail() – route handler helpers
+├── components/             # React components (ui, customer, restaurant, dispatch)
+└── lib/                    # Client-side: api-client, format
+
+packages/
+├── db/                     # Prisma schema, client singleton, seed data
+├── shared/                 # Enums, types, Zod schemas (cross-boundary)
+└── config/                 # ESLint + TypeScript base configs
+```
 
 ## Quick Start
 
 ```bash
 # Prerequisites: Node.js 20+, pnpm 9+, PostgreSQL
 
-# 1. Install dependencies
 pnpm install
-
-# 2. Set up environment
-cp .env.example .env
-# Edit .env with your database URL
-
-# 3. Generate Prisma client & push schema
+cp .env.example .env       # edit DB_URL
 pnpm db:generate
 pnpm db:push
-
-# 4. Seed sample data
 pnpm db:seed
-
-# 5. Start dev server
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-## Project Structure
-
-```
-├── apps/web/              # Next.js app (UI + API routes)
-│   └── src/
-│       ├── app/           # Pages and API routes (App Router)
-│       ├── server/        # Server-side domain modules
-│       │   ├── modules/   # restaurants, menu, orders, dispatch, drivers
-│       │   └── lib/       # errors, money, ids, logger
-│       ├── components/    # React components
-│       └── lib/           # Client-side utilities
-├── packages/
-│   ├── db/                # Prisma schema, client, seed
-│   ├── shared/            # Shared enums, types, schemas (Zod)
-│   └── config/            # ESLint and TypeScript configs
-└── docs/                  # Architecture and API documentation
-```
+Open [http://localhost:3000](http://localhost:3000).
 
 ## API Endpoints
 
@@ -63,25 +65,23 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 | POST | `/api/v1/dispatch/assignments` | Assign driver to order |
 | GET | `/api/v1/drivers` | List active drivers |
 
-## MVP Scope
+All routes use consistent `{ data }` / `{ error: { code, message, details } }` envelopes via `handleRoute()`.
 
-### Included
-- Restaurant menu browsing
-- Order creation with item snapshots and cent-based totals
-- Order status progression (state machine)
-- Restaurant dashboard for order management
-- Dispatch board with manual driver assignment
-- Mock auth (role-based)
+## What's Stubbed
 
-### Deferred
-- Real authentication (SSO, OAuth)
-- Payments integration
-- Real-time updates (WebSockets)
-- Maps and route optimization
-- Auto-dispatch and ETA prediction
-- Multi-currency support
-- Coupons and promotions
-- Analytics dashboard
+The scaffold is compile-safe but intentionally minimal:
+
+- **Service logic**: Order creation works end-to-end; dispatch `updateStatus` is a TODO stub
+- **Auth**: Mock session in `server/auth/session.ts` — returns `null` everywhere
+- **UI**: Server-rendered pages with no client interactivity (no forms, no cart)
+- **Validation**: Zod schemas cover basic fields; business constraints (e.g. max items) are TODO
+- **Error codes**: Generic set (`VALIDATION_ERROR`, `NOT_FOUND`, etc.); domain-specific codes pending
+
+## Next Implementation Order
+
+1. **Create-order flow** — cart UI, checkout form, POST to `/api/v1/orders`
+2. **Restaurant order status updates** — dashboard buttons to advance order state
+3. **Dispatch assignment** — dispatch board driver-assign UI + status progression
 
 ## Tech Stack
 

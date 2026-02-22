@@ -1,40 +1,69 @@
-import type { ApiResponse } from "@ddba/shared";
+import { isApiError, type ApiSuccessResponse } from "@ddba/shared";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_ENV === "production" ? "" : "http://localhost:3000";
+// ---------------------------------------------------------------------------
+// API error class (client-side)
+// ---------------------------------------------------------------------------
+export class ApiClientError extends Error {
+  constructor(
+    public readonly code: string,
+    message: string,
+    public readonly status: number,
+    public readonly details?: Record<string, unknown>,
+  ) {
+    super(message);
+    this.name = "ApiClientError";
+  }
+}
 
-async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${BASE_URL}${path}`, {
+// ---------------------------------------------------------------------------
+// Generic fetchers
+// ---------------------------------------------------------------------------
+
+async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const res = await fetch(path, {
     headers: { "Content-Type": "application/json", ...options?.headers },
     ...options,
   });
 
-  const json = await res.json() as ApiResponse<T>;
+  const json: unknown = await res.json();
 
-  if ("error" in json) {
-    throw new Error(json.error.message);
+  if (isApiError(json)) {
+    throw new ApiClientError(
+      json.error.code,
+      json.error.message,
+      res.status,
+      json.error.details as Record<string, unknown> | undefined,
+    );
   }
 
-  return json.data;
+  return (json as ApiSuccessResponse<T>).data;
 }
 
+/** GET helper */
+export function apiGet<T>(path: string): Promise<T> {
+  return request<T>(path);
+}
+
+/** POST helper */
+export function apiPost<T>(path: string, body: unknown): Promise<T> {
+  return request<T>(path, { method: "POST", body: JSON.stringify(body) });
+}
+
+// ---------------------------------------------------------------------------
+// Feature-specific convenience methods (thin wrappers, add as needed)
+// ---------------------------------------------------------------------------
 export const api = {
   getMenu: (restaurantId: string) =>
-    apiFetch(`/api/v1/restaurants/${restaurantId}/menu`),
+    apiGet(`/api/v1/restaurants/${restaurantId}/menu`),
 
   createOrder: (data: unknown) =>
-    apiFetch("/api/v1/orders", { method: "POST", body: JSON.stringify(data) }),
+    apiPost("/api/v1/orders", data),
 
   updateOrderStatus: (orderId: string, status: string) =>
-    apiFetch(`/api/v1/orders/${orderId}/status`, {
-      method: "POST",
-      body: JSON.stringify({ status }),
-    }),
+    apiPost(`/api/v1/orders/${orderId}/status`, { status }),
 
   assignDriver: (orderId: string, driverId: string) =>
-    apiFetch("/api/v1/dispatch/assignments", {
-      method: "POST",
-      body: JSON.stringify({ orderId, driverId }),
-    }),
+    apiPost("/api/v1/dispatch/assignments", { orderId, driverId }),
 
-  getDrivers: () => apiFetch("/api/v1/drivers"),
+  getDrivers: () => apiGet("/api/v1/drivers"),
 };

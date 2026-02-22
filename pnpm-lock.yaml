@@ -15,6 +15,43 @@ importers:
         specifier: ^5.7.0
         version: 5.9.3
 
+  apps/api:
+    dependencies:
+      '@ddba/backend-core':
+        specifier: workspace:*
+        version: link:../../packages/backend-core
+      '@ddba/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@ddba/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      next:
+        specifier: ^15.1.0
+        version: 15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
+      zod:
+        specifier: ^3.24.0
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.11
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+
   apps/web:
     dependencies:
       '@ddba/db':
@@ -49,7 +86,30 @@ importers:
         specifier: ^5.7.0
         version: 5.9.3
 
+  packages/backend-core:
+    dependencies:
+      '@ddba/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      zod:
+        specifier: ^3.24.0
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+
   packages/config: {}
+
+  packages/contracts:
+    dependencies:
+      zod:
+        specifier: ^3.24.0
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
 
   packages/db:
     dependencies:

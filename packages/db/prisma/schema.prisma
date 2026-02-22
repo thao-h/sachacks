@@ -24,6 +24,13 @@ enum DispatchStatus {
   DROPPED_OFF
 }
 
+enum OfferStatus {
+  OFFERED
+  ACCEPTED
+  EXPIRED
+  REJECTED
+}
+
 model Restaurant {
   id        String   @id @default(cuid())
   name      String
@@ -69,6 +76,7 @@ model Order {
   restaurant Restaurant          @relation(fields: [restaurantId], references: [id])
   items      OrderItem[]
   dispatch   DispatchAssignment?
+  offers     DispatchOffer[]
 
   @@index([restaurantId])
   @@index([status])
@@ -98,6 +106,7 @@ model Driver {
   updatedAt DateTime @updatedAt
 
   assignments DispatchAssignment[]
+  offers      DispatchOffer[]
 }
 
 model DispatchAssignment {
@@ -113,4 +122,21 @@ model DispatchAssignment {
 
   @@index([driverId])
   @@index([status])
+}
+
+model DispatchOffer {
+  id        String      @id @default(cuid())
+  orderId   String
+  driverId  String
+  status    OfferStatus @default(OFFERED)
+  expiresAt DateTime
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  order  Order  @relation(fields: [orderId], references: [id])
+  driver Driver @relation(fields: [driverId], references: [id])
+
+  @@unique([orderId, driverId])
+  @@index([orderId, status])
+  @@index([driverId, status])
 }

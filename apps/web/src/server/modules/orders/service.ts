@@ -1,7 +1,8 @@
 import { orderRepo } from "./repo";
 import { menuRepo } from "../menu/repo";
+import { dispatchService } from "../dispatch/service";
 import { NotFoundError, InvalidStateError, ValidationError } from "@/server/lib/errors";
-import { canTransitionOrder, type CreateOrderInput, type OrderStatus } from "@ddba/shared";
+import { canTransitionOrder, multiplyCents, sumCents, OrderStatus, type CreateOrderInput, type OrderStatus as OrderStatusType } from "@ddba/shared";
 import { logger } from "@/server/lib/logger";
 
 export const orderService = {
@@ -19,11 +20,11 @@ export const orderService = {
         name: menuItem.name,
         unitPriceCents: menuItem.priceCents,
         quantity: item.quantity,
-        lineTotalCents: menuItem.priceCents * item.quantity,
+        lineTotalCents: multiplyCents(menuItem.priceCents, item.quantity),
       };
     });
 
-    const subtotalCents = orderItems.reduce((sum, item) => sum + item.lineTotalCents, 0);
+    const subtotalCents = sumCents(orderItems.map((i) => i.lineTotalCents));
 
     const order = await orderRepo.create({
       restaurantId: input.restaurantId,
@@ -38,11 +39,11 @@ export const orderService = {
     return order;
   },
 
-  async updateStatus(orderId: string, newStatus: OrderStatus) {
+  async updateStatus(orderId: string, newStatus: OrderStatusType) {
     const order = await orderRepo.findById(orderId);
     if (!order) throw new NotFoundError("Order", orderId);
 
-    if (!canTransitionOrder(order.status as OrderStatus, newStatus)) {
+    if (!canTransitionOrder(order.status as OrderStatusType, newStatus)) {
       throw new InvalidStateError(
         `Cannot move order from ${order.status} to ${newStatus}`,
       );
@@ -50,6 +51,48 @@ export const orderService = {
 
     const updated = await orderRepo.updateStatus(orderId, newStatus);
     logger.info("Order status updated", { orderId, from: order.status, to: newStatus });
+
+    // Auto-dispatch trigger: when order becomes READY_FOR_PICKUP, create offers
+    if (newStatus === OrderStatus.READY_FOR_PICKUP) {
+      try {
+        await dispatchService.autoDispatch(orderId);
+      } catch (err) {
+        // Log but don't fail the status update — offers can be retried
+        logger.error("Auto-dispatch failed", {
+          orderId,
+          error: err instanceof Error ? err.message : "unknown",
+        });
+      }
+    }
+
+    return updated;
+  },
+
+  /**
+   * Restaurant cancels an order. Allowed before driver picks up.
+   * Cancels any dispatch offers/assignments, then sets order CANCELED.
+   */
+  async cancelOrder(orderId: string, reason?: string) {
+    const order = await orderRepo.findById(orderId);
+    if (!order) throw new NotFoundError("Order", orderId);
+
+    const status = order.status as OrderStatusType;
+
+    // Can't cancel if already delivered or already canceled
+    if (status === OrderStatus.DELIVERED || status === OrderStatus.CANCELED) {
+      throw new InvalidStateError(`Cannot cancel order in ${status} status`);
+    }
+
+    // If dispatched, verify driver hasn't picked up yet
+    if (
+      status === OrderStatus.OUT_FOR_DELIVERY ||
+      status === OrderStatus.READY_FOR_PICKUP
+    ) {
+      await dispatchService.cancelForOrder(orderId);
+    }
+
+    const updated = await orderRepo.updateStatus(orderId, OrderStatus.CANCELED);
+    logger.info("Order cancelled", { orderId, reason: reason ?? "none" });
     return updated;
   },
 
@@ -63,7 +106,7 @@ export const orderService = {
     return orderRepo.findByRestaurant(restaurantId);
   },
 
-  async listByStatus(status: OrderStatus) {
+  async listByStatus(status: OrderStatusType) {
     return orderRepo.findByStatus(status);
   },
 };

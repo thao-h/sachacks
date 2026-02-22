@@ -39,3 +39,14 @@ Client → API Route → Service → Repo → Prisma → PostgreSQL
 - `@ddba/shared`: Cross-boundary types, enums, Zod schemas
 - `@ddba/db`: Prisma client singleton, schema, seed data
 - `@ddba/config`: ESLint and TypeScript base configs
+
+## Backend-First Extension (v2)
+
+The project now includes a backend-first architecture layer alongside the original monolith:
+
+- **`packages/backend-core`** - Framework-agnostic business logic with dependency-injected repos
+- **`packages/contracts`** - Shared enums, Zod schemas, and API envelope types
+- **`packages/db/src/repositories`** - Prisma implementations of backend-core repo interfaces
+- **`apps/api`** - Standalone Next.js HTTP adapter (port 4000) consuming backend-core services
+
+This enables the domain logic to be tested and used independently of any web framework.
