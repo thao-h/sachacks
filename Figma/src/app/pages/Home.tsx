@@ -1,4 +1,4 @@
-import { MapPin, ChevronRight } from 'lucide-react';
+import { MapPin, ChevronRight, ShoppingBag, Car, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 
@@ -11,92 +11,84 @@ export function Home() {
         transition={{ duration: 0.6 }}
         className="w-full max-w-4xl"
       >
-        <div className="bg-white rounded-3xl shadow-2xl shadow-blue-500/10 p-12 md:p-16">
-          {/* Logo and Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-blue-500 blur-xl opacity-40 rounded-full"></div>
-                <MapPin className="w-12 h-12 text-blue-600 relative" strokeWidth={2.5} />
-              </div>
-              <h1 className="text-5xl font-bold text-gray-900">DDBA</h1>
-            </div>
+        <div className="bg-white rounded-3xl shadow-2xl shadow-blue-500/10 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-              DDBA Local Delivery OS
-            </h2>
-            
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Local delivery operations platform for restaurants.
-            </p>
-          </motion.div>
+            {/* Left Content */}
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              {/* Logo and Header */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="mb-8"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-blue-500 blur-xl opacity-40 rounded-full"></div>
+                    <MapPin className="w-10 h-10 text-blue-600 relative" strokeWidth={2.5} />
+                  </div>
+                  <h1 className="text-3xl font-bold text-gray-900">DDBA</h1>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight leading-tight">
+                  Local Delivery OS
+                </h2>
+                
+                <p className="text-lg text-gray-600 font-medium">
+                  Community-powered delivery for Davis
+                </p>
+              </motion.div>
 
-          {/* Action Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* For Customers */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <div className="text-center">
-                <h3 className="text-sm font-semibold text-gray-600 mb-4 uppercase tracking-wider">
-                  For Customers
-                </h3>
+              {/* Action Buttons */}
+              <div className="space-y-4">
                 <Link 
                   to="/customer"
-                  className="group relative w-full bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl py-4 px-6 font-semibold transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                  className="group w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-4 px-6 font-semibold transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 flex items-center justify-between"
                 >
-                  Browse Menu
+                  <div className="flex items-center gap-3">
+                    <ShoppingBag className="w-5 h-5" />
+                    Order Food
+                  </div>
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
-              </div>
-            </motion.div>
 
-            {/* For Restaurants */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <div className="text-center">
-                <h3 className="text-sm font-semibold text-gray-600 mb-4 uppercase tracking-wider">
-                  For Restaurants
-                </h3>
-                <Link 
-                  to="/restaurant"
-                  className="group w-full bg-white hover:bg-gray-50 text-gray-900 rounded-xl py-4 px-6 font-semibold transition-all duration-300 border-2 border-gray-200 hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                >
-                  Dashboard
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
-              </div>
-            </motion.div>
+                <div className="grid grid-cols-2 gap-4">
+                  <Link 
+                    to="/driver"
+                    className="group w-full bg-white hover:bg-gray-50 text-gray-900 rounded-xl py-4 px-4 font-semibold transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5 flex flex-col items-start gap-2"
+                  >
+                    <Car className="w-6 h-6 text-blue-600 mb-1" />
+                    <span>Drive & Earn</span>
+                  </Link>
 
-            {/* For Dispatchers */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              <div className="text-center">
-                <h3 className="text-sm font-semibold text-gray-600 mb-4 uppercase tracking-wider">
-                  For Dispatchers
-                </h3>
-                <Link 
-                  to="/dispatch"
-                  className="group w-full bg-white hover:bg-gray-50 text-gray-900 rounded-xl py-4 px-6 font-semibold transition-all duration-300 border-2 border-gray-200 hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                >
-                  Live Board
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <Link 
+                    to="/communities"
+                    className="group w-full bg-white hover:bg-gray-50 text-gray-900 rounded-xl py-4 px-4 font-semibold transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5 flex flex-col items-start gap-2"
+                  >
+                    <Users className="w-6 h-6 text-green-600 mb-1" />
+                    <span>My Communities</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-8 text-center md:text-left">
+                <Link to="/restaurant" className="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors">
+                  For Restaurants & Dispatchers →
                 </Link>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Right Image */}
+            <div className="relative h-64 md:h-auto bg-blue-50">
+              <img 
+                src="https://images.unsplash.com/photo-1717250265987-b5c58bb96b8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb21tdW5pdHklMjBkZWxpdmVyeSUyMGlsbHVzdHJhdGlvbiUyMG9yJTIwdmVjdG9yJTIwYXJ0fGVufDF8fHx8MTc3MTcyNzE5NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
+                alt="Community Delivery" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:bg-gradient-to-l md:from-transparent md:to-white/10" />
+            </div>
+
           </div>
         </div>
       </motion.div>

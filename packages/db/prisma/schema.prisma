@@ -35,8 +35,8 @@ model Restaurant {
   id        String   @id @default(cuid())
   name      String
   slug      String   @unique
-  address   String
-  phone     String
+  address   String   @default("")
+  phone     String   @default("")
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,6 +51,7 @@ model MenuItem {
   name           String
   description    String   @default("")
   priceCents     Int
+  imageUrl       String?
   category       String   @default("General")
   isAvailable    Boolean  @default(true)
   createdAt      DateTime @default(now())

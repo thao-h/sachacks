@@ -53,9 +53,27 @@ export function apiPost<T>(path: string, body: unknown): Promise<T> {
 // Feature-specific convenience methods (thin wrappers, add as needed)
 // ---------------------------------------------------------------------------
 export const api = {
-  getMenu: (restaurantId: string) =>
-    apiGet(`/api/v1/restaurants/${restaurantId}/menu`),
+  // Auth
+  login: (identifier: string, name?: string) =>
+    apiPost("/api/auth/login", { identifier, name }),
 
+  logout: () =>
+    apiPost("/api/auth/logout", {}),
+
+  me: () =>
+    apiGet("/api/auth/me"),
+
+  setMode: (mode: string) =>
+    apiPost("/api/auth/mode", { mode }),
+
+  // Restaurants
+  getRestaurants: () =>
+    apiGet("/api/v1/restaurants"),
+
+  getMenuBySlug: (slug: string) =>
+    apiGet(`/api/v1/restaurants/slug/${slug}/menu`),
+
+  // Menu & orders
   createOrder: (data: unknown) =>
     apiPost("/api/v1/orders", data),
 

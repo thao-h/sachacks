@@ -1,0 +1,512 @@
+[ {
+  "Dish Name" : "A1 Premium Black Tea",
+  "Dish Description" : "",
+  "Price (USD)" : "5.75",
+  "Category" : "Teaspresso",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "A1 Premium Green Tea",
+  "Dish Description" : "Premium Green Tea",
+  "Price (USD)" : "5.75",
+  "Category" : "Teaspresso",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "A9 Roasted Oolong Tea",
+  "Dish Description" : "",
+  "Price (USD)" : "5.75",
+  "Category" : "Teaspresso",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B1 Signature Boba Milk Tea",
+  "Dish Description" : "Comes with BOBA and LARGE SIZE",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B2 Milk Tea w/ Pudding",
+  "Dish Description" : "Comes with EGG PUDDING and LARGE SIZE",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B3 Milk Tea w/ Grass Jelly",
+  "Dish Description" : "Comes with GRASS JELLY and LARGE SIZE",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B4 Tofuhua & Red Bean Milk Tea",
+  "Dish Description" : "Comes with TOFUHUA and RED BEAN",
+  "Price (USD)" : "6.75",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B5 3G Milk Tea",
+  "Dish Description" : "Comes with BOBA, EGG PUDDING, GRASS JELLY and LARGE SIZE",
+  "Price (USD)" : "7.55",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B6 Matcha Milk Tea",
+  "Dish Description" : "Comes with RED BEAN and MATCHA PUDDING",
+  "Price (USD)" : "6.75",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "B7 Jasmine Green Milk Tea",
+  "Dish Description" : "Comes with BOBA",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Jelly Series",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C1 Signature C-1 Milk Tea",
+  "Dish Description" : "Comes with BOBA and COFFEE JELLY",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C2 Hokkaido Milk Tea",
+  "Dish Description" : "Comes with BOBA and EGG PUDDING, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C3 Roasted Oolong Milk Tea",
+  "Dish Description" : "Comes with BOBA",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C4 Okinawa Milk Tea",
+  "Dish Description" : "Comes with EGG PUDDING, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C6 Panda Milk Tea",
+  "Dish Description" : "Comes with BOBA and AGAR BOBA",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C7 Fresh Taro Milk Tea",
+  "Dish Description" : "Comes with BOBA and Fresh Taro",
+  "Price (USD)" : "6.75",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "C10 Wintermelon Milk Tea",
+  "Dish Description" : "Comes with GRASS JELLY, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "L1 Thai Ice Tea",
+  "Dish Description" : "Thai Tea",
+  "Price (USD)" : "6.55",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "M3 Strawberry Blossom",
+  "Dish Description" : "Highest Grade of 2019 Winter Season Hand-Picked Jasmine Green Milk Tea with Strawberry Heart Jelly, the lowest sweetness is 30%",
+  "Price (USD)" : "6.75",
+  "Category" : "Milktea Specialty",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D2 Peach Fruit Tea",
+  "Dish Description" : "Comes with PEACH POPPING BOBA, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D5 Passion Fruit Tea",
+  "Dish Description" : "Comes with BOBA and PASSION JELLY, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D6 Mango Fruit Tea",
+  "Dish Description" : "Comes with BOBA , MANGO JELLY, and FRESH MANGO, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D7 Litchi Green Tea",
+  "Dish Description" : "Comes with BOBA, LITCHI JELLY, and FRESH LITCHI, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D8 Pomelo Green Tea",
+  "Dish Description" : "Comes with ALOE VERA, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D9 Honey Aloe Green Tea",
+  "Dish Description" : "Comes with ALOE VERA, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D10 KHOYO GRAPES FRUIT TEA",
+  "Dish Description" : "BLACKISH-PURPLE GRAPES GREEN TEA WITH GRAPES NATA DE COCO JELLY, VERY REFRESHING, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "D12 Strawberry Fruit Tea",
+  "Dish Description" : "Comes with BOBA , LITCHI JELLY, and FRESH STRAWBERRY, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "N9 Strawberry & Mango Fruit Tea",
+  "Dish Description" : "Comes with FRESH MANGO and FRESH STRAWBERRY, the lowest sweetness is 30%",
+  "Price (USD)" : "6.55",
+  "Category" : "Itea Fruit Tea",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "F1 Premium Green Tea Kreama",
+  "Dish Description" : "",
+  "Price (USD)" : "6.95",
+  "Category" : "Sea Salt Kreama",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "F1. Premium Black Tea Kreama",
+  "Dish Description" : "",
+  "Price (USD)" : "6.95",
+  "Category" : "Sea Salt Kreama",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "F2 Roasted Oolong Kreama",
+  "Dish Description" : "",
+  "Price (USD)" : "6.95",
+  "Category" : "Sea Salt Kreama",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "F3 Winter Melon Tea Kreama",
+  "Dish Description" : "the lowest sweetness is 30%",
+  "Price (USD)" : "6.95",
+  "Category" : "Sea Salt Kreama",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "I1 Fresh Ginger Milk",
+  "Dish Description" : "",
+  "Price (USD)" : "6.75",
+  "Category" : "Hot Drink",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "I2 Longan Red Date Tea",
+  "Dish Description" : "",
+  "Price (USD)" : "6.75",
+  "Category" : "Hot Drink",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "I3 Hot Malt Chocolate",
+  "Dish Description" : "LARGE SIZE ONLY",
+  "Price (USD)" : "6.75",
+  "Category" : "Hot Drink",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "I4 Golden Ovaltine Malt Drink.",
+  "Dish Description" : "SMALL SIZE ONLY",
+  "Price (USD)" : "6.75",
+  "Category" : "Hot Drink",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "K2 Taro & Grass Jelly",
+  "Dish Description" : "come with large size",
+  "Price (USD)" : "6.75",
+  "Category" : "Signature Iced Milk & Sago",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y1 Basil Popcorn Chicken",
+  "Dish Description" : "Seasoning with Salt & Pepper, Thai, and Chili Powder",
+  "Price (USD)" : "10.95",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y2 Aged Takoyaki",
+  "Dish Description" : "Seasoning with Takoyaki Sauce, Mayonnaise, Seaweed",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y3 Seasoned Curly Fries",
+  "Dish Description" : "Fries, Mayonnaise, Takoyaki Sauce, Seaweed",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y4 Seasoned Calamari",
+  "Dish Description" : "Seasoning with Salt & Pepper",
+  "Price (USD)" : "12.45",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y6 Cutlet Pork Chop",
+  "Dish Description" : "with Pork Chop Sauce, Mayonnaise",
+  "Price (USD)" : "10.95",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y7 Taiwanese Tempura",
+  "Dish Description" : "Seasoning with Salt & Pepper",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y8 Grilled Lobster Ball",
+  "Dish Description" : "",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y9 Japanese Egg Tofu",
+  "Dish Description" : "Seasoning with Unagi Sauce, Mayonnaise, Seaweed",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y10 Croquette",
+  "Dish Description" : "Potato Cake",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y12 Fried Cutter Fish Balls",
+  "Dish Description" : "Seasoning with Salt & Pepper",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y14 Fried Fish Filet of Sole",
+  "Dish Description" : "",
+  "Price (USD)" : "9.75",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y15 Fried Garlic Chicken Wings",
+  "Dish Description" : "",
+  "Price (USD)" : "9.95",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y16 Gyoza",
+  "Dish Description" : "Deep Fried Dumpling",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y18 Fried Flour Roll",
+  "Dish Description" : "comes with Condensed Milk",
+  "Price (USD)" : "8.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y49 Golden Sesame Ball",
+  "Dish Description" : "8 PC",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y19 Mini Egg Roll",
+  "Dish Description" : "",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y20 Mozzarella Sticks",
+  "Dish Description" : "comes with Buttermilk Ranch",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y21 Fried Hokkaido Oyster",
+  "Dish Description" : "Seasoning with Unagi Sauce, Mayonnaise, Seaweed",
+  "Price (USD)" : "9.95",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y22 Kurobuta Coarse Sausage",
+  "Dish Description" : "",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y24 Shrimp Lollipop",
+  "Dish Description" : "",
+  "Price (USD)" : "9.50",
+  "Category" : "Snacks",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y42 Braised Beef Brisket Over Rice",
+  "Dish Description" : "Braised Beef Brisket Over Rice with Broccoli",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y43 General Chicken Over Rice",
+  "Dish Description" : "General Chicken with broccoli, green onion, sesame",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y44 Orange Chicken Over Rice",
+  "Dish Description" : "Orange Chicken over rice with broccoli, green onion, sesame",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y25 Shoyu Tonkotsu Ramen",
+  "Dish Description" : "Pork Broth Base, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y26 Black Garlic Oil Ramen",
+  "Dish Description" : "Pork Broth Base with Black Garlic Oil, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach, Chili, Garlic",
+  "Price (USD)" : "17.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y27 Crab Tonkotsu Ramen",
+  "Dish Description" : "Pork Broth Base, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach, Chili, Crab",
+  "Price (USD)" : "18.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y28 Miso Ramen",
+  "Dish Description" : "Miso Soup Base, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y29 Shrimp Curry Ramen",
+  "Dish Description" : "Pork Broth Base with Curry, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach, Chili, Shrimp",
+  "Price (USD)" : "17.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y30 Kimchi Spicy Miso Ramen",
+  "Dish Description" : "Pork Broth Base with Spicy Miso, Topping with BBQ Pork, Fish Cake, Bamboo Shoot, Corn, Egg, Agaric, Green Onion, Seaweed, Spinach, Chili, Kimchi",
+  "Price (USD)" : "17.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y31 Curry Cutlet Over Rice",
+  "Dish Description" : "",
+  "Price (USD)" : "18.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y32 Gyu Don",
+  "Dish Description" : "Beef over Rice",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y33 Unagi Don",
+  "Dish Description" : "Grilled Eel over Rice",
+  "Price (USD)" : "23.55",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y34 Fried Shrimp Udon",
+  "Dish Description" : "",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y35 Beef & Union Udon",
+  "Dish Description" : "",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y41 Chashu Over Rice",
+  "Dish Description" : "BBQ Pork over Rice",
+  "Price (USD)" : "16.95",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+}, {
+  "Dish Name" : "Y0 White Rice",
+  "Dish Description" : "a bowl of plain rice",
+  "Price (USD)" : "3.45",
+  "Category" : "Noodle & Rice",
+  "Phone Number" : "",
+  "Restaurant Address" : ""
+} ]

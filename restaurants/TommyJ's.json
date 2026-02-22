@@ -1,0 +1,761 @@
+[ {
+  "Product Name" : "French Fries or Tater Tots Half",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "4.99"
+}, {
+  "Product Name" : "French Fries or Tater Tots Full",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "8.99"
+}, {
+  "Product Name" : "Mozzarella Sticks (6)",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "7.99"
+}, {
+  "Product Name" : "Jalapeño Poppers (6)",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "7.99"
+}, {
+  "Product Name" : "Chicken Strips & Side 2 Piece",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "8.99"
+}, {
+  "Product Name" : "Chicken Strips & Side 4 Piece",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Chicken Wings 6 Piece",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "11.99"
+}, {
+  "Product Name" : "Chicken Wings 12 Piece",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "House-Made Angus Beef Chili 8oz Cup",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "5.49"
+}, {
+  "Product Name" : "House-Made Angus Beef Chili 16oz Bowl",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "8.99"
+}, {
+  "Product Name" : "Chicken Quesadilla",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Appetizers",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Blue Buffalo Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "10.99"
+}, {
+  "Product Name" : "Jalapeño Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "10.99"
+}, {
+  "Product Name" : "Shroomer Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "10.99"
+}, {
+  "Product Name" : "Chili Cheese Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Cajun Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Philly Fries",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Top Shelf Taters",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Cheeseburger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders a la Carte",
+  "Colors" : "",
+  "Price (USD)" : "9.99"
+}, {
+  "Product Name" : "Blue Buffalo",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders a la Carte",
+  "Colors" : "",
+  "Price (USD)" : "9.99"
+}, {
+  "Product Name" : "Tri Tip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders a la Carte",
+  "Colors" : "",
+  "Price (USD)" : "9.99"
+}, {
+  "Product Name" : "Chicken Strip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders a la Carte",
+  "Colors" : "",
+  "Price (USD)" : "9.99"
+}, {
+  "Product Name" : "Tri Tip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders Entree",
+  "Colors" : "",
+  "Price (USD)" : "13.98"
+}, {
+  "Product Name" : "Chicken Strip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders Entree",
+  "Colors" : "",
+  "Price (USD)" : "13.98"
+}, {
+  "Product Name" : "Cheeseburger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders Entree",
+  "Colors" : "",
+  "Price (USD)" : "13.98"
+}, {
+  "Product Name" : "Blue Buffalo",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sliders Entree",
+  "Colors" : "",
+  "Price (USD)" : "13.98"
+}, {
+  "Product Name" : "BBQ Chicken Salad",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Buffalo Chicken Salad",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Chicken Caesar Salad",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "House Salad Half",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "5.99"
+}, {
+  "Product Name" : "House Salad Full",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "10.99"
+}, {
+  "Product Name" : "Grilled or Crispy Chicken",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "5.99"
+}, {
+  "Product Name" : "Tri Tip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Gluten-Free Greens",
+  "Colors" : "",
+  "Price (USD)" : "8.99"
+}, {
+  "Product Name" : "The Philly",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "The Dip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Reuben",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Pesto Chicken",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Grilled Cheese",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "10.99"
+}, {
+  "Product Name" : "Add Ham for Grilled Cheese",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "BLT",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "Chicken Strip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "Grilled Chicken Club",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Malibu Chicken",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "California Chicken",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sandwiches",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Aggie Jam",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Cheeseburger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "Bacon Cheeseburger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "BBQ Bacon Cheeseburger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Blue Buffalo",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Blue Bacon",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Cajun Burger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Jalapeño",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Chili Burger (chili contains Angus beef)",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Mexi-Cali",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Firehouse",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Cali Burger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Southern Cali",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Swiss 'N' Shroomer",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "The Tommy Gobbler",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Tommy's Turkey Bánh Mì",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "1/2 lb House-Made Burgers",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Blue Buffalo Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+}, {
+  "Product Name" : "Jalapeño Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+}, {
+  "Product Name" : "Philly Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Chili Cheese Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Cajun Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Shroomer Style upgrade",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Fry Upgrades",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+}, {
+  "Product Name" : "Choose 2",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "On the Lighter Side",
+  "Colors" : "",
+  "Price (USD)" : "9.99"
+}, {
+  "Product Name" : "Choose 3",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "On the Lighter Side",
+  "Colors" : "",
+  "Price (USD)" : "12.99"
+}, {
+  "Product Name" : "Breakfast Sandwich",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "14.99"
+}, {
+  "Product Name" : "Biscuits & Gravy",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Corned Beef Hash",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "16.99"
+}, {
+  "Product Name" : "Add Country Gravy to Corned Beef Hash",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Two Egg Plate",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "13.99"
+}, {
+  "Product Name" : "Add 1 Piece Toast to Two Egg Plate",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "1.75"
+}, {
+  "Product Name" : "Add 2 Pieces Toast to Two Egg Plate",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+}, {
+  "Product Name" : "Breakfast Burrito",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "Sub Tri Tip for Breakfast Burrito",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "4.99"
+}, {
+  "Product Name" : "Chipotle Brunch Quesadilla",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "15.99"
+}, {
+  "Product Name" : "Sub Tri Tip for Chipotle Brunch Quesadilla",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "4.99"
+}, {
+  "Product Name" : "Brunch Burger",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Classic Mash Ups",
+  "Colors" : "",
+  "Price (USD)" : "19.99"
+}, {
+  "Product Name" : "Classic Benedict",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "The Benedicts",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Garden Benedict",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "The Benedicts",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Hash Benedict",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "The Benedicts",
+  "Colors" : "",
+  "Price (USD)" : "18.99"
+}, {
+  "Product Name" : "Bacon Shroomer",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Three Egg Omelets",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Denver",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Three Egg Omelets",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Philly",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Three Egg Omelets",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Garden",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Three Egg Omelets",
+  "Colors" : "",
+  "Price (USD)" : "17.99"
+}, {
+  "Product Name" : "Egg",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "1.99"
+}, {
+  "Product Name" : "Gravy",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Bacon",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "3.99"
+}, {
+  "Product Name" : "Sausage",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+}, {
+  "Product Name" : "Tri Tip",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "8.99"
+}, {
+  "Product Name" : "Biscuit",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "2.99"
+}, {
+  "Product Name" : "English Muffin",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "2.49"
+}, {
+  "Product Name" : "Toast 1 Piece",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "1.75"
+}, {
+  "Product Name" : "Toast 2 Pieces",
+  "Product URL" : "",
+  "Product Image" : "",
+  "Rating (Max 5)" : "",
+  "Product Type" : "Sides & Extras",
+  "Colors" : "",
+  "Price (USD)" : "3.49"
+} ]

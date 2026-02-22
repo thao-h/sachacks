@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
+import { DeliveryOptions, DeliveryOptionType } from '../components/DeliveryOptions';
 
 interface CartItem {
   id: string;
@@ -18,14 +19,36 @@ export function Checkout() {
     name: '',
     phone: '',
     address: '',
-    fulfillmentMode: 'delivery',
   });
+  
+  const [deliveryOption, setDeliveryOption] = useState<DeliveryOptionType>('route-match');
+
+  const deliveryFee = useMemo(() => {
+    switch (deliveryOption) {
+      case 'route-match': return 1.50;
+      case 'community-batch': return 2.00;
+      case 'direct-courier': return 5.99;
+      case 'pickup': return 0;
+      default: return 0;
+    }
+  }, [deliveryOption]);
+
+  const tax = total * 0.08;
+  const grandTotal = total + deliveryFee + tax;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const orderId = 'ORD' + Date.now().toString().slice(-6);
-    navigate(`/confirmation/${orderId}`, {
-      state: { ...formData, cart, total, orderId },
+    navigate(`/track/${orderId}`, {
+      state: { 
+        ...formData, 
+        cart, 
+        total, 
+        orderId,
+        deliveryOption,
+        deliveryFee,
+        grandTotal
+      },
     });
   };
 
@@ -97,8 +120,8 @@ export function Checkout() {
               </label>
               <textarea
                 id="address"
-                required={formData.fulfillmentMode === 'delivery'}
-                disabled={formData.fulfillmentMode === 'pickup'}
+                required={deliveryOption !== 'pickup'}
+                disabled={deliveryOption === 'pickup'}
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 rows={3}
@@ -109,32 +132,13 @@ export function Checkout() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Fulfillment Mode
+                Delivery Method
               </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setFormData({ ...formData, fulfillmentMode: 'delivery' })}
-                  className={`px-4 py-3 rounded-lg border-2 transition-all ${
-                    formData.fulfillmentMode === 'delivery'
-                      ? 'border-blue-600 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  Delivery
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFormData({ ...formData, fulfillmentMode: 'pickup' })}
-                  className={`px-4 py-3 rounded-lg border-2 transition-all ${
-                    formData.fulfillmentMode === 'pickup'
-                      ? 'border-blue-600 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  Pickup
-                </button>
-              </div>
+              <DeliveryOptions 
+                selectedOption={deliveryOption}
+                onSelect={setDeliveryOption}
+                communityActive={true} // Mock: user is in active community area
+              />
             </div>
 
             <button
@@ -171,12 +175,12 @@ export function Checkout() {
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">Delivery Fee</span>
               <span className="text-gray-900">
-                {formData.fulfillmentMode === 'delivery' ? '$2.99' : '$0.00'}
+                ${deliveryFee.toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">Tax</span>
-              <span className="text-gray-900">${(total * 0.08).toFixed(2)}</span>
+              <span className="text-gray-900">${tax.toFixed(2)}</span>
             </div>
           </div>
 
@@ -184,7 +188,7 @@ export function Checkout() {
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold text-gray-900">Total</span>
               <span className="text-xl font-bold text-blue-600">
-                ${(total + (formData.fulfillmentMode === 'delivery' ? 2.99 : 0) + total * 0.08).toFixed(2)}
+                ${grandTotal.toFixed(2)}
               </span>
             </div>
           </div>

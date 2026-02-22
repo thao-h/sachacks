@@ -1,0 +1,1219 @@
+[ {
+  "Dish Name" : "Guacamole and Chips",
+  "Dish Description" : "",
+  "Price (USD)" : "9.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Guacamole and Chips",
+  "Dish Description" : "",
+  "Price (USD)" : "13.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Bean Dip",
+  "Dish Description" : "Refried beans topped with avocado, cheese and tomatoes.",
+  "Price (USD)" : "9.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Bean Dip with Chorizo",
+  "Dish Description" : "Refried beans topped with avocado, cheese and tomatoes.",
+  "Price (USD)" : "13.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Nachos",
+  "Dish Description" : "Chips, beans, cheese, tomatoes, jalapeños, guacamole and sour cream.",
+  "Price (USD)" : "14.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Nachos with Steak, Chicken, or Carnitas",
+  "Dish Description" : "Chips, beans, cheese, tomatoes, jalapeños, guacamole and sour cream.",
+  "Price (USD)" : "18.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Flautas",
+  "Dish Description" : "Three beef, chicken, or potato & cheese deep fried rolled corn \"taquitos\" topped with guacamole and sour cream",
+  "Price (USD)" : "11.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Shrimp Cocktail",
+  "Dish Description" : "Chilled delightful spicy cocktail sauce served with shrimp complimented with onion, tomato, cucumber and avocado.",
+  "Price (USD)" : "18.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "CEVICHE",
+  "Dish Description" : "Tilapia ceviche with cucumber, onion, jalapeños topped with avocado and tomatoes.",
+  "Price (USD)" : "13.99",
+  "Category" : "Appetizers",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soup of the Day",
+  "Dish Description" : "Ask your server about today's soup.",
+  "Price (USD)" : "6.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soup of the Day",
+  "Dish Description" : "Ask your server about today's soup.",
+  "Price (USD)" : "12.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soup of the Day",
+  "Dish Description" : "Ask your server about today's soup.",
+  "Price (USD)" : "14.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada de la Casa",
+  "Dish Description" : "Romaine lettuce tossed with our house creamy cilantro dressing, cheese, tomatoes and avocado.",
+  "Price (USD)" : "14.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada de la Casa with Chicken, Steak, or Carnitas",
+  "Dish Description" : "Romaine lettuce tossed with our house creamy cilantro dressing, cheese, tomatoes and avocado.",
+  "Price (USD)" : "18.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada de la Casa with Shrimp",
+  "Dish Description" : "Romaine lettuce tossed with our house creamy cilantro dressing, cheese, tomatoes and avocado.",
+  "Price (USD)" : "20.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada Norteña",
+  "Dish Description" : "A colorful mixture of green beans, corn, whole black beans, tomatoes, onion, avocado, bell peppers and a few peanuts tossed together on a bed of Romaine lettuce and red cabbage. Served with cilantro dressing on the side.",
+  "Price (USD)" : "15.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada Norteña with Chicken, Steak, Carnitas, or Grilled Veggies",
+  "Dish Description" : "A colorful mixture of green beans, corn, whole black beans, tomatoes, onion, avocado, bell peppers and a few peanuts tossed together on a bed of Romaine lettuce and red cabbage. Served with cilantro dressing on the side.",
+  "Price (USD)" : "19.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada Norteña with Shrimp",
+  "Dish Description" : "A colorful mixture of green beans, corn, whole black beans, tomatoes, onion, avocado, bell peppers and a few peanuts tossed together on a bed of Romaine lettuce and red cabbage. Served with cilantro dressing on the side.",
+  "Price (USD)" : "21.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada de Ceviche",
+  "Dish Description" : "Tender tilapia fish cooked in lemon and lime juice, onions, and cilantro. Served with avocado on a bed of Romaine lettuce and red cabbage.",
+  "Price (USD)" : "19.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada del Cesar",
+  "Dish Description" : "Romaine lettuce tossed with Caesar dressing, cheese and tomatoes.",
+  "Price (USD)" : "14.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada del Cesar with Chicken, Steak, Carnitas, Grilled Veggies",
+  "Dish Description" : "Romaine lettuce tossed with Caesar dressing, cheese and tomatoes.",
+  "Price (USD)" : "18.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Ensalada del Cesar with Shrimp",
+  "Dish Description" : "Romaine lettuce tossed with Caesar dressing, cheese and tomatoes.",
+  "Price (USD)" : "20.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Taco Salad",
+  "Dish Description" : "Crispy flour tortilla bowl filled with shredded lettuce, whole pinto and black beans, pico de gallo, sour cream, guacamole, cheese.",
+  "Price (USD)" : "14.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Taco Salad with Chicken, Steak, Carnitas or Grilled Veggies",
+  "Dish Description" : "Crispy flour tortilla bowl filled with shredded lettuce, whole pinto and black beans, pico de gallo, sour cream, guacamole, cheese.",
+  "Price (USD)" : "18.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Taco Salad with Shrimp",
+  "Dish Description" : "Crispy flour tortilla bowl filled with shredded lettuce, whole pinto and black beans, pico de gallo, sour cream, guacamole, cheese.",
+  "Price (USD)" : "20.99",
+  "Category" : "Salads",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carnitas",
+  "Dish Description" : "Crispy chunks of pork served with guacamole and pico de gallo and choice of tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Fajitas",
+  "Dish Description" : "Choice of strips of chicken breast or top sirloin steak tossed on the grill with bell peppers and onions. Served with guacamole, sour cream and choice of tortillas.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chimichanga",
+  "Dish Description" : "Choose Chicken, Shredded Beef or Carnitas with mild red sauce wrapped in a deep fried burrito topped with sour cream, guacamole and a splash of red sauce.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Enchiladas (One)",
+  "Dish Description" : "Choose filling of Chicken, Beef, Cheese, or Carnitas wrapped in a corn tortilla and topped with your choice of mild Roja, spicy Verde, or rich Mole sauce and cheese.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Enchiladas (Two)",
+  "Dish Description" : "Choose filling of Chicken, Beef, Cheese, or Carnitas wrapped in a corn tortilla and topped with your choice of mild Roja, spicy Verde, or rich Mole sauce and cheese.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Crab Enchilada (One)",
+  "Dish Description" : "Enchilada stuffed with grilled crab and onions, topped with Poblana sauce and cheese.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Crab Enchilada (Two)",
+  "Dish Description" : "Enchilada stuffed with grilled crab and onions, topped with Poblana sauce and cheese.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pork Tamal",
+  "Dish Description" : "Homemade tamal stuffed with seasoned pork and topped with salsa ranchera and cheese.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Flautas",
+  "Dish Description" : "Two deep fried taquitos stuffed with Chicken, Beef, or Potato & Cheese. Topped with sour cream and guacamole.",
+  "Price (USD)" : "14.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Verde",
+  "Dish Description" : "Tender pork simmered in a spicy green tomatillo and jalapeño sauce with choice of tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Colorado",
+  "Dish Description" : "Tender pork simmered in a red guajillo pepper sauce with choice of tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Al Pastor (One)",
+  "Dish Description" : "Pork strips marinated in Adobo sauce and pineapple, topped with onions and cilantro.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Chicken (One)",
+  "Dish Description" : "Grilled chicken topped with cheese, lettuce and tomato",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carnitas (One)",
+  "Dish Description" : "Grilled shredded pork topped with fresh onions and cilantro.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Mahi Mahi (One)",
+  "Dish Description" : "Grilled white fish fillet topped with fresh cabbage and chipotle aioli.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carne Asada (One)",
+  "Dish Description" : "Grilled strips of top sirloin steak, onions, tomatoes and cilantro.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Al Pastor (Two)",
+  "Dish Description" : "Pork strips marinated in Adobo sauce and pineapple, topped with onions and cilantro.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Chicken (Two)",
+  "Dish Description" : "Grilled chicken topped with cheese, lettuce and tomato",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carnitas (Two)",
+  "Dish Description" : "Grilled shredded pork topped with fresh onions and cilantro.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Mahi Mahi (Two)",
+  "Dish Description" : "Grilled white fish fillet topped with fresh cabbage and chipotle aioli.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carne Asada (Two)",
+  "Dish Description" : "Grilled strips of top sirloin steak, onions, tomatoes and cilantro.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Crispy Tacos (One)",
+  "Dish Description" : "Crispy corn tortilla stuffed with choice of Shredded Beef, Chicken, or Potatoes & Cheese lettuce, tomatoes and cheese. Served with rice, beans and choice of soup or salad.",
+  "Price (USD)" : "14.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Crispy Tacos (Two)",
+  "Dish Description" : "Crispy corn tortilla stuffed with choice of Shredded Beef, Chicken, or Potatoes & Cheese lettuce, tomatoes and cheese. Served with rice, beans and choice of soup or salad.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Burritos - Carnitas",
+  "Dish Description" : "Perfectly seasoned shredded pork wrapped with pico de gallo.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Burritos - Chile Verde",
+  "Dish Description" : "Tender pork simmered in a spicy Verde sauce wrapped with refried beans and cheese.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Burritos - Chile Colorado",
+  "Dish Description" : "Tender pork simmered in a mild red sauce, wrapped with refried beans and cheese.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Burritos - Chicken",
+  "Dish Description" : "Marinated chicken breast wrapped with pico de gallo and lettuce.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Burritos - Carne Asada",
+  "Dish Description" : "Strips of Top Sirloin grilled with onions, tomatoes and cilantro wrapped with pico de gallo.",
+  "Price (USD)" : "17.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "SUPER Burrito",
+  "Dish Description" : "Choose one type of meat (Chicken, Carnitas, Carne Asada, or Al Pastor) and add rice, beans, sour cream , guacamole, pico de gallo and cheese wrapped on a flour tortilla.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadillas - Carnitas",
+  "Dish Description" : "Shredded pork",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadillas - Chicken",
+  "Dish Description" : "Marinated grilled chicken breast",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadillas - Carne Asada",
+  "Dish Description" : "Grilled top sirloin, onions, tomato, and cilantro",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadillas - Vegetarian",
+  "Dish Description" : "Sautéed bell peppers, mushrooms, zucchini squash, onions and spinach.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadillas - Cheese Only",
+  "Dish Description" : "Choose pico de gallo or tomatoes",
+  "Price (USD)" : "12.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chicken Tamal",
+  "Dish Description" : "Homemade tamal stuffed with chicken and topped with a creamy Poblana sauce and queso fresco.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Veggie Fajitas",
+  "Dish Description" : "A generous portion of sautéed onions, zucchini, mushrooms, bell peppers, and spinach. Served with sour cream, guacamole and tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Veggie Tamal",
+  "Dish Description" : "Homemade tamal stuffed with corn, zucchini, and green beans, topped with Creamy Chipotle sauce.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Relleno",
+  "Dish Description" : "Chilaca pepper stuffed with cheese and topped with salsa Ranchera. Served with tortillas.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Veggie Relleno",
+  "Dish Description" : "Poblano pepper stuffed with corn, zucchini, and queso fresco, topped with a creamy Poblana sauce. Served with black beans and tortillas.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Chicken",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Carnitas",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Vegetales",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Chile Verde",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Aguacate",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Ceviche",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "15.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas - Asada",
+  "Dish Description" : "Crispy flat corn tortilla topped with shredded lettuce, tomatoes and cheese, with your choice of the following :",
+  "Price (USD)" : "16.99",
+  "Category" : "Lunch Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carnitas",
+  "Dish Description" : "A traditional Mexican dish of fried pork seasoned with citrus flavors, served with guacamole, pico de gallo and tortillas.",
+  "Price (USD)" : "19.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Fajitas",
+  "Dish Description" : "Choose generous portions of marinated Chicken breast or Sirloin Steak strips, grilled with red and green bell peppers and onions. Served with guacamole, sour cream and tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carne Asada",
+  "Dish Description" : "Tender slices of Top Sirloin grilled with onions in the traditional way. Served with guacamole, pico de gallo and tortillas.",
+  "Price (USD)" : "21.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Milanesa",
+  "Dish Description" : "Breaded and fried top sirloin served with guacamole, pico de gallo and tortillas.",
+  "Price (USD)" : "21.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Mole Poblano con Pollo",
+  "Dish Description" : "Mole sauce, a blend of seven kinds of peppers, Mexican chocolate, peanuts, and spices, served over grilled marinated chicken breast garnished with sesame seeds and onions.",
+  "Price (USD)" : "21.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Enchiladas",
+  "Dish Description" : "Select a filling of Cheese, Chicken,Beef or Carnitas and mild Red, spicy Verde, or rich Mole sauce.",
+  "Price (USD)" : "19.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Crispy Tacos",
+  "Dish Description" : "Crispy corn tortillas stuffed with Shredded Beef or Chicken, or Potatoes & Cheese lettuce, tomatoes and cheese.",
+  "Price (USD)" : "18.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carnitas",
+  "Dish Description" : "Shredded pork topped with onions and cilantro.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Carne Asada",
+  "Dish Description" : "Steak strips grilled with onions, tomatoes and cilantro.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Al Pastor",
+  "Dish Description" : "Pork strips marinated in Adobo sauce and pineapple, topped with onions and cilantro.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Soft Tacos - Chicken",
+  "Dish Description" : "Grilled Chicken topped with lettuce, cheese and tomatoes.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chicken Tamales",
+  "Dish Description" : "Homemade chicken tamales topped with Chile Poblano sauce and queso fresco.",
+  "Price (USD)" : "19.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Colorado",
+  "Dish Description" : "Tender seasoned pork simmered in mild red guajillo chile sauce. Served with tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Verde",
+  "Dish Description" : "Tender seasoned pork simmered in spicy tomatillo Verde sauce. Served with tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tres Flautas",
+  "Dish Description" : "Deep fried tightly rolled corn \"taquitos\" filled with choice of Shredded Beef, Chicken or Potato & Cheese. Topped with sour cream and guacamole.",
+  "Price (USD)" : "18.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pork Tamales",
+  "Dish Description" : "Homemade pork tamales topped with Ranchera sauce and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chimichanga",
+  "Dish Description" : "Choose Chicken, Shredded Beef, or Carnitas with mild Red sauce in a deep fried burrito, topped with sour cream, guacamole and a splash of tasty red sauce.",
+  "Price (USD)" : "20.99",
+  "Category" : "Dinner Entrees",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#1 Carnitas and Chile Relleno",
+  "Dish Description" : "Perfectly seasoned Carnitas and a Chile Relleno stuffed with cheese and topped with Ranchera sauce. Served with guacamole, pico de gallo and tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#2 Chile Verde Burrito y Enchilada de Pollo",
+  "Dish Description" : "Pork in spicy verde sauce wrapped in a flour tortilla and a chicken enchilada topped with choice of Roja, Verde or Mole sauce.",
+  "Price (USD)" : "20.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#3 Chile Relleno y Enchilada de Pollo",
+  "Dish Description" : "Chile Relleno stuffed with cheese and topped with Ranchera sauce and a chicken enchilada topped with choice of Roja, Verde or Mole sauce.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#4 Tamal de Puerco y Enchilada de Queso",
+  "Dish Description" : "Homemade pork tamal topped with Ranchera sauce and cheese combined with a cheese enchilada topped with your choice of Roja, Verde or Mole sauce.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#5 Enchilada de Pollo y Taco de Pollo",
+  "Dish Description" : "Chicken enchilada topped with your choice of mild Red, spicy Verde, or rich Mole sauce and a crispy chicken taco with lettuce, tomatoes, and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#6 Chile Colorado Burrito y Chile Relleno",
+  "Dish Description" : "Chile Colorado Burrito with pico de gallo and a Chile Relleno stuffed with cheese, topped with ranchera sauce and cheese.",
+  "Price (USD)" : "20.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#7 Taco de Pollo y Tamal de Puerco",
+  "Dish Description" : "Crispy Chicken Taco topped with lettuce, cheese and tomatoes with a pork tamal topped with ranchera sauce and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#8 Burrito de Pollo y Taco de Carne Asada",
+  "Dish Description" : "Grilled marinated chicken burrito wrapped with lettuce and pico de gallo in a flour tortilla and tender strips of grilled sirloin, onions, tomatoes, and cilantro on a soft corn tortilla.",
+  "Price (USD)" : "20.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#9 Taco de Carnitas y Tamal de Puerco",
+  "Dish Description" : "Seasoned pork taco on soft corn tortilla topped with onions and cilantro combined with a savory homemade pork tamal topped with Ranchera sauce and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#10 Chile Relleno y Taco de Res",
+  "Dish Description" : "Chile Relleno stuffed with cheese topped with Ranchera sauce and crispy shredded beef taco topped with lettuce, tomatoes and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "#11 Tu Combinacion",
+  "Dish Description" : "Choose any two items from the dinner menu* to create your own combination plate.",
+  "Price (USD)" : "22.99",
+  "Category" : "Combinations",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Cheese Enchiladas",
+  "Dish Description" : "Two enchiladas stuffed with cheese and topped with choice of Mild Roja or Spicy Verde sauce.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Fajitas de Vegetales",
+  "Dish Description" : "A generous portion of sautéed onions, zucchini, mushrooms, bell peppers and spinach. Served with sour cream, guacamole and tortillas.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostada de Vegetales",
+  "Dish Description" : "Sautéed onions, zucchini, mushrooms, bell peppers and spinach on top of a crispy corn tortilla covered with guacamole and topped with cheese.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Dos Chiles Rellenos",
+  "Dish Description" : "Fried Chilaca peppers stuffed with cheese and topped with Ranchera sauce and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostada de Aguacate",
+  "Dish Description" : "Crispy corn tortilla topped with guacamole, lettuce, tomatoes and cheese.",
+  "Price (USD)" : "18.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tamales de Vegetales",
+  "Dish Description" : "Two homemade tamales stuffed with corn, squash, zucchini, and green beans, topped with creamy Chipotle sauce and cheese.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Parrillada de Chayote",
+  "Dish Description" : "Grilled Chayote squash with onions, zucchini, mushrooms, bell peppers, and spinach. Served with guacamole, sour cream and tortillas.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadilla - Cheese Only",
+  "Dish Description" : "Just cheese folded in a flour tortilla with your choice of fresh tomatoes, onions, or pico de gallo.",
+  "Price (USD)" : "15.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadilla - with Chicken, Carnitas, Steak, Al Pastor, or Veggies",
+  "Dish Description" : "Just cheese folded in a flour tortilla with your choice of fresh tomatoes, onions, or pico de gallo.",
+  "Price (USD)" : "19.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Quesadilla - with Shrimp",
+  "Dish Description" : "Just cheese folded in a flour tortilla with your choice of fresh tomatoes, onions, or pico de gallo.",
+  "Price (USD)" : "21.99",
+  "Category" : "Lighter Dinner Options",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Fajitas de Camaron",
+  "Dish Description" : "Jumbo shrimp grilled with onions, red and green bell peppers, served with sour cream and guacamole and tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Camarones a la Diabla",
+  "Dish Description" : "Jumbo shrimp sautéed with onions and bell peppers in a very spicy chile de árbol sauce with choice of tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Camarones Rancheros",
+  "Dish Description" : "Jumbo shrimp sautéed with onions and bell peppers simmered in a mild ranchero sauce with choice of tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Camarones al Mojo de Ajo",
+  "Dish Description" : "Jumbo shrimp sautéed in olive oil and lots and lots of garlic with choice of tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Dos Tacos de Pescado",
+  "Dish Description" : "Grilled Mahi Mahi on corn tortillas topped with cabbage and Chipotle Aioli garnished with mango pico de gallo.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Dos Tacos de Camaron",
+  "Dish Description" : "Grilled jumbo shrimp topped with a creamy chipotle sauce, lettuce, tomatoes, and cheese on soft corn tortillas.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tostadas de Ceviche",
+  "Dish Description" : "Two crispy flat corn tortillas topped with a layer of guacamole and Tilapia Ceviche.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Enchiladas de Cangrejo O camaron",
+  "Dish Description" : "Enchiladas stuffed with choice of grilled crab and onions or shrimp topped with Poblana sauce and cheese.",
+  "Price (USD)" : "20.99",
+  "Category" : "Seafood",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Cheese Quesadilla",
+  "Dish Description" : "Flour tortilla with Jack cheese.",
+  "Price (USD)" : "8.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Crispy Taco",
+  "Dish Description" : "Beef or Chicken Crispy Taco topped with lettuce, cheese and tomato.",
+  "Price (USD)" : "8.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Bean and Cheese Burrito",
+  "Dish Description" : "Refried beans and cheese in a flour tortilla.",
+  "Price (USD)" : "8.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Chicken OR STEAK Quesadilla",
+  "Dish Description" : "Grilled Chicken breast or sirloin steak folded in a flour tortilla with Jack cheese.",
+  "Price (USD)" : "10.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Chicken Enchilada",
+  "Dish Description" : "Chicken enchilada topped with mild red sauce and cheese.",
+  "Price (USD)" : "9.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Flautas",
+  "Dish Description" : "Rolled taquitos stuffed with your choice of shredded chicken, beef or potatoes & cheese.",
+  "Price (USD)" : "7.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "KID'S GRILLED CHICKEN or carnitas",
+  "Dish Description" : "Seasoned Grilled Chicken or Carnitas.",
+  "Price (USD)" : "10.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's soft taco",
+  "Dish Description" : "Choose Chicken, Steak, or Carnitas on soft corn tortilla.",
+  "Price (USD)" : "10.99",
+  "Category" : "Kid's Menu",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pozole",
+  "Dish Description" : "Hearty pork and hominy soup served with traditional garnishes of cabbage, radishes and lemon.",
+  "Price (USD)" : "14.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pozole",
+  "Dish Description" : "Hearty pork and hominy soup served with traditional garnishes of cabbage, radishes and lemon.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Menudo",
+  "Dish Description" : "Tasty beef tripe and hominy soup with all the traditional spices and garnishes.",
+  "Price (USD)" : "14.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Menudo",
+  "Dish Description" : "Tasty beef tripe and hominy soup with all the traditional spices and garnishes.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chilaquiles",
+  "Dish Description" : "Crispy corn tortilla pieces tossed with scrambled eggs, smothered in a mild red sauce, topped with cheese and sour cream. Served with beans and potatoes.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Huevos Rancheros",
+  "Dish Description" : "A corn tortilla and a slice of ham under two eggs topped with salsa Ranchera and cheese. Served with refried beans and potatoes.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chorizo",
+  "Dish Description" : "Tasty pork chorizo scrambled with eggs and your choice of onions, tomatoes or jalapeños.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Machaca",
+  "Dish Description" : "Shredded beef scrambled with eggs and your choice of onions, tomatoes and fresh jalapeños.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carne Asada con Huevos",
+  "Dish Description" : "Two eggs, any style, served with grilled top sirloin strips with onion, cilantro and tomatoes. Served with refried beans and tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carnitas con Huevos",
+  "Dish Description" : "Two eggs, any style, served with seasoned pork, refried beans and tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tamal con Huevos",
+  "Dish Description" : "Two eggs, any style, with a pork or vegetarian tamal or topped with salsa Roja and cheese. Served with beans.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Sausage con Huevos",
+  "Dish Description" : "Two eggs, any style, served with our spicy sausage. served with refried beans, potatoes and tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Chile Verde con Huevos",
+  "Dish Description" : "Two eggs, any style, served with pork simmered in a spicy green sauce. Served with beans and tortillas.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pancakes con Huevos",
+  "Dish Description" : "Two eggs, any style and three pancakes.",
+  "Price (USD)" : "12.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Huevos Pancho Villa",
+  "Dish Description" : "Peppers, mushrooms, onions, spicy sausage and fresh jalapeños scrambled together with eggs.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Vegetarian Omelet",
+  "Dish Description" : "A combination of spinach, zucchini, mushrooms, onions, squash, tomatoes and cheese folded inside this omelet.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tres Hermanas Omelet",
+  "Dish Description" : "Spicy sausage, sautéed onions, tomatoes and fresh jalapeños, inside this omelet topped with salsa Ranchera.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Azteca Omelet",
+  "Dish Description" : "Nopalitos, tomatoes, onions and jalapeños folded inside this omelet.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Carnitas Omelet",
+  "Dish Description" : "Shredded pork, onions, tomatoes and fresh jalapeños.",
+  "Price (USD)" : "16.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Chorizo",
+  "Dish Description" : "Scrambled Chorizo and Eggs, served with rice and beans",
+  "Price (USD)" : "12.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Kid's Pancakes and Egg",
+  "Dish Description" : "Two pancakes served with any style egg.",
+  "Price (USD)" : "10.99",
+  "Category" : "Brunch",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Flan",
+  "Dish Description" : "Custard topped with lechera and whipped cream",
+  "Price (USD)" : "7.00",
+  "Category" : "Dessert",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Deep Fried Ice Cream",
+  "Dish Description" : "Vanilla ice cream deep fried and topped with strawberries and whipped cream.",
+  "Price (USD)" : "9.00",
+  "Category" : "Dessert",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tres Leches Cake",
+  "Dish Description" : "Homemade coconut tres leches cake",
+  "Price (USD)" : "7.00",
+  "Category" : "Dessert",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Churros",
+  "Dish Description" : "Churros filled with caramel and served with vanilla ice cream",
+  "Price (USD)" : "8.00",
+  "Category" : "Dessert",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tres Hermanas Original Margarita",
+  "Dish Description" : "Our perfect combination of Silver Tequila, Triple Sec, hand squeezed lime juice, and Sweet & Sour. Served Blended or on the Rocks.",
+  "Price (USD)" : "11.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Tres Hermanas Original Margarita (Pitcher)",
+  "Dish Description" : "Our perfect combination of Silver Tequila, Triple Sec, hand squeezed lime juice, and Sweet & Sour. Served Blended or on the Rocks.",
+  "Price (USD)" : "50.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Top Shelf Margarita",
+  "Dish Description" : "Herradura Reposado Tequila, fresh lime juice, a splash of sweet & sour, and a float of Mandarin Cognac Liqueur.",
+  "Price (USD)" : "13.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Top Shelf Margarita (Pitcher)",
+  "Dish Description" : "Herradura Reposado Tequila, fresh lime juice, a splash of sweet & sour, and a float of Mandarin Cognac Liqueur.",
+  "Price (USD)" : "60.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Cadillac Margarita",
+  "Dish Description" : "Cazadores Añejo Tequila, Cointreau, fresh lime juice, and a float of Grand Marnier. Served on the Rocks.",
+  "Price (USD)" : "14.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Cadillac Margarita (Pitcher)",
+  "Dish Description" : "Cazadores Añejo Tequila, Cointreau, fresh lime juice, and a float of Grand Marnier. Served on the Rocks.",
+  "Price (USD)" : "65.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Patron Margarita",
+  "Dish Description" : "Made on the rocks with Patron Reposado Tequila, fresh lime and Combier.",
+  "Price (USD)" : "14.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Patron Margarita (Pitcher)",
+  "Dish Description" : "Made on the rocks with Patron Reposado Tequila, fresh lime and Combier.",
+  "Price (USD)" : "65.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Jamaicarita",
+  "Dish Description" : "Herradura Silver Tequila, Agavero Orange Liqueur, fresh lime juice and a splash of Hibiscus fresh juice. Served on the Rocks.",
+  "Price (USD)" : "12.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Jamaicarita (Pitcher)",
+  "Dish Description" : "Herradura Silver Tequila, Agavero Orange Liqueur, fresh lime juice and a splash of Hibiscus fresh juice. Served on the Rocks.",
+  "Price (USD)" : "55.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "EL TEQ Margarita",
+  "Dish Description" : "El Tequileno Blanco Tequila, fresh lime, organic agave nectar, and a splash of triple sec.",
+  "Price (USD)" : "13.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "EL TEQ Margarita (Pitcher)",
+  "Dish Description" : "El Tequileno Blanco Tequila, fresh lime, organic agave nectar, and a splash of triple sec.",
+  "Price (USD)" : "60.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "PALOMA",
+  "Dish Description" : "Tereamana Silver Tequila, fresh lime, Squirt. Refreshing and low calorie.",
+  "Price (USD)" : "12.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "PALOMA (Pitcher)",
+  "Dish Description" : "Tereamana Silver Tequila, fresh lime, Squirt. Refreshing and low calorie.",
+  "Price (USD)" : "55.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "REYNARITA",
+  "Dish Description" : "El Tequileno Platinum Tequila, fresh lime and lemon juice, Conciere, float of Jasmine liqueuer.",
+  "Price (USD)" : "13.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "REYNARITA (Pitcher)",
+  "Dish Description" : "El Tequileno Platinum Tequila, fresh lime and lemon juice, Conciere, float of Jasmine liqueuer.",
+  "Price (USD)" : "50.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Blackberry Margarita",
+  "Dish Description" : "Jimador Silver Tequila, Triple Sec, fresh lime juice with a float of Blackberry liqueur. Served on the Rocks.",
+  "Price (USD)" : "13.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Blackberry Margarita (Pitcher)",
+  "Dish Description" : "Jimador Silver Tequila, Triple Sec, fresh lime juice with a float of Blackberry liqueur. Served on the Rocks.",
+  "Price (USD)" : "60.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pomegranate Margarita",
+  "Dish Description" : "Campo Bravo Silver Tequila, fresh lime, triple sec and pomegranate juice.",
+  "Price (USD)" : "12.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Pomegranate Margarita (Pitcher)",
+  "Dish Description" : "Campo Bravo Silver Tequila, fresh lime, triple sec and pomegranate juice.",
+  "Price (USD)" : "55.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Cucumber Jalapeño Margarita",
+  "Dish Description" : "Cucumber Jalapeño infused tequila, fresh lime juice, Cointreau, jalapeño, spicy salt rim.",
+  "Price (USD)" : "12.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Cucumber Jalapeño Margarita (Pitcher)",
+  "Dish Description" : "Cucumber Jalapeño infused tequila, fresh lime juice, Cointreau, jalapeño, spicy salt rim.",
+  "Price (USD)" : "55.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Smokey Margarita",
+  "Dish Description" : "Dos Hombres Mezcal, fresh lime, Conciere, spicy salt rim.",
+  "Price (USD)" : "13.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+}, {
+  "Dish Name" : "Smokey Margarita (Pitcher)",
+  "Dish Description" : "Dos Hombres Mezcal, fresh lime, Conciere, spicy salt rim.",
+  "Price (USD)" : "60.00",
+  "Category" : "Margaritas",
+  "Phone Number" : "+15307568737",
+  "Restaurant Address" : "805 2nd St, Davis, CA 95616, US"
+} ]

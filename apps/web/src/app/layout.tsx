@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { LayoutShell } from "@/components/ui/LayoutShell";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "DDBA Local Delivery OS",
-  description: "Local delivery operations system for restaurants",
+  description: "Community-powered delivery for Davis",
 };
 
 export default function RootLayout({
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LayoutShell>{children}</LayoutShell>
+      </body>
     </html>
   );
 }

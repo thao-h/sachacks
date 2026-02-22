@@ -1,172 +1,240 @@
 "use client";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useState } from "react";
+
+import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import {
+  DeliveryOptions,
+  type DeliveryOptionType,
+} from "@/components/ui/DeliveryOptions";
 
 interface CartItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   quantity: number;
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  orderType: string;
-}
-
-const cartItems: CartItem[] = [
-  { id: 1, name: "Pad Thai", price: 14.99, quantity: 1 },
-  { id: 2, name: "Spring Rolls", price: 6.99, quantity: 2 },
-];
-
 export default function CheckoutPage() {
-  const [formData, setFormData] = useState<FormData>({
+  const router = useRouter();
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("ddba_cart");
+    if (raw) {
+      const data = JSON.parse(raw);
+      setCart(data.cart || []);
+      setTotal(data.total || 0);
+    }
+    setLoaded(true);
+  }, []);
+
+  const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
     address: "",
-    orderType: "delivery",
   });
-  const [message, setMessage] = useState("");
-  const stripe = useStripe();
-  const elements = useElements();
 
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const [deliveryOption, setDeliveryOption] =
+    useState<DeliveryOptionType>("route-match");
 
-  // handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const deliveryFee = useMemo(() => {
+    switch (deliveryOption) {
+      case "route-match":
+        return 1.5;
+      case "community-batch":
+        return 2.0;
+      case "direct-courier":
+        return 5.99;
+      case "pickup":
+        return 0;
+      default:
+        return 0;
+    }
+  }, [deliveryOption]);
 
-  // handle payment and order submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  const tax = total * 0.08;
+  const grandTotal = total + deliveryFee + tax;
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // validate required fields
-    if (!formData.name || !formData.email || !formData.phone || (formData.orderType === "delivery" && !formData.address)) {
-      setMessage("Please fill out all required fields.");
-      return;
-    }
-
-    if (!stripe || !elements) {
-      setMessage("Stripe not loaded yet. Please try again.");
-      return;
-    }
-
-    setMessage("Processing payment...");
-
-    // 1️⃣ In real setup: call backend to create PaymentIntent
-    // For demo, we'll skip backend and simulate success
-    // const res = await fetch("/api/create-payment-intent", { method: "POST", body: JSON.stringify({ amount: total * 100 }) });
-    // const { clientSecret } = await res.json();
-
-    const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
-      setMessage("Card information is missing.");
-      return;
-    }
-
-    // 2️⃣ Confirm card payment (demo: simulate success)
-    // const result = await stripe.confirmCardPayment(clientSecret, {
-    //   payment_method: { card: cardElement, billing_details: { name: formData.name, email: formData.email } }
-    // });
-
-    // if (result.error) {
-    //   setMessage(`Payment failed: ${result.error.message}`);
-    //   return;
-    // }
-
-    // 3️⃣ Save order to database (simulated)
-    console.log("Order Submitted:", { ...formData, items: cartItems, total });
-
-    setMessage(`Payment successful! Your order total is $${total.toFixed(2)}`);
+    const orderId = "ORD" + Date.now().toString().slice(-6);
+    sessionStorage.setItem(
+      "ddba_order",
+      JSON.stringify({
+        ...formData,
+        cart,
+        total,
+        orderId,
+        deliveryOption,
+        deliveryFee,
+        grandTotal,
+      })
+    );
+    router.push(`/track/${orderId}`);
   };
+
+  if (!loaded) return null;
+
+  if (cart.length === 0) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+        <p className="text-gray-600 mb-4">Your cart is empty</p>
+        <button
+          onClick={() => router.push("/customer")}
+          className="text-blue-600 hover:text-blue-700"
+        >
+          Browse Menu
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <main style={{ maxWidth: 800, margin: "0 auto", padding: "2rem" }}>
-      <h1>Checkout</h1>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <button
+        onClick={() => router.push("/customer")}
+        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Menu
+      </button>
 
-      <h2>Order Summary</h2>
-      <div style={{ marginBottom: "1.5rem" }}>
-        {cartItems.map((item) => (
-          <div key={item.id} style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{item.name} × {item.quantity}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Checkout Form */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="font-semibold text-gray-900 mb-6">
+            Delivery Information
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                required
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                required
+                value={formData.phone}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                placeholder="(555) 123-4567"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="address"
+                className="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Delivery Address
+              </label>
+              <textarea
+                id="address"
+                required={deliveryOption !== "pickup"}
+                disabled={deliveryOption === "pickup"}
+                value={formData.address}
+                onChange={(e) =>
+                  setFormData({ ...formData, address: e.target.value })
+                }
+                rows={3}
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                placeholder="123 Main St, Apt 4B"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                Delivery Method
+              </label>
+              <DeliveryOptions
+                selectedOption={deliveryOption}
+                onSelect={setDeliveryOption}
+                communityActive={true}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+            >
+              Place Order
+            </button>
+          </form>
+        </div>
+
+        {/* Order Summary */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 h-fit">
+          <h2 className="font-semibold text-gray-900 mb-6">Order Summary</h2>
+
+          <div className="space-y-4 mb-6">
+            {cart.map((item: CartItem) => (
+              <div key={item.id} className="flex justify-between text-sm">
+                <span className="text-gray-600">
+                  {item.quantity}x {item.name}
+                </span>
+                <span className="text-gray-900 font-medium">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
-        <hr />
-        <div style={{ display: "flex", justifyContent: "space-between", fontWeight: "bold", marginTop: "0.5rem" }}>
-          <span>Total</span>
-          <span>${total.toFixed(2)}</span>
+
+          <div className="border-t border-gray-200 pt-4 space-y-2 mb-4">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Subtotal</span>
+              <span className="text-gray-900">${total.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Delivery Fee</span>
+              <span className="text-gray-900">${deliveryFee.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Tax</span>
+              <span className="text-gray-900">${tax.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-200 pt-4">
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-semibold text-gray-900">Total</span>
+              <span className="text-xl font-bold text-blue-600">
+                ${grandTotal.toFixed(2)}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          style={{ width: "100%" }}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={{ width: "100%" }}
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          style={{ width: "100%" }}
-        />
-        {formData.orderType === "delivery" && (
-          <input
-            type="text"
-            name="address"
-            placeholder="Delivery Address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-            style={{ width: "100%" }}
-          />
-        )}
-        <select
-          name="orderType"
-          value={formData.orderType}
-          onChange={handleChange}
-        >
-          <option value="delivery">Delivery</option>
-          <option value="pickup">Pickup</option>
-        </select>
-
-        {/* Stripe Card Element */}
-        <div style={{ padding: "1rem", border: "1px solid #ccc", borderRadius: 4 }}>
-          <CardElement />
-        </div>
-
-        <button type="submit" disabled={!stripe} style={{ padding: "0.5rem 1rem" }}>
-          Pay ${total.toFixed(2)}
-        </button>
-      </form>
-
-      {message && <p style={{ marginTop: "1rem" }}>{message}</p>}
-    </main>
+    </div>
   );
 }
