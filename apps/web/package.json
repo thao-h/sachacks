@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "prisma generate --schema=../../packages/db/prisma/schema.prisma",
+    "prebuild": "pnpm --filter @ddba/db db:generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
