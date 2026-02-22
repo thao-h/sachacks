@@ -54,7 +54,7 @@ export const GET = handleRoute(async (request) => {
     },
   });
 
-  const data = communities.map((community) => {
+const data = communities.map((community: any) => {
     const memberRole = community.members[0]?.role ?? null;
     const joined = memberRole !== null;
 
@@ -104,7 +104,7 @@ export const POST = handleRoute(async (request) => {
 
   const inviteCode = input.visibility === "PRIVATE" ? generateInviteCode() : null;
 
-  const community = await prisma.$transaction(async (tx) => {
+const community = await prisma.$transaction(async (tx: any) => {
     const created = await tx.community.create({
       data: {
         name: input.name,
