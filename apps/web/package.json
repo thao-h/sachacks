@@ -17,9 +17,11 @@
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "@react-google-maps/api": "^2.20.6",
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.58.1",
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",

@@ -2,18 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import datetime
+import re
 
-# Targets: Woodstock's Pizza and Sophia's Thai Kitchen
+# New Targets: Tres Hermanas and Burgers and Brew
 RESTAURANTS = {
-    "Woodstock's Pizza": "https://woodstocksdavis.com/menu/",
-    "Sophia's Thai Kitchen": "https://sophiasthaikitchen.com/menu/"
+    "Preethi Indian Cuisine": "https://www.preethiindian.com/menu-1",
+    "Jusco": "https://juscodavis.com/order/"
 }
 
 def scrape_menus():
     results = []
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
+    headers = {'User-Agent': 'Mozilla/5.0'}
     
     for name, url in RESTAURANTS.items():
         print(f"Scraping {name}...")
@@ -22,38 +21,31 @@ def scrape_menus():
             soup = BeautifulSoup(response.text, 'html.parser')
             menu_items = []
 
-            # WOODSTOCK'S PIZZA Logic
-            if "woodstocks" in url:
-                # They often use <h4> for item names and a specific class for prices
-                for item in soup.find_all(['div', 'li'], class_=['menu-item', 'product']):
-                    title = item.find(['h3', 'h4'])
-                    price = item.find(class_=['price', 'amount'])
-                    if title:
+            # General strategy: Look for blocks of text that contain a "$"
+            # This works for both sites because they list prices clearly.
+            for element in soup.find_all(['li', 'p', 'div', 'h4']):
+                text = element.get_text(separator=" ", strip=True)
+                
+                # Check if the line has a price (e.g., $15.95)
+                price_match = re.search(r'\$\d+\.?\d*', text)
+                
+                if price_match:
+                    price = price_match.group()
+                    # The name is usually the text before the price
+                    item_name = text.split(price)[0].strip("- ").strip()
+                    
+                    if item_name and len(item_name) < 60: # Avoid grabbing huge paragraphs
                         menu_items.append({
-                            "name": title.get_text(strip=True),
-                            "price": price.get_text(strip=True) if price else "Varies"
+                            "name": item_name,
+                            "price": price
                         })
 
-            # SOPHIA'S THAI KITCHEN Logic
-            elif "sophias" in url:
-                # Sophias uses clear <strong> tags for dish names
-                for row in soup.find_all(['p', 'div']):
-                    strong_tag = row.find('strong')
-                    if strong_tag:
-                        item_text = row.get_text(separator=" ", strip=True)
-                        # Look for a price pattern (e.g. 14.50)
-                        if any(char.isdigit() for char in item_text):
-                            menu_items.append({
-                                "name": strong_tag.get_text(strip=True),
-                                "price": item_text.split()[-1] # Usually the last word is the price
-                            })
-
-            # Clean up the list
+            # Remove duplicates
             unique_menu = [i for n, i in enumerate(menu_items) if i not in menu_items[n + 1:]]
 
             results.append({
                 "restaurant": name,
-                "menu": unique_menu if unique_menu else "No items found - Site layout may have changed."
+                "menu": unique_menu[:25] # Top 25 items
             })
             
         except Exception as e:
@@ -68,8 +60,7 @@ def save_to_json(data):
     }
     with open('davis_menus.json', 'w') as f:
         json.dump(output, f, indent=4)
-    print("\nFile 'davis_menus.json' updated!")
+    print("\nSuccess! 'davis_menus.json' updated with prices.")
 
 if __name__ == "__main__":
-    data = scrape_menus()
-    save_to_json(data)
+    save_to_json(scrape_menus())

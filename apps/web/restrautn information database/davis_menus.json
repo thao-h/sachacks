@@ -1,15 +1,217 @@
 {
     "metadata": {
-        "last_updated": "2026-02-21 15:17:56.859234"
+        "last_updated": "2026-02-21 16:22:43.119435"
     },
     "restaurants": [
         {
-            "restaurant": "Woodstock's Pizza",
-            "menu": "No items found - Site layout may have changed."
+            "restaurant": "Preethi Indian Cuisine",
+            "menu": [
+                {
+                    "name": "Papad [2 Pieces]",
+                    "price": "$2.99"
+                },
+                {
+                    "name": "Pakora",
+                    "price": "$5.99"
+                },
+                {
+                    "name": "Chilli Pakora",
+                    "price": "$7.99"
+                },
+                {
+                    "name": "Samosa [2 pieces]",
+                    "price": "$4.99"
+                },
+                {
+                    "name": "Chicken 65",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Chicken Pakora",
+                    "price": "$10.99"
+                },
+                {
+                    "name": "Rasam",
+                    "price": "$4.99"
+                },
+                {
+                    "name": "Sambar",
+                    "price": "$4.99"
+                },
+                {
+                    "name": "Idli",
+                    "price": "$5.99"
+                },
+                {
+                    "name": "Plain Dosa",
+                    "price": "$10.99"
+                },
+                {
+                    "name": "Masala Dosa",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Rava Masala Dosa",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "South Indian Veg Special Combo",
+                    "price": "$15.99"
+                },
+                {
+                    "name": "Dal Curry",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Aloo Gobi",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Navarathan Koorma",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Mutter Paneer",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Baingan Bartha",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Aloo Saag",
+                    "price": "14.99"
+                },
+                {
+                    "name": "Mushroom Coconut Curry",
+                    "price": "$14.99"
+                },
+                {
+                    "name": "Paneer Chili",
+                    "price": "$16.99"
+                },
+                {
+                    "name": "Dal Curry Thali",
+                    "price": "$18.99"
+                },
+                {
+                    "name": "Aloo Gobi Thali",
+                    "price": "$18.99"
+                },
+                {
+                    "name": "Mutter Paneer Thali",
+                    "price": "$18.99"
+                },
+                {
+                    "name": "Shrimp Kadai",
+                    "price": "$19.99"
+                }
+            ]
         },
         {
-            "restaurant": "Sophia's Thai Kitchen",
-            "menu": "No items found - Site layout may have changed."
+            "restaurant": "Jusco",
+            "menu": [
+                {
+                    "name": "Gyoza",
+                    "price": "$5.99"
+                },
+                {
+                    "name": "Fried Calamari",
+                    "price": "$10.99"
+                },
+                {
+                    "name": "Shrimp Tempura",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Vegetable Egg Roll",
+                    "price": "$5.99"
+                },
+                {
+                    "name": "Miso Soup",
+                    "price": "$3.99"
+                },
+                {
+                    "name": "Impossible Patty",
+                    "price": "$3.95"
+                },
+                {
+                    "name": "Chicken Katsu",
+                    "price": "$12.50"
+                },
+                {
+                    "name": "Salmon Hand Roll",
+                    "price": "$8.99"
+                },
+                {
+                    "name": "Shrimp Tempura Hand Roll",
+                    "price": "$8.50"
+                },
+                {
+                    "name": "Spicy Scallop Hand Roll",
+                    "price": "$8.99"
+                },
+                {
+                    "name": "Sushi Combo",
+                    "price": "$25.99"
+                },
+                {
+                    "name": "California (Classic Roll)",
+                    "price": "$10.50"
+                },
+                {
+                    "name": "Oregon (Classic Roll)",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Hawaii (Classic Roll)",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Crunchy (Vegetarian Roll)",
+                    "price": "$11.99"
+                },
+                {
+                    "name": "Avocado(Vegetarian Roll)",
+                    "price": "$9.99"
+                },
+                {
+                    "name": "Kappa (Vegetarian Roll)",
+                    "price": "$8.99"
+                },
+                {
+                    "name": "Sake Sashimi",
+                    "price": "$13.50"
+                },
+                {
+                    "name": "Saba Sashimi",
+                    "price": "$12.50"
+                },
+                {
+                    "name": "Unagi (Nigiri (Non-Raw - 2))",
+                    "price": "$4.50"
+                },
+                {
+                    "name": "Smoke Salmon",
+                    "price": "$4.50"
+                },
+                {
+                    "name": "Hokki Gai",
+                    "price": "$4.50"
+                },
+                {
+                    "name": "Hamachi",
+                    "price": "$4.99"
+                },
+                {
+                    "name": "Las Vegas",
+                    "price": "$10.99"
+                },
+                {
+                    "name": "Sunset",
+                    "price": "$10.99"
+                }
+            ]
         }
     ]
 }

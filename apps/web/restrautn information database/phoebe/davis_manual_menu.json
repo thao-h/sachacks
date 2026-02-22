@@ -1,0 +1,16 @@
+{
+    "metadata": {
+        "last_updated": "2026-02-21 20:24:50.519986",
+        "source": "SacHacks 2026 Manual Scraper"
+    },
+    "data": [
+        {
+            "restaurant": "Burgers and Brew",
+            "menu": []
+        },
+        {
+            "restaurant": "The Mustard Seed",
+            "menu": []
+        }
+    ]
+}
