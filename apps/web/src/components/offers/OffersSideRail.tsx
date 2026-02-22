@@ -32,19 +32,19 @@ export default function OffersSideRail() {
   const visibleOffers = useMemo(() => offers.slice(0, 8), [offers]);
 
   return (
-    <aside className="bg-white border border-gray-200 rounded-xl p-4 sticky top-24">
+    <aside className="bg-white border border-stone-200 rounded-xl p-4 sticky top-24">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-          <Tag className="w-4 h-4 text-blue-600" />
+        <h3 className="text-sm font-semibold text-stone-900 flex items-center gap-2">
+          <Tag className="w-4 h-4 text-primary-600" />
           Live Offers
         </h3>
-        <span className="text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
+        <span className="text-xs text-primary-700 bg-primary-50 px-2 py-0.5 rounded-full">
           {visibleOffers.length}
         </span>
       </div>
 
       {visibleOffers.length === 0 ? (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-stone-500">
           No active offers yet. Restaurant boosts and surplus bundles will appear here.
         </p>
       ) : (
@@ -54,11 +54,11 @@ export default function OffersSideRail() {
             return (
               <div
                 key={offer.id}
-                className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2"
+                className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2"
               >
-                <p className="text-xs text-gray-500 mb-1">{offer.restaurantName}</p>
-                <p className="text-sm font-semibold text-gray-900">{offer.title}</p>
-                <p className="text-xs text-gray-600 mt-1">{offer.details}</p>
+                <p className="text-xs text-stone-500 mb-1">{offer.restaurantName}</p>
+                <p className="text-sm font-semibold text-stone-900">{offer.title}</p>
+                <p className="text-xs text-stone-600 mt-1">{offer.details}</p>
                 {timeLeft !== null && (
                   <p className="text-xs text-amber-700 mt-1.5 flex items-center gap-1">
                     <Clock className="w-3 h-3" />

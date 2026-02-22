@@ -81,10 +81,10 @@ export default function CheckoutPage() {
   if (cart.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-        <p className="text-gray-600 mb-4">Your cart is empty</p>
+        <p className="text-stone-600 mb-4">Your cart is empty</p>
         <button
           onClick={() => router.push("/customer")}
-          className="text-blue-600 hover:text-blue-700"
+          className="text-primary-600 hover:text-primary-700"
         >
           Browse Menu
         </button>
@@ -96,18 +96,18 @@ export default function CheckoutPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <button
         onClick={() => router.push("/customer")}
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+        className="flex items-center gap-2 text-stone-600 hover:text-stone-900 mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Menu
       </button>
 
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold text-stone-900 mb-8">Checkout</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Checkout Form */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="font-semibold text-gray-900 mb-6">
+        <div className="bg-white rounded-xl border border-stone-200 p-6">
+          <h2 className="font-semibold text-stone-900 mb-6">
             Delivery Information
           </h2>
 
@@ -115,7 +115,7 @@ export default function CheckoutPage() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1.5"
+                className="block text-sm font-medium text-stone-700 mb-1.5"
               >
                 Full Name
               </label>
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
                 placeholder="John Doe"
               />
             </div>
@@ -135,7 +135,7 @@ export default function CheckoutPage() {
             <div>
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium text-gray-700 mb-1.5"
+                className="block text-sm font-medium text-stone-700 mb-1.5"
               >
                 Phone Number
               </label>
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -155,7 +155,7 @@ export default function CheckoutPage() {
             <div>
               <label
                 htmlFor="address"
-                className="block text-sm font-medium text-gray-700 mb-1.5"
+                className="block text-sm font-medium text-stone-700 mb-1.5"
               >
                 Delivery Address
               </label>
@@ -168,13 +168,13 @@ export default function CheckoutPage() {
                   setFormData({ ...formData, address: e.target.value })
                 }
                 rows={3}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="123 Main St, Apt 4B"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-stone-700 mb-3">
                 Delivery Method
               </label>
               <DeliveryOptions
@@ -186,7 +186,7 @@ export default function CheckoutPage() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+              className="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
             >
               Place Order
             </button>
@@ -194,41 +194,41 @@ export default function CheckoutPage() {
         </div>
 
         {/* Order Summary */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 h-fit">
-          <h2 className="font-semibold text-gray-900 mb-6">Order Summary</h2>
+        <div className="bg-white rounded-xl border border-stone-200 p-6 h-fit">
+          <h2 className="font-semibold text-stone-900 mb-6">Order Summary</h2>
 
           <div className="space-y-4 mb-6">
             {cart.map((item: CartItem) => (
               <div key={item.id} className="flex justify-between text-sm">
-                <span className="text-gray-600">
+                <span className="text-stone-600">
                   {item.quantity}x {item.name}
                 </span>
-                <span className="text-gray-900 font-medium">
+                <span className="text-stone-900 font-medium">
                   ${(item.price * item.quantity).toFixed(2)}
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="border-t border-gray-200 pt-4 space-y-2 mb-4">
+          <div className="border-t border-stone-200 pt-4 space-y-2 mb-4">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-900">${total.toFixed(2)}</span>
+              <span className="text-stone-600">Subtotal</span>
+              <span className="text-stone-900">${total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Delivery Fee</span>
-              <span className="text-gray-900">${deliveryFee.toFixed(2)}</span>
+              <span className="text-stone-600">Delivery Fee</span>
+              <span className="text-stone-900">${deliveryFee.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Tax</span>
-              <span className="text-gray-900">${tax.toFixed(2)}</span>
+              <span className="text-stone-600">Tax</span>
+              <span className="text-stone-900">${tax.toFixed(2)}</span>
             </div>
           </div>
 
-          <div className="border-t border-gray-200 pt-4">
+          <div className="border-t border-stone-200 pt-4">
             <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold text-gray-900">Total</span>
-              <span className="text-xl font-bold text-blue-600">
+              <span className="text-lg font-semibold text-stone-900">Total</span>
+              <span className="text-xl font-bold text-primary-600">
                 ${grandTotal.toFixed(2)}
               </span>
             </div>

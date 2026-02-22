@@ -88,32 +88,32 @@ export function DeliveryOptions({
               onClick={() => onSelect(option.id)}
               className={`relative flex flex-col p-4 rounded-xl border-2 text-left transition-all ${
                 isSelected
-                  ? "border-blue-600 bg-blue-50/50"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-              } ${isDisabled ? "opacity-60 cursor-not-allowed bg-gray-50" : "cursor-pointer"}`}
+                  ? "border-primary-600 bg-primary-50/50"
+                  : "border-stone-200 bg-white hover:border-stone-300"
+              } ${isDisabled ? "opacity-60 cursor-not-allowed bg-stone-50" : "cursor-pointer"}`}
             >
               <div className="flex justify-between items-start w-full mb-2">
                 <div
-                  className={`p-2 rounded-lg ${isSelected ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600"}`}
+                  className={`p-2 rounded-lg ${isSelected ? "bg-primary-100 text-primary-600" : "bg-stone-100 text-stone-600"}`}
                 >
                   <Icon className="w-5 h-5" />
                 </div>
-                <div className="font-bold text-gray-900">
+                <div className="font-bold text-stone-900">
                   {option.price === 0 ? "Free" : `$${option.price.toFixed(2)}`}
                 </div>
               </div>
 
-              <div className="font-semibold text-gray-900 mb-0.5">
+              <div className="font-semibold text-stone-900 mb-0.5">
                 {option.title}
               </div>
-              <div className="text-xs text-gray-500 line-clamp-2">
+              <div className="text-xs text-stone-500 line-clamp-2">
                 {isDisabled && option.unavailableReason
                   ? option.unavailableReason
                   : option.subtitle}
               </div>
 
               {isSelected && (
-                <div className="absolute top-3 right-3 w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center">
+                <div className="absolute top-3 right-3 w-4 h-4 rounded-full bg-primary-600 flex items-center justify-center">
                   <div className="w-1.5 h-1.5 rounded-full bg-white" />
                 </div>
               )}
@@ -123,7 +123,7 @@ export function DeliveryOptions({
       </div>
 
       {selected && (
-        <div className="flex items-center gap-2 text-sm text-blue-700 bg-blue-50 px-3 py-2 rounded-lg border border-blue-100">
+        <div className="flex items-center gap-2 text-sm text-primary-700 bg-primary-50 px-3 py-2 rounded-lg border border-primary-100">
           <Info className="w-4 h-4" />
           <span className="font-medium">
             Estimated arrival: {selected.eta}

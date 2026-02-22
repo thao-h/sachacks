@@ -2,6 +2,30 @@
 
 import { useState } from "react";
 import { User, Circle } from "lucide-react";
+import { motion } from "motion/react";
+
+const columnColors: Record<string, { border: string; bg: string; badge: string }> = {
+  "Ready for Pickup": {
+    border: "border-l-amber-400",
+    bg: "bg-amber-50",
+    badge: "bg-amber-100 text-amber-700",
+  },
+  Assigned: {
+    border: "border-l-sky-400",
+    bg: "bg-sky-50",
+    badge: "bg-sky-100 text-sky-700",
+  },
+  "Picked Up": {
+    border: "border-l-purple-400",
+    bg: "bg-purple-50",
+    badge: "bg-purple-100 text-purple-700",
+  },
+  "Dropped Off": {
+    border: "border-l-green-400",
+    bg: "bg-green-50",
+    badge: "bg-green-100 text-green-700",
+  },
+};
 
 interface DeliveryOrder {
   id: string;
@@ -174,10 +198,10 @@ export default function DispatchBoardPage() {
 
   return (
     <div className="h-[calc(100vh-4rem)] flex">
-      <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="font-bold text-gray-900 mb-1">Drivers</h2>
-          <p className="text-sm text-gray-600">
+      <div className="w-80 bg-white border-r border-stone-200 flex flex-col">
+        <div className="p-6 border-b border-stone-200">
+          <h2 className="font-bold text-stone-900 mb-1">Drivers</h2>
+          <p className="text-sm text-stone-600">
             {drivers.filter((d) => d.status === "Available").length} available
           </p>
         </div>
@@ -189,9 +213,9 @@ export default function DispatchBoardPage() {
               className={`bg-white border-2 rounded-xl p-4 transition-all ${
                 assigningOrder
                   ? driver.status === "Available"
-                    ? "border-blue-400 cursor-pointer hover:bg-blue-50"
-                    : "border-gray-200 opacity-50"
-                  : "border-gray-200"
+                    ? "border-primary-400 cursor-pointer hover:bg-primary-50"
+                    : "border-stone-200 opacity-50"
+                  : "border-stone-200"
               }`}
               onClick={() => {
                 if (assigningOrder && driver.status === "Available") {
@@ -200,11 +224,11 @@ export default function DispatchBoardPage() {
               }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                  <User className="w-5 h-5 text-gray-600" />
+                <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-stone-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 truncate">{driver.name}</h3>
+                  <h3 className="font-semibold text-stone-900 truncate">{driver.name}</h3>
                   <div className="flex items-center gap-1.5">
                     <Circle
                       className={`w-2 h-2 ${
@@ -212,22 +236,22 @@ export default function DispatchBoardPage() {
                           ? "fill-green-500 text-green-500"
                           : driver.status === "On Delivery"
                             ? "fill-orange-500 text-orange-500"
-                            : "fill-gray-400 text-gray-400"
+                            : "fill-stone-400 text-stone-400"
                       }`}
                     />
-                    <span className="text-xs text-gray-600">{driver.status}</span>
+                    <span className="text-xs text-stone-600">{driver.status}</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex gap-4 text-sm">
                 <div>
-                  <p className="text-gray-600">Active</p>
-                  <p className="font-semibold text-gray-900">{driver.activeOrders}</p>
+                  <p className="text-stone-600">Active</p>
+                  <p className="font-semibold text-stone-900">{driver.activeOrders}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600">Today</p>
-                  <p className="font-semibold text-gray-900">{driver.completedToday}</p>
+                  <p className="text-stone-600">Today</p>
+                  <p className="font-semibold text-stone-900">{driver.completedToday}</p>
                 </div>
               </div>
             </div>
@@ -235,64 +259,69 @@ export default function DispatchBoardPage() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-x-auto bg-gray-50">
+      <div className="flex-1 overflow-x-auto bg-stone-50">
         <div className="min-w-max h-full p-6 flex gap-4">
           {columns.map((status) => {
             const columnOrders = getOrdersByStatus(status);
             return (
               <div key={status} className="w-80 flex flex-col">
-                <div className="bg-white rounded-t-xl border border-gray-200 border-b-0 p-4">
+                <div className={`bg-white rounded-t-xl border border-stone-200 border-b-0 p-4 border-l-4 ${columnColors[status]?.border || ""}`}>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-gray-900">{status}</h3>
-                    <span className="bg-gray-100 text-gray-700 text-sm font-medium px-2.5 py-1 rounded-full">
+                    <h3 className="font-semibold text-stone-900">{status}</h3>
+                    <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${columnColors[status]?.badge || "bg-stone-100 text-stone-700"}`}>
                       {columnOrders.length}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex-1 bg-gray-50 border-x border-gray-200 overflow-y-auto p-4 space-y-3">
+                <div className="flex-1 bg-stone-50 border-x border-stone-200 overflow-y-auto p-4 space-y-3">
                   {columnOrders.map((order) => (
-                    <div
+                    <motion.div
                       key={order.id}
-                      className="bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg transition-all"
+                      layout
+                      layoutId={order.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      className={`bg-white rounded-xl border border-stone-200 border-l-4 ${columnColors[status]?.border || ""} p-4 hover:shadow-lg transition-shadow`}
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h4 className="font-bold text-gray-900">{order.id}</h4>
-                          <p className="text-sm text-gray-600">{order.customerName}</p>
+                          <h4 className="font-bold text-stone-900">{order.id}</h4>
+                          <p className="text-sm text-stone-600">{order.customerName}</p>
                         </div>
                         {order.estimatedTime && (
-                          <span className="bg-blue-50 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
+                          <span className="bg-primary-50 text-primary-700 text-xs font-medium px-2 py-1 rounded-full">
                             {order.estimatedTime}
                           </span>
                         )}
                       </div>
 
                       <div className="space-y-2 mb-3 text-sm">
-                        <p className="text-gray-600">{order.customerAddress}</p>
-                        <p className="text-gray-500">{order.customerPhone}</p>
+                        <p className="text-stone-600">{order.customerAddress}</p>
+                        <p className="text-stone-500">{order.customerPhone}</p>
                       </div>
 
                       <div className="space-y-1 mb-3">
                         {order.items.map((item, idx) => (
-                          <p key={idx} className="text-sm text-gray-600">
+                          <p key={idx} className="text-sm text-stone-600">
                             {item.quantity}x {item.name}
                           </p>
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                        <span className="font-semibold text-gray-900">
+                      <div className="flex items-center justify-between pt-3 border-t border-stone-100">
+                        <span className="font-semibold text-stone-900">
                           ${order.total.toFixed(2)}
                         </span>
                         {order.driverId ? (
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-stone-600">
                             {"\ud83d\ude97"} {getDriverName(order.driverId)}
                           </span>
                         ) : status === "Ready for Pickup" ? (
                           <button
                             onClick={() => setAssigningOrder(order)}
-                            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
                           >
                             Assign Driver
                           </button>
@@ -300,11 +329,11 @@ export default function DispatchBoardPage() {
                       </div>
 
                       {status !== "Dropped Off" && (
-                        <div className="mt-3 pt-3 border-t border-gray-100">
+                        <div className="mt-3 pt-3 border-t border-stone-100">
                           {status === "Ready for Pickup" && order.driverId && (
                             <button
                               onClick={() => moveOrderToStatus(order.id, "Assigned")}
-                              className="w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors"
+                              className="w-full text-xs bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg transition-colors"
                             >
                               Confirm Assignment
                             </button>
@@ -327,15 +356,15 @@ export default function DispatchBoardPage() {
                           )}
                         </div>
                       )}
-                    </div>
+                    </motion.div>
                   ))}
 
                   {columnOrders.length === 0 && (
-                    <div className="text-center py-8 text-gray-400 text-sm">No orders</div>
+                    <div className="text-center py-8 text-stone-400 text-sm">No orders</div>
                   )}
                 </div>
 
-                <div className="bg-white rounded-b-xl border border-gray-200 border-t-0 h-2" />
+                <div className="bg-white rounded-b-xl border border-stone-200 border-t-0 h-2" />
               </div>
             );
           })}
@@ -346,15 +375,15 @@ export default function DispatchBoardPage() {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0" onClick={() => setAssigningOrder(null)} />
           <div className="relative bg-white rounded-2xl p-6 max-w-md w-full">
-            <h3 className="font-bold text-gray-900 mb-4">
+            <h3 className="font-bold text-stone-900 mb-4">
               Assign Driver to {assigningOrder.id}
             </h3>
-            <p className="text-sm text-gray-600 mb-6">
+            <p className="text-sm text-stone-600 mb-6">
               Select an available driver from the sidebar
             </p>
             <button
               onClick={() => setAssigningOrder(null)}
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+              className="w-full bg-stone-100 hover:bg-stone-200 text-stone-700 py-2 px-4 rounded-lg transition-colors"
             >
               Cancel
             </button>

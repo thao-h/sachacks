@@ -286,13 +286,13 @@ export default function GrowthOpsPanel({
   };
 
   return (
-    <section className="mb-8 bg-white rounded-xl border border-gray-200 p-4 sm:p-5 space-y-4">
+    <section className="mb-8 bg-white rounded-xl border border-stone-200 p-4 sm:p-5 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-stone-900">
             Growth + Community Ops
           </h2>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-stone-600">
             Manage offers, surplus, and social-good logistics.
           </p>
         </div>
@@ -301,8 +301,8 @@ export default function GrowthOpsPanel({
             onClick={() => setActiveTab("offers")}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
               activeTab === "offers"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-700"
+                ? "bg-stone-900 text-white"
+                : "bg-stone-100 text-stone-700"
             }`}
           >
             Offers Command Center
@@ -311,8 +311,8 @@ export default function GrowthOpsPanel({
             onClick={() => setActiveTab("impact")}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
               activeTab === "impact"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-700"
+                ? "bg-stone-900 text-white"
+                : "bg-stone-100 text-stone-700"
             }`}
           >
             Community Impact
@@ -329,7 +329,7 @@ export default function GrowthOpsPanel({
       {activeTab === "offers" ? (
         <div className="space-y-5">
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">
+            <h3 className="text-sm font-semibold text-stone-900 mb-2">
               Batch Activity Feed
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -341,24 +341,24 @@ export default function GrowthOpsPanel({
                 return (
                   <article
                     key={batch.id}
-                    className="rounded-lg border border-gray-200 p-3 bg-gray-50"
+                    className="rounded-lg border border-stone-200 p-3 bg-stone-50"
                   >
-                    <p className="font-semibold text-gray-900">{batch.communityName}</p>
-                    <p className="text-xs text-gray-500">{batch.geography}</p>
-                    <p className="text-sm mt-2 text-gray-700">
+                    <p className="font-semibold text-stone-900">{batch.communityName}</p>
+                    <p className="text-xs text-stone-500">{batch.geography}</p>
+                    <p className="text-sm mt-2 text-stone-700">
                       {formatDollars(batch.currentCents)} /{" "}
                       {formatDollars(batch.thresholdCents)} reached
                     </p>
-                    <div className="mt-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="mt-1 h-2 bg-stone-200 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-blue-600 rounded-full"
+                        className="h-full bg-primary-600 rounded-full"
                         style={{ width: `${ratio}%` }}
                       />
                     </div>
                     <button
                       onClick={() => batchBoost(batch.id)}
                       disabled={pushingBatchId === batch.id}
-                      className="mt-3 w-full text-sm font-medium rounded-lg bg-blue-600 text-white py-2 hover:bg-blue-700 disabled:opacity-60"
+                      className="mt-3 w-full text-sm font-medium rounded-lg bg-primary-600 text-white py-2 hover:bg-primary-700 disabled:opacity-60"
                     >
                       {pushingBatchId === batch.id
                         ? "Sending..."
@@ -371,38 +371,38 @@ export default function GrowthOpsPanel({
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">
+            <h3 className="text-sm font-semibold text-stone-900 mb-2">
               Quick Action Toggles
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <button
                 onClick={toggleEcoOnly}
-                className="rounded-lg border border-gray-200 p-3 bg-white text-left"
+                className="rounded-lg border border-stone-200 p-3 bg-white text-left"
               >
-                <p className="font-semibold text-gray-900 flex items-center gap-2">
+                <p className="font-semibold text-stone-900 flex items-center gap-2">
                   <Leaf className="w-4 h-4 text-green-600" />
                   Eco-Only Discount
                 </p>
-                <p className="text-xs text-gray-600 mt-1">
+                <p className="text-xs text-stone-600 mt-1">
                   10% off for bicycle-delivered orders.
                 </p>
-                <p className="text-xs mt-2 font-medium text-gray-700">
+                <p className="text-xs mt-2 font-medium text-stone-700">
                   {ecoOnlyDiscountEnabled ? "Enabled" : "Disabled"}
                 </p>
               </button>
 
               <button
                 onClick={toggleDeadZonePickup}
-                className="rounded-lg border border-gray-200 p-3 bg-white text-left"
+                className="rounded-lg border border-stone-200 p-3 bg-white text-left"
               >
-                <p className="font-semibold text-gray-900 flex items-center gap-2">
-                  <Store className="w-4 h-4 text-blue-600" />
+                <p className="font-semibold text-stone-900 flex items-center gap-2">
+                  <Store className="w-4 h-4 text-primary-600" />
                   Dead-Zone Pickup
                 </p>
-                <p className="text-xs text-gray-600 mt-1">
+                <p className="text-xs text-stone-600 mt-1">
                   Pickup-only special for 2 PM - 4 PM slow hours.
                 </p>
-                <p className="text-xs mt-2 font-medium text-gray-700">
+                <p className="text-xs mt-2 font-medium text-stone-700">
                   {deadZonePickupEnabled ? "Enabled" : "Disabled"}
                 </p>
               </button>
@@ -410,7 +410,7 @@ export default function GrowthOpsPanel({
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">
+            <h3 className="text-sm font-semibold text-stone-900 mb-2">
               Inventory Clearing Tool (60-min Flash Sale)
             </h3>
             <form onSubmit={submitFlashSale} className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -418,18 +418,18 @@ export default function GrowthOpsPanel({
                 value={flashIngredient}
                 onChange={(e) => setFlashIngredient(e.target.value)}
                 placeholder="Ingredient (e.g. Avocados)"
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-gray-50"
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
               />
               <input
                 value={flashOfferText}
                 onChange={(e) => setFlashOfferText(e.target.value)}
                 placeholder="Offer text (e.g. Free Guac)"
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-gray-50"
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
               />
               <button
                 type="submit"
                 disabled={creatingFlash}
-                className="rounded-lg bg-gray-900 text-white text-sm font-medium px-4 py-2 hover:bg-black disabled:opacity-60"
+                className="rounded-lg bg-stone-900 text-white text-sm font-medium px-4 py-2 hover:bg-black disabled:opacity-60"
               >
                 {creatingFlash ? "Launching..." : "Launch Flash Sale"}
               </button>
@@ -437,7 +437,7 @@ export default function GrowthOpsPanel({
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">
+            <h3 className="text-sm font-semibold text-stone-900 mb-2">
               Surplus Sale: Night Loop
             </h3>
             <form
@@ -448,20 +448,20 @@ export default function GrowthOpsPanel({
                 value={surplusItemName}
                 onChange={(e) => setSurplusItemName(e.target.value)}
                 placeholder="Item name"
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-gray-50"
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
               />
               <input
                 type="number"
                 min={1}
                 value={surplusQuantity}
                 onChange={(e) => setSurplusQuantity(Math.max(1, Number(e.target.value)))}
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-gray-50"
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
               />
               <input
                 value={surplusOriginalPrice}
                 onChange={(e) => setSurplusOriginalPrice(e.target.value)}
                 placeholder="Original price (USD)"
-                className="px-3 py-2 rounded-lg border border-gray-200 bg-gray-50"
+                className="px-3 py-2 rounded-lg border border-stone-200 bg-stone-50"
               />
               <button
                 type="submit"
@@ -473,19 +473,19 @@ export default function GrowthOpsPanel({
 
             <div className="space-y-2">
               {surplusBundles.length === 0 ? (
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-stone-500">
                   No surplus bundles yet.
                 </p>
               ) : (
                 surplusBundles.slice(0, 6).map((bundle) => (
                   <article
                     key={bundle.id}
-                    className="rounded-lg border border-gray-200 bg-gray-50 p-3"
+                    className="rounded-lg border border-stone-200 bg-stone-50 p-3"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div>
-                        <p className="font-semibold text-gray-900">{bundle.itemName}</p>
-                        <p className="text-xs text-gray-600">
+                        <p className="font-semibold text-stone-900">{bundle.itemName}</p>
+                        <p className="text-xs text-stone-600">
                           {bundle.quantity} units • cost-only{" "}
                           {formatDollars(bundle.costOnlyPriceCents)} (orig{" "}
                           {formatDollars(bundle.originalPriceCents)})
@@ -514,9 +514,9 @@ export default function GrowthOpsPanel({
       ) : (
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
-              <p className="text-xs text-blue-700">Total Savings Provided</p>
-              <p className="text-2xl font-bold text-blue-900">
+            <div className="rounded-lg border border-primary-200 bg-primary-50 px-4 py-3">
+              <p className="text-xs text-primary-700">Total Savings Provided</p>
+              <p className="text-2xl font-bold text-primary-900">
                 {formatDollars(impact.totalSavingsCents)}
               </p>
             </div>
@@ -534,14 +534,14 @@ export default function GrowthOpsPanel({
             </div>
           </div>
 
-          <div className="rounded-lg border border-gray-200 bg-white p-4">
-            <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <PieChart className="w-4 h-4 text-gray-700" />
+          <div className="rounded-lg border border-stone-200 bg-white p-4">
+            <h3 className="font-semibold text-stone-900 mb-2 flex items-center gap-2">
+              <PieChart className="w-4 h-4 text-stone-700" />
               Community Impact Summary
             </h3>
-            <ul className="text-sm text-gray-700 space-y-1">
+            <ul className="text-sm text-stone-700 space-y-1">
               <li className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-blue-600" />
+                <Sparkles className="w-4 h-4 text-primary-600" />
                 Batch boosts + flash sales are tracked as customer savings.
               </li>
               <li className="flex items-center gap-2">
@@ -556,7 +556,7 @@ export default function GrowthOpsPanel({
 
             <button
               onClick={generateImpactReport}
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-900 text-white px-4 py-2 text-sm font-medium hover:bg-black"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-stone-900 text-white px-4 py-2 text-sm font-medium hover:bg-black"
             >
               <BellRing className="w-4 h-4" />
               Generate DDBA Impact Report

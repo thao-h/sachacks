@@ -116,14 +116,14 @@ export default function DeliveryRouteMap({
 
   if (!apiKey) {
     return (
-      <div className="flex items-center justify-center h-80 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300">
+      <div className="flex items-center justify-center h-80 bg-stone-100 rounded-xl border-2 border-dashed border-stone-300">
         <div className="text-center px-6">
-          <p className="text-gray-700 font-semibold mb-1">
+          <p className="text-stone-700 font-semibold mb-1">
             Google Maps API key not configured
           </p>
-          <p className="text-gray-500 text-sm">
-            Add <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to{" "}
-            <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">apps/web/.env.local</code>
+          <p className="text-stone-500 text-sm">
+            Add <code className="bg-stone-200 px-1.5 py-0.5 rounded text-xs">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to{" "}
+            <code className="bg-stone-200 px-1.5 py-0.5 rounded text-xs">apps/web/.env.local</code>
           </p>
         </div>
       </div>
@@ -140,8 +140,8 @@ export default function DeliveryRouteMap({
 
   if (!isLoaded) {
     return (
-      <div className="flex items-center justify-center h-80 bg-gray-50 rounded-xl animate-pulse">
-        <p className="text-gray-400 text-sm">Loading map…</p>
+      <div className="flex items-center justify-center h-80 bg-stone-50 rounded-xl animate-pulse">
+        <p className="text-stone-400 text-sm">Loading map…</p>
       </div>
     );
   }

@@ -21,7 +21,7 @@ const statusConfig: Record<
     text: "text-yellow-600",
     dot: "bg-yellow-500",
   },
-  Confirmed: { bg: "bg-blue-50", text: "text-blue-600", dot: "bg-blue-600" },
+  Confirmed: { bg: "bg-sky-50", text: "text-sky-600", dot: "bg-sky-600" },
   Preparing: {
     bg: "bg-purple-50",
     text: "text-purple-600",

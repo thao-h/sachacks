@@ -1,7 +1,14 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  useCallback,
+} from "react";
 import { LandingHeader } from "./LandingHeader";
+import { BottomNav } from "./BottomNav";
 import { AuthModal } from "./AuthModal";
 import { api } from "@/lib/api-client";
 import type { SessionUser } from "@/lib/session";
@@ -47,7 +54,7 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
       }
       action();
     },
-    [user],
+    [user]
   );
 
   return (
@@ -70,7 +77,8 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
         onClose={() => setAuthOpen(false)}
         onLogin={setUser}
       />
-      {children}
+      <div id="main-content" className="pb-16 md:pb-0">{children}</div>
+      <BottomNav />
     </AuthContext.Provider>
   );
 }

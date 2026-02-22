@@ -399,22 +399,22 @@ export default function CommunityHubPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      <header className="bg-white border-b border-gray-200 sticky top-16 z-10">
+    <div className="min-h-screen bg-stone-50 pb-20">
+      <header className="bg-white border-b border-stone-200 sticky top-16 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4 space-y-3">
-          <h1 className="text-2xl font-bold text-gray-900">Community Hub</h1>
+          <h1 className="text-2xl font-bold text-stone-900">Community Hub</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <input
               type="text"
               placeholder="Search communities..."
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
-              className="md:col-span-2 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="md:col-span-2 px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
             />
             <select
               value={selectedArea}
               onChange={(event) => setSelectedArea(event.target.value)}
-              className="px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
             >
               <option value="">All areas</option>
               {areaSelectOptions.map((area) => (
@@ -428,18 +428,18 @@ export default function CommunityHubPage() {
             <button
               onClick={handleSaveAreaPreference}
               disabled={savingArea}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
+              className="bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
             >
               {savingArea ? "Saving..." : "Save Area Preference"}
             </button>
             <button
               onClick={loadCommunities}
-              className="bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium px-3 py-2 rounded-lg"
+              className="bg-white border border-stone-200 hover:bg-stone-100 text-sm font-medium px-3 py-2 rounded-lg"
             >
               Refresh List
             </button>
             {userAreaPreference && (
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-stone-600">
                 Preferred area: <span className="font-semibold">{userAreaPreference}</span>
               </span>
             )}
@@ -458,8 +458,8 @@ export default function CommunityHubPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
-        <section className="bg-white border border-gray-200 rounded-xl p-4">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">
+        <section className="bg-white border border-stone-200 rounded-xl p-4">
+          <h2 className="text-lg font-semibold text-stone-900 mb-3">
             Start a Community
           </h2>
           <form onSubmit={handleCreateCommunity} className="space-y-3">
@@ -470,7 +470,7 @@ export default function CommunityHubPage() {
                   setCreateForm((prev) => ({ ...prev, name: event.target.value }))
                 }
                 placeholder="Community name"
-                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="px-3 py-2.5 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
               />
               <select
                 value={createForm.area}
@@ -480,7 +480,7 @@ export default function CommunityHubPage() {
                     area: event.target.value as (typeof DAVIS_AREAS)[number],
                   }))
                 }
-                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="px-3 py-2.5 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
               >
                 {areaSelectOptions.map((area) => (
                   <option key={area} value={area}>
@@ -498,7 +498,7 @@ export default function CommunityHubPage() {
                     visibility: event.target.value as "PUBLIC" | "PRIVATE",
                   }))
                 }
-                className="px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="px-3 py-2.5 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
               >
                 <option value="PUBLIC">Public</option>
                 <option value="PRIVATE">Private</option>
@@ -512,7 +512,7 @@ export default function CommunityHubPage() {
                   }))
                 }
                 placeholder="Description (optional)"
-                className="md:col-span-2 px-3 py-2.5 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="md:col-span-2 px-3 py-2.5 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
               />
             </div>
             <button
@@ -543,28 +543,28 @@ export default function CommunityHubPage() {
               return (
                 <article
                   key={community.id}
-                  className="bg-white border border-gray-200 rounded-xl p-4 space-y-4"
+                  className="bg-white border border-stone-200 rounded-xl p-4 space-y-4"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-lg font-semibold text-stone-900">
                         {community.name}
                       </h3>
-                      <div className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                      <div className="text-sm text-stone-600 flex items-center gap-1 mt-1">
                         <MapPin className="w-4 h-4" />
                         {community.area}
                       </div>
                       {community.description && (
-                        <p className="text-sm text-gray-600 mt-2 max-w-2xl">
+                        <p className="text-sm text-stone-600 mt-2 max-w-2xl">
                           {community.description}
                         </p>
                       )}
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <span className="text-xs font-medium bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                      <span className="text-xs font-medium bg-stone-100 text-stone-700 px-2 py-1 rounded-full">
                         {community.visibility}
                       </span>
-                      <span className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                      <span className="text-xs font-medium bg-primary-50 text-primary-700 px-2 py-1 rounded-full">
                         {community.memberCount} members
                       </span>
                       <span className="text-xs font-medium bg-indigo-50 text-indigo-700 px-2 py-1 rounded-full">
@@ -590,13 +590,13 @@ export default function CommunityHubPage() {
                             }))
                           }
                           placeholder="Invite code"
-                          className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                          className="px-3 py-2 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
                         />
                       )}
                       <button
                         onClick={() => handleJoinCommunity(community)}
                         disabled={busyAction === `join-${community.id}`}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
+                        className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-4 py-2 rounded-lg disabled:opacity-60"
                       >
                         {busyAction === `join-${community.id}`
                           ? "Joining..."
@@ -605,9 +605,9 @@ export default function CommunityHubPage() {
                     </div>
                   ) : (
                     <div className="space-y-3">
-                      <div className="text-sm text-gray-600">
+                      <div className="text-sm text-stone-600">
                         Joined as{" "}
-                        <span className="font-semibold text-gray-900">
+                        <span className="font-semibold text-stone-900">
                           {community.memberRole ?? "MEMBER"}
                         </span>
                       </div>
@@ -615,7 +615,7 @@ export default function CommunityHubPage() {
                       <div className="flex flex-wrap items-center gap-2">
                         <button
                           onClick={() => loadCommunityBulkOrders(community.id)}
-                          className="inline-flex items-center gap-1.5 bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium px-3 py-2 rounded-lg"
+                          className="inline-flex items-center gap-1.5 bg-white border border-stone-200 hover:bg-stone-100 text-sm font-medium px-3 py-2 rounded-lg"
                         >
                           <RefreshCw className="w-4 h-4" />
                           {loadingBulkOrders[community.id]
@@ -627,7 +627,7 @@ export default function CommunityHubPage() {
                           <button
                             onClick={() => handleGenerateInviteCode(community)}
                             disabled={busyAction === `invite-${community.id}`}
-                            className="bg-gray-900 hover:bg-black text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
+                            className="bg-stone-900 hover:bg-black text-white text-sm font-medium px-3 py-2 rounded-lg disabled:opacity-60"
                           >
                             {busyAction === `invite-${community.id}`
                               ? "Generating..."
@@ -645,8 +645,8 @@ export default function CommunityHubPage() {
                         )}
                       </div>
 
-                      <div className="border border-gray-200 rounded-lg p-3">
-                        <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      <div className="border border-stone-200 rounded-lg p-3">
+                        <h4 className="font-semibold text-stone-900 mb-2 flex items-center gap-2">
                           <ShoppingBag className="w-4 h-4" />
                           Start Bulk Order
                         </h4>
@@ -674,7 +674,7 @@ export default function CommunityHubPage() {
                               }))
                             }
                             placeholder="Order title (e.g. Friday sushi run)"
-                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="px-3 py-2 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
                           />
                           <select
                             value={bulkForm?.restaurantId ?? ""}
@@ -693,7 +693,7 @@ export default function CommunityHubPage() {
                                 },
                               }))
                             }
-                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="px-3 py-2 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
                           >
                             <option value="">Select restaurant</option>
                             {restaurants.map((restaurant) => (
@@ -720,7 +720,7 @@ export default function CommunityHubPage() {
                                 },
                               }))
                             }
-                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="px-3 py-2 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
                           />
                           <input
                             value={bulkForm?.deliveryNotes ?? ""}
@@ -740,7 +740,7 @@ export default function CommunityHubPage() {
                               }))
                             }
                             placeholder="Delivery notes (optional)"
-                            className="px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                            className="px-3 py-2 border border-stone-200 rounded-lg bg-stone-50 focus:ring-2 focus:ring-primary-500 outline-none"
                           />
                           <button
                             type="submit"
@@ -756,7 +756,7 @@ export default function CommunityHubPage() {
 
                       <div className="space-y-2">
                         {bulkOrders.length === 0 ? (
-                          <div className="text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-3">
+                          <div className="text-sm text-stone-600 bg-stone-50 border border-stone-200 rounded-lg p-3">
                             No bulk orders loaded yet. Use "Refresh Bulk Orders" to
                             view active orders.
                           </div>
@@ -764,23 +764,23 @@ export default function CommunityHubPage() {
                           bulkOrders.map((order) => (
                             <div
                               key={order.id}
-                              className="border border-gray-200 rounded-lg p-3 flex flex-col gap-2"
+                              className="border border-stone-200 rounded-lg p-3 flex flex-col gap-2"
                             >
                               <div className="flex flex-wrap items-center justify-between gap-2">
                                 <div>
-                                  <div className="font-semibold text-gray-900">
+                                  <div className="font-semibold text-stone-900">
                                     {order.title}
                                   </div>
-                                  <div className="text-sm text-gray-600">
+                                  <div className="text-sm text-stone-600">
                                     {order.restaurantName} • closes{" "}
                                     {formatDate(order.orderDeadline)}
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-xs font-medium bg-gray-100 px-2 py-1 rounded-full">
+                                  <span className="text-xs font-medium bg-stone-100 px-2 py-1 rounded-full">
                                     {order.status}
                                   </span>
-                                  <span className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                                  <span className="text-xs font-medium bg-primary-50 text-primary-700 px-2 py-1 rounded-full">
                                     {order.participantsCount} joined
                                   </span>
                                 </div>
@@ -792,7 +792,7 @@ export default function CommunityHubPage() {
                                       handleJoinBulkOrder(community.id, order.id)
                                     }
                                     disabled={busyAction === `bulk-join-${order.id}`}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
+                                    className="bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
                                   >
                                     {busyAction === `bulk-join-${order.id}`
                                       ? "Joining..."
@@ -805,7 +805,7 @@ export default function CommunityHubPage() {
                                       handleLockBulkOrder(community.id, order.id)
                                     }
                                     disabled={busyAction === `bulk-lock-${order.id}`}
-                                    className="bg-gray-900 hover:bg-black text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
+                                    className="bg-stone-900 hover:bg-black text-white text-sm font-medium px-3 py-1.5 rounded-lg disabled:opacity-60"
                                   >
                                     {busyAction === `bulk-lock-${order.id}`
                                       ? "Locking..."
